@@ -1,14 +1,13 @@
 package be.iris.session;
 
-import be.iris.session.view.ActivityBeanRemote;
-import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+
+import be.iris.session.view.ActivityBeanRemote;
 
 /**
  * Session Bean implementation class ActivityBean
  */
 @Stateless(mappedName = "activityBean")
-@LocalBean
 public class ActivityBean implements ActivityBeanRemote {
 
     /**

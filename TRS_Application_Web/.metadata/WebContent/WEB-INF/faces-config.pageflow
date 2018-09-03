@@ -1,6 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15359785941360" configfile="/TRS_Application_Web/WebContent/WEB-INF/faces-config.xml"/>
-=======
-<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15359777444360" configfile="/TRS_Application_Web/WebContent/WEB-INF/faces-config.xml"/>
->>>>>>> b5caedc9cb6f0fe9ba935ca57a03303fda49bc6b
+<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15359811569290" configfile="/TRS_Application_Web/WebContent/WEB-INF/faces-config.xml"/>
