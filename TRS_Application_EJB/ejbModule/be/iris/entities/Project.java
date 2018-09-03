@@ -1,4 +1,4 @@
-package be.iris.entities;
+/*package be.iris.entities;
 
 import javax.persistence.Entity;
 
@@ -16,4 +16,4 @@ public class Project {
 	}
 	
 	
-}
+}*/

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
     <wb-module deploy-name="TRS_Application_EAR">
-        <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
         <dependent-module archiveName="TRS_Application_EJB.jar" deploy-path="/" handle="module:/resource/TRS_Application_EJB/TRS_Application_EJB">
             <dependent-object/>
             <dependency-type>uses</dependency-type>
