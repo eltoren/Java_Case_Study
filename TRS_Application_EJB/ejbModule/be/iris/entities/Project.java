@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 public class Project {
 
 	private String ptitle;
-
+	
 	public String getPtitle() {
 		return ptitle;
 	}
