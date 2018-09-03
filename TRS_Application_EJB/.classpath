@@ -12,5 +12,8 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="Lib/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="Lib/openjpa-all-2.4.3.jar"/>
+	<classpathentry kind="lib" path="Lib/slf4j-simple-1.7.25.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
