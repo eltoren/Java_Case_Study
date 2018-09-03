@@ -8,7 +8,6 @@ import javax.ejb.Stateless;
  * Session Bean implementation class ActivityBean
  */
 @Stateless(mappedName = "activityBean")
-@LocalBean
 public class ActivityBean implements ActivityBeanRemote {
 
     /**
