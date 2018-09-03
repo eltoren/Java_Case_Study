@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 @Entity
 public class Project {
 
+	@id @generated
 	private String ptitle;
 	
 	public String getPtitle() {
