@@ -3,15 +3,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
 xmlns:p="http://primefaces.org/ui"
 xmlns:f="http://xmlns.jcp.org/jsf/core">
-<head>
+<h:head>
  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" /> 
-<title>Insert title here</title>
-</head>
-<body>
+<title>Login</title>
+</h:head>
+<h:body>
 
-<p>hello</p>
+	<p:panelGrid columns="3">
+  
+ 
+    <p:outputText value="Login ID:" />
+    <p:selectOneMenu value="" immediate="true"/>
+ 
+    <p:outputText value="password" />
+    <p:password value="" immediate="true"/>
+ 
+	<p:commandButton ajax="false" action=""/>
+</p:panelGrid>
 
-<h1>YOUHOUUU</h1>
-
-</body>
+</h:body>
 </html>

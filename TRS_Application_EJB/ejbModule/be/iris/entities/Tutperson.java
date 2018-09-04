@@ -20,8 +20,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.apache.openjpa.persistence.FetchAttribute;
-
 
 /**
  * The persistent class for the TUTPERSONS database table.
@@ -57,7 +55,7 @@ public class Tutperson implements Serializable {
 	@Inject
 	@Column(name="COC_PNO")
 	@OneToOne
-	@JoinColumn(name="CONO")
+	@JoinColumn(name="cono")
 	private Tutcompany cocPno;
 
 	//bi-directional many-to-one association to Tutcompany
