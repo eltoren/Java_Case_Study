@@ -56,7 +56,6 @@ public class Tutcompany implements Serializable {
 	private String covat;
 
 	//bi-directional many-to-one association to Tutperson
-	@Inject
 	@OneToOne(mappedBy="cocPno", fetch=FetchType.LAZY)
 	private Tutperson tutperson;
 

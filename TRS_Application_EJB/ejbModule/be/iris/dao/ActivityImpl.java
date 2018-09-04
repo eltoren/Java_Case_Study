@@ -14,7 +14,7 @@ import be.iris.entities.Tutactivity;
 public class ActivityImpl implements ActivityDao {
 
 	@PersistenceContext(unitName = "TRSAppJpa")
-	EntityManager em;
+	private EntityManager em;
 
 	@Override
 	public void insertActivity(Tutactivity activity) {
