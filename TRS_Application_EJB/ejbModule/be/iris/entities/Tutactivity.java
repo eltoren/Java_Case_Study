@@ -11,11 +11,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Named
 @Entity
+@NamedQuery(name="Tutactivity.ListActivities", query="SELECT a from Tutactivity a")
 @Table(name="TUTACTIVITIES")
 public class Tutactivity {
 
