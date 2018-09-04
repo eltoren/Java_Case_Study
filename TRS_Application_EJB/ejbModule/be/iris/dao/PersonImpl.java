@@ -112,27 +112,15 @@ public class PersonImpl implements PersonDao {
 
 	@Override
 	public List<Tutperson> listAllPersons() {
-		EntityTransaction tx = em.getTransaction();
 		List<Tutperson> listPersons = new ArrayList<>();
 		try {
-			tx.begin();
-
-			System.out.println("PERSON DAO HERE");
 			TypedQuery<Tutperson> query = em.createNamedQuery("Tutperson.findPersonsLogs", Tutperson.class);
 
 			for (Tutperson p : query.getResultList()) {
 				em.detach(p);
 				listPersons.add(p);
 			}
-
-			tx.commit();
-
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 		return listPersons;
