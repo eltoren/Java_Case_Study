@@ -7,6 +7,8 @@ import javax.ejb.Stateless;
 
 import be.iris.entities.Tutperson;
 import be.iris.entities.Tutproject;
+import be.iris.dao.ActivityDao;
+import be.iris.dao.ActivityImpl;
 import be.iris.entities.Tutactivity;
 
 import be.iris.session.view.ActivityBeanRemote;
@@ -14,33 +16,39 @@ import be.iris.session.view.ActivityBeanRemote;
 @Stateless(mappedName = "activityBean")
 public class ActivityBean implements ActivityBeanRemote {
 
-	// need jpa controller for it
+	private ActivityDao activityDao = new ActivityImpl();
 
 	public ActivityBean() {
 	}
 
 	@Override
 	public void saveNewActivitie(Tutactivity activity) {
-		// TODO Auto-generated method stub
+		activityDao.insertActivity(activity);
 
 	}
 
 	@Override
-	public void updateActivity(Tutactivity activity) {
-		// TODO Auto-generated method stub
+	public void updateActivity(Tutactivity oldActivity, Tutactivity newActivity) {
+		activityDao.updateActivity(oldActivity, newActivity);
 
 	}
 
 	@Override
-	public void updateListOfActivities(List<Tutactivity> activities) {
-		// TODO Auto-generated method stub
+	public void updateListOfActivities(List<Tutactivity> oldActivities, List<Tutactivity> newActivities) {
+		if (oldActivities.size() == newActivities.size()) {
+			for (int i = 0; i < oldActivities.size(); i++) {
+				activityDao.updateActivity(oldActivities.get(i), newActivities.get(i));
+			}
+		} else {
+			System.out.println("size not equal");
+			//error
+		}
 
 	}
 
 	@Override
 	public List<Tutactivity> getAllActivities() {
-		// TODO Auto-generated method stub
-		return null;
+		return activityDao.listAllActivity();
 	}
 
 	@Override
@@ -88,14 +96,15 @@ public class ActivityBean implements ActivityBeanRemote {
 
 	@Override
 	public void deleteActivity(Tutactivity activity) {
-		// TODO Auto-generated method stub
+		activityDao.deleteActivity(activity);
 
 	}
 
 	@Override
 	public void deleteListOfActivities(List<Tutactivity> activities) {
-		// TODO Auto-generated method stub
-
+		for (Tutactivity tutactivity : activities) {
+			activityDao.deleteActivity(tutactivity);
+		}
 	}
 
 	@Override
