@@ -3,10 +3,13 @@ package be.iris.entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+
 
 public class WorkingDayPK implements Serializable{
 
 
+	@Column(name="WORKING_PNO")
 	private int personId;
 	
 	private LocalDate date;
