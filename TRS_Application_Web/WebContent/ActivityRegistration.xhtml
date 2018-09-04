@@ -16,7 +16,7 @@
 <p:growl id="msgs" showDetail="true" />
  
     <p:panel id="basic" header="Registration activity" footer="Registration activity" style="margin-bottom:20px">
-        <h:panelGrid columns="2" cellpadding="5">
+    <h:panelGrid columns="2" cellpadding="5">
            
        
 
@@ -28,7 +28,7 @@
 <!--  Start Activity Name (change the value) -->
 <br/>
 <p:outputLabel value="Name of the activity :" />
-<p:inputText id="ln" value="#{person.lastName}" required="true"	requiredMessage="required field" />
+<p:inputText id="ln" value="" required="true"	requiredMessage="required field" />
 <br/>
 <!--  End Activity Name -->
 
@@ -67,7 +67,7 @@
     </p:messages>
  
     	 <p:outputLabel for="Project" value="Basic:" />
-        <p:selectOneMenu id="Project" value="#{selectOneMenuView.project}" style="width:125px">
+         <p:selectOneMenu id="Project" value="#{selectOneMenuView.project}" style="width:125px">
             <f:selectItem itemLabel="project" itemValue="" />
             <f:selectItem itemLabel="project1" itemValue="project2" />
             <f:selectItem itemLabel="project2" itemValue="project3" />
@@ -102,9 +102,15 @@
 
     <p:growl id="growl" life="2000" />
       <br/>
-      <p:commandButton value="Register" id="registerButton" actionListener="#{buttonView.buttonAction}" ajax="false" />
+      <p:commandButton value="Register" id="registerButton" action="#{frontBean.register}" ajax="false" />
       <br/>
-       <p:commandButton value="Go Back" id="BackButton" actionListener="#{buttonView.buttonAction}" ajax="false" />
+      <p:commandButton value="Go Back" id="BackButton" action="#{buttonView.buttonAction}" ajax="false" />
+
+
+
+	<p:dialog header="Modal Dialog" widgetVar="dlg1" modal="true" height="100">
+    <h:outputText value="Registration success" />
+	</p:dialog>  
 
 
 <!-- End Button -->
