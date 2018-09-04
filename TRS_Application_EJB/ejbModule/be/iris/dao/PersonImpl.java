@@ -94,9 +94,12 @@ public class PersonImpl implements PersonDao {
 		try {
 			tx.begin();
 
-			TypedQuery<Tutperson> query = em.createNamedQuery("Tutperson.findAll", Tutperson.class);
+			//TypedQuery<Tutperson> query = em.createNamedQuery("Tutperson.findAll", Tutperson.class);
+			//listPersons = query.getResultList();
+			String q = "SELECT * FROM TUTPERSONS T WHERE EXISTS (SELECT * FROM TUTPASSWORDS P"
+					+ "WHERE T.PNO = P.PASS_PNO)";
+			TypedQuery<Tutperson> query = em.createQuery(q,Tutperson.class);
 			listPersons = query.getResultList();
-
 			tx.commit();
 		} catch (RuntimeException re) {
 			try {

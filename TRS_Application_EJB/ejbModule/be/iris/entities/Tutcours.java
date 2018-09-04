@@ -9,20 +9,15 @@ import javax.persistence.NamedQuery;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-
-/**
- * The persistent class for the TUTCOURSES database table.
- * 
- */
 @Named
 @Entity
 @Table(name="TUTCOURSES")
 @NamedQuery(name="Tutcours.findAll", query="SELECT t FROM Tutcours t")
-@PrimaryKeyJoinColumn(name="pid")
+@PrimaryKeyJoinColumn(name="PID")
 public class Tutcours extends Tutproject implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private String cid;
+	private String pid;
 
 	private BigDecimal caprice;
 
@@ -36,11 +31,11 @@ public class Tutcours extends Tutproject implements Serializable {
 	}
 
 	public String getCid() {
-		return this.cid;
+		return this.pid;
 	}
 
 	public void setCid(String cid) {
-		this.cid = cid;
+		this.pid = cid;
 	}
 
 	public BigDecimal getCaprice() {

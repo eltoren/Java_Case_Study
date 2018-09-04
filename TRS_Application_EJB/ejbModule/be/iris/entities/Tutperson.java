@@ -28,7 +28,7 @@ import javax.validation.constraints.NotNull;
 @Named
 @Entity
 @Table(name="TUTPERSONS")
-@NamedQuery(name="Tutperson.findAll", query="SELECT t FROM Tutperson t")
+@NamedQuery(name="Tutperson.findAll", query="SELECT t FROM Tutperson t ")
 public class Tutperson implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -55,7 +55,7 @@ public class Tutperson implements Serializable {
 	@Inject
 	@Column(name="COC_PNO")
 	@OneToOne
-	@JoinColumn(name="CONO")
+	@JoinColumn(name="cono")
 	private Tutcompany cocPno;
 
 	//bi-directional many-to-one association to Tutcompany
