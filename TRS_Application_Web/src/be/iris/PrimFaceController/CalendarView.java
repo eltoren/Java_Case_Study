@@ -1,20 +1,26 @@
 package be.iris.PrimFaceController;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.Date;
+
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
 
- 
+
 @Named
-public class CalendarView {
+@RequestScoped
+public class CalendarView implements Serializable {
          
     
     private Date date;
-	private Date date1;
-	private Date date2;
+	private Date timeStartWork;
+	private Date timeEndWork;
      
     public void onDateSelect(SelectEvent event) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -35,21 +41,31 @@ public class CalendarView {
         this.date = date;
     }
     
-    public Date getDate1() {
-        return date1;
-    }
- 
-    public void setDate1(Date date1) {
-        this.date1 = date1;
-    }
- 
-    public Date getDate2() {
-        return date2;
-    }
- 
-    public void setDate2(Date date2) {
-        this.date2 = date2;
-    }
+    
+
+    public Date getTimeStartWork() {
+		return timeStartWork;
+	}
+
+	public void setTimeStartWork(Date timeStartWork) {
+		this.timeStartWork = timeStartWork;
+	}
+
+	public Date getTimeEndWork() {
+		return timeEndWork;
+	}
+
+	public void setTimeEndWork(Date timeEndWork) {
+		this.timeEndWork = timeEndWork;
+	}
+
+	public CalendarView() {}
+	public CalendarView(Date date, Date date1, Date date2) {
+		super();
+		this.date = date;
+		this.timeStartWork = timeStartWork;
+		this.timeEndWork = timeEndWork;
+	}
  
    
 }

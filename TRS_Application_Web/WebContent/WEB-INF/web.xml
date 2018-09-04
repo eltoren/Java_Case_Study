@@ -22,5 +22,10 @@
 		<param-value>cruze</param-value>
 	</context-param>  
     
+    <error-page>	    
+		<exception-type>javax.faces.application.ViewExpiredException</exception-type>  
+		<location>/Error.xhtml</location>
+	</error-page>
+    
 </web-app>
 

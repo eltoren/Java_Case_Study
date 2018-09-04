@@ -1,8 +1,8 @@
 package be.iris.PrimFaceController;
-import javax.faces.bean.ManagedBean;
+import javax.inject.Named;
 
 
-@ManagedBean
+@Named
 public class SelectOneMenuView {
  
     private String project;
@@ -12,9 +12,10 @@ public class SelectOneMenuView {
         return project;
     }
  
-    public void setConsole(String project) {
+    public void setProject(String project) {
         this.project = project;
     }
  
+    
    
 }
