@@ -41,7 +41,7 @@ public class ActivityBean implements ActivityBeanRemote {
 			}
 		} else {
 			System.out.println("size not equal");
-			//error
+			// error
 		}
 
 	}
@@ -52,46 +52,39 @@ public class ActivityBean implements ActivityBeanRemote {
 	}
 
 	@Override
-	public List<Tutactivity> getAllActivitiesOnDate(LocalDate date) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Tutactivity> getAllActivitiesAtDate(LocalDate date) {
+		return activityDao.getAllActivitiesAtDate(date);
 	}
 
 	@Override
 	public List<Tutactivity> getAllActivitiesOfPerson(Tutperson person) {
-		// TODO Auto-generated method stub
-		return null;
+		return activityDao.getAllActivitiesOfPerson(person);
 	}
 
 	@Override
 	public List<Tutactivity> getAllActivitiesOfPersonAtDate(Tutperson person, LocalDate date) {
-		// TODO Auto-generated method stub
-		return null;
+		return activityDao.getAllActivitiesOfPersonAtDate(person, date);
 	}
 
 	@Override
-	public List<Tutactivity> getAllActivitiesOfProject(Tutproject Project) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Tutactivity> getAllActivitiesOfProject(Tutproject project) {
+		return activityDao.getAllActivitiesOfProject(project);
 	}
 
 	@Override
 	public List<Tutactivity> getAllActivitiesOfProjectAtDate(Tutproject project, LocalDate date) {
-		// TODO Auto-generated method stub
-		return null;
+		return activityDao.getAllActivitiesOfProjectAtDate(project, date);
 	}
 
 	@Override
 	public List<Tutactivity> getAllActivitiesOfPersonWorkingAtProject(Tutperson person, Tutproject project) {
-		// TODO Auto-generated method stub
-		return null;
+		return activityDao.getAllActivitiesOfPersonWorkingAtProject(person, project);
 	}
 
 	@Override
 	public List<Tutactivity> getAllActivitiesOfPersonWorkingAtProjectOnDate(Tutperson person, Tutproject project,
 			LocalDate date) {
-		// TODO Auto-generated method stub
-		return null;
+		return activityDao.getAllActivitiesOfPersonWorkigAtProjectOnDate(person, project, date);
 	}
 
 	@Override
@@ -109,33 +102,32 @@ public class ActivityBean implements ActivityBeanRemote {
 
 	@Override
 	public void deleteActivitiesOnDate(LocalDate date) {
-		// TODO Auto-generated method stub
-
+		activityDao.deleteListOfActivitiesOnDate(date);
 	}
 
 	@Override
 	public void deleteActivitiesOfPerson(Tutperson person) {
-		// TODO Auto-generated method stub
-
+		activityDao.deleteListOfActivitiesOfPerson(person);
 	}
 
 	@Override
 	public void deleteActivitiesOfPersonAtDate(Tutperson person, LocalDate date) {
-		// TODO Auto-generated method stub
-
+		activityDao.deleteListOfActivitiesOfPersonAtDate(person, date);
 	}
 
 	@Override
 	public void deleteActivitiesOfProject(Tutproject project) {
-		// TODO Auto-generated method stub
-
+		activityDao.deleteListOfActivitiesOfProject(project);
 	}
 
 	@Override
 	public void deleteActivitiesOfProjectAtDate(Tutproject project, LocalDate date) {
-		// TODO Auto-generated method stub
+		activityDao.deleteListOfActivitiesofProjectAtDate(project, date);
+	}
 
+	@Override
+	public void deleteListOfActivitesOfPersonAtDate(Tutperson person, LocalDate date) {
+		activityDao.deleteListOfActivitiesOfPersonAtDate(person, date);
 	}
 
 }
-
