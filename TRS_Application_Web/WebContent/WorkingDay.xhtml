@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Working day registration</title>
+</h:head>
+
+<h:body>
+<h1> Working day registration</h1>
+
+<p:growl id="msgs" showDetail="true" />
+ 
+    <p:panel id="basic" header="Basic" footer="Registration  working day" style="margin-bottom:20px">
+        <h:panelGrid columns="2" cellpadding="10">
+           
+       
+
+<h:form id="form">
+
+<h:panelGrid id = "panel" columns = "1" border = "0"
+      cellpadding = "1" cellspacing = "1">
+
+<!--  Start Activity Name (change the value) -->
+<br/>
+<p:outputLabel value="Name of the activity :" />
+<p:inputText id="ln" value="#{person.lastName}" required="true"	requiredMessage="required field" />
+<br/>
+<!--  End Activity Name -->
+
+
+
+
+
+<!--  Calendar part (restricted) 
+	Min date and max date? to determined
+-->
+
+
+    <p:growl id="msgs" showDetail="true" />
+                  
+        <p:outputLabel for="restricted" value="The date of activity :" />
+        <p:calendar id="restricted" value="#{calendarView.date}" mindate="1/09/18" maxdate="01/1/2100" />
+    
+    <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+         
+            <p:outputLabel value="Restricted:" />
+            <p:outputLabel value="#{calendarView.date}">
+            <f:convertDateTime pattern="MM/dd/yyyy" />
+            </p:outputLabel>
+   
+    </p:dialog>
+
+
+<!-- End Calendar -->
+
+
+<!--  Start Menu select Project -->
+
+
+    <p:messages>
+        <p:autoUpdate />
+    </p:messages>
+ 
+    	 <p:outputLabel for="Project" value="Basic:" />
+        <p:selectOneMenu id="Project" value="#{selectOneMenuView.project}" style="width:125px">
+            <f:selectItem itemLabel="project" itemValue="" />
+            <f:selectItem itemLabel="project1" itemValue="Xbox One" />
+            <f:selectItem itemLabel="project2" itemValue="PS4" />
+            <f:selectItem itemLabel="project3" itemValue="Wii U" />
+        </p:selectOneMenu>
+        
+                
+         <p:dialog header="Values" modal="true" showEffect="bounce" widgetVar="dlg" resizable="false">
+            <h:outputText value="Basic:" />
+            <h:outputText value="#{selectOneMenuView.project}" />
+         
+    </p:dialog>
+
+
+
+<!--  End Menu select Project -->
+
+<!--  2 buttons Start : register and go back -->
+
+    <p:growl id="growl" life="2000" />
+      <br/>
+      <p:commandButton value="Register" id="registerButton" actionListener="#{buttonView.buttonAction}" ajax="false" />
+      <br/>
+       <p:commandButton value="Go Back" id="BackButton" actionListener="#{buttonView.buttonAction}" ajax="false" />
+
+
+<!-- End Button -->
+
+</h:panelGrid>
+
+
+
+
+</h:form>
+ </h:panelGrid>
+    </p:panel>
+
+</h:body>
+</html>

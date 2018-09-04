@@ -11,7 +11,7 @@
 		<class>be.iris.entities.Tutactivity</class>
 		<properties>
 			<property name="openjpa.ConnectionFactoryProperties" value="PrettyPrint=true,PrintParameters=true" />
-			<property name="openjpa.jdbc.Schema" value="TU00010" />
+			<property name="openjpa.jdbc.Schema" value="tu00010" />
 			<property name="openjpa.Log"
 				value="defaultLevel=WARN, Runtime=INFO, Tool=INFO,SQL=TRACE" />
 		</properties>

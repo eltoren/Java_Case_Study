@@ -17,8 +17,8 @@ import javax.validation.constraints.NotNull;
 
 @Named
 @Entity
-@NamedQuery(name="Tutactivity.ListActivities", query="SELECT a from Tutactivity a")
 @Table(name="TUTACTIVITIES")
+@NamedQuery(name="Tutactivity.ListActivities", query="SELECT a from Tutactivity a")
 public class Tutactivity {
 
 	@Id
