@@ -20,7 +20,7 @@ public interface ActivityBeanRemote {
 
 	public List<Tutactivity> getAllActivities();
 
-	public List<Tutactivity> getAllActivitiesOnDate(LocalDate date);
+	public List<Tutactivity> getAllActivitiesAtDate(LocalDate date);
 
 	public List<Tutactivity> getAllActivitiesOfPerson(Tutperson person);
 
@@ -49,4 +49,5 @@ public interface ActivityBeanRemote {
 
 	public void deleteActivitiesOfProjectAtDate(Tutproject project, LocalDate date);
 
+	public void deleteListOfActivitesOfPersonAtDate(Tutperson person, LocalDate date);
 }

@@ -4,11 +4,15 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 
+import be.iris.dao.ActivityDao;
+import be.iris.dao.ActivityImpl;
 import be.iris.entities.Tutperson;
 import be.iris.session.view.PersonBeanRemote;
 
 @Stateless(mappedName = "personBean")
 public class PersonBean implements PersonBeanRemote {
+
+	private ActivityDao activityDao = new ActivityImpl();
 
     public PersonBean() {
     }
