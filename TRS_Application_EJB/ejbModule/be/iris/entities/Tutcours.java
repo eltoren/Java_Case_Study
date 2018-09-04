@@ -1,14 +1,20 @@
 package be.iris.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.math.BigDecimal;
+
+import javax.inject.Named;
+import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 
 /**
  * The persistent class for the TUTCOURSES database table.
  * 
  */
+@Named
 @Entity
 @Table(name="TUTCOURSES")
 @NamedQuery(name="Tutcours.findAll", query="SELECT t FROM Tutcours t")

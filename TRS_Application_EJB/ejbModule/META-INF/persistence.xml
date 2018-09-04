@@ -8,6 +8,7 @@
 		<class>be.iris.entities.Tutcours</class>
 		<class>be.iris.entities.Tutperson</class>
 		<class>be.iris.entities.TutworkingDay</class>
+		<class>be.iris.entities.Tutactivity</class>
 		<properties>
 			<property name="openjpa.ConnectionFactoryProperties" value="PrettyPrint=true,PrintParameters=true" />
 			<property name="openjpa.jdbc.Schema" value="TU00010" />

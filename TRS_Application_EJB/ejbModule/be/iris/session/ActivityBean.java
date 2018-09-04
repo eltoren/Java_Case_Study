@@ -5,128 +5,127 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 
-import be.iris.entities.Activity;
 import be.iris.entities.Tutperson;
 import be.iris.entities.Tutproject;
+import be.iris.entities.Tutactivity;
+
 import be.iris.session.view.ActivityBeanRemote;
 
 @Stateless(mappedName = "activityBean")
 public class ActivityBean implements ActivityBeanRemote {
 
 	// need jpa controller for it
-	
-    public ActivityBean() {
-    }
 
-	@Override
-	public void saveNewActivitie(Activity activity) {
-		// TODO Auto-generated method stub
-		
+	public ActivityBean() {
 	}
 
 	@Override
-	public List<Activity> getAllActivities() {
+	public void saveNewActivitie(Tutactivity activity) {
 		// TODO Auto-generated method stub
-		return null;
+
 	}
 
 	@Override
-	public List<Activity> getAllActivitiesOnDate(LocalDate date) {
+	public void updateActivity(Tutactivity activity) {
 		// TODO Auto-generated method stub
-		return null;
+
 	}
 
 	@Override
-	public List<Activity> getAllActivitiesOfPerson(Tutperson person) {
+	public void updateListOfActivities(List<Tutactivity> activities) {
 		// TODO Auto-generated method stub
-		return null;
+
 	}
 
 	@Override
-	public List<Activity> getAllActivitiesOfPersonAtDate(Tutperson person, LocalDate date) {
+	public List<Tutactivity> getAllActivities() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Activity> getAllActivitiesOfProject(Tutproject Project) {
+	public List<Tutactivity> getAllActivitiesOnDate(LocalDate date) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Activity> getAllActivitiesOfProjectAtDate(Tutproject project, LocalDate date) {
+	public List<Tutactivity> getAllActivitiesOfPerson(Tutperson person) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Activity> getAllActivitiesOfPersonWorkingAtProject(Tutperson person, Tutproject project) {
+	public List<Tutactivity> getAllActivitiesOfPersonAtDate(Tutperson person, LocalDate date) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Activity> getAllActivitiesOfPersonWorkingAtProjectOnDate(Tutperson person, Tutproject project,
+	public List<Tutactivity> getAllActivitiesOfProject(Tutproject Project) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Tutactivity> getAllActivitiesOfProjectAtDate(Tutproject project, LocalDate date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Tutactivity> getAllActivitiesOfPersonWorkingAtProject(Tutperson person, Tutproject project) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Tutactivity> getAllActivitiesOfPersonWorkingAtProjectOnDate(Tutperson person, Tutproject project,
 			LocalDate date) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void updateActivity(Activity activity) {
+	public void deleteActivity(Tutactivity activity) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void updateListOfActivities(List<Activity> activities) {
+	public void deleteListOfActivities(List<Tutactivity> activities) {
 		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void deleteActivity(Activity activity) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteListOfActivities(List<Activity> activities) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void deleteActivitiesOnDate(LocalDate date) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deleteActivitiesOfPerson(Tutperson person) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deleteActivitiesOfPersonAtDate(Tutperson person, LocalDate date) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deleteActivitiesOfProject(Tutproject project) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deleteActivitiesOfProjectAtDate(Tutproject project, LocalDate date) {
 		// TODO Auto-generated method stub
-		
+
 	}
-    
-    
 
 }

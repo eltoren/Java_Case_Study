@@ -3,8 +3,10 @@ package be.iris.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -52,7 +54,8 @@ public class Tutcompany implements Serializable {
 	private String covat;
 
 	//bi-directional many-to-one association to Tutperson
-	@OneToOne(mappedBy="cocPno")
+	@Inject
+	@OneToOne(mappedBy="cocPno", fetch=FetchType.LAZY)
 	private Tutperson tutperson;
 
 	//bi-directional many-to-one association to Tutperson
@@ -170,6 +173,10 @@ public class Tutcompany implements Serializable {
 		tutperson.setTutcompany(null);
 
 		return tutperson;
+	}
+	
+	public String toString(){
+		return this.getConame() +"  " + this.getCocountr();
 	}
 
 }
