@@ -52,8 +52,7 @@ public class Tutperson implements Serializable {
 
 	private String ptel;
 
-	@OneToOne
-	@JoinColumn(name="cono")
+	@OneToOne(mappedBy="tutperson")
 	private Tutcompany cocPno;
 
 	//bi-directional many-to-one association to Tutcompany
