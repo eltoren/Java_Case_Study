@@ -7,12 +7,13 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.RollbackException;
 import javax.persistence.TypedQuery;
 
 import be.iris.entities.Tutperson;
 
-@Stateless(mappedName="personDaoImpl")
+@Stateless(mappedName = "personDaoImpl")
 public class PersonImpl implements PersonDao {
 
 	@PersistenceContext(unitName = "TRSAppJpa")
@@ -88,19 +89,60 @@ public class PersonImpl implements PersonDao {
 		}
 
 	}
+	
+	@Override
+	public Tutperson getPerson(Tutperson person) {
+		EntityTransaction tx = em.getTransaction();
+		Tutperson returnPerson = new Tutperson();
+		try {
+			tx.begin();
+			returnPerson = em.find(Tutperson.class, person);
+			tx.commit();
+		} catch (RuntimeException re) {
+			try {
+				
+			} catch (RollbackException rbe) {
+				System.err.println(rbe.getMessage());
+			}
+			System.err.println(re.getMessage());
+		}
+		return returnPerson;
+	}
+
 
 	@Override
 	public List<Tutperson> listAllPersons() {
-		System.out.println("PERSON DAO HERE");
+		EntityTransaction tx = em.getTransaction();
 		List<Tutperson> listPersons = new ArrayList<>();
-		TypedQuery<Tutperson> query = em.createNamedQuery("Tutperson.findPersonsLogs", Tutperson.class);
+		try {
+			tx.begin();
 
-		for(Tutperson p : query.getResultList()){
-			em.detach(p);
-			listPersons.add(p);
+			System.out.println("PERSON DAO HERE");
+			TypedQuery<Tutperson> query = em.createNamedQuery("Tutperson.findPersonsLogs", Tutperson.class);
+
+			for (Tutperson p : query.getResultList()) {
+				em.detach(p);
+				listPersons.add(p);
+			}
+
+			tx.commit();
+
+		} catch (RuntimeException re) {
+			try {
+				tx.rollback();
+			} catch (RollbackException rbe) {
+				System.err.println(rbe.getMessage());
+			}
+			System.err.println(re.getMessage());
 		}
-		
 		return listPersons;
 	}
 
+	@Override
+	public String getPasswordOfPerson(Tutperson person) {
+		String sql ="select p.password from tutpasswords p where p.pno = ?";
+		Query query = em.createNativeQuery(sql, Tutperson.class);
+		query.setParameter(1, person.getPno());
+		return (String) query.getSingleResult();
+	}
 }

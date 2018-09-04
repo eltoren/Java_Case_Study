@@ -14,7 +14,11 @@ public interface PersonDao {
 	public void updatePerson(Tutperson oldPerson, Tutperson newPerson);
 
 	public void deletePerson(Tutperson person);
+	
+	public Tutperson getPerson(Tutperson person);
 
 	public List<Tutperson> listAllPersons();
+	
+	public String getPasswordOfPerson(Tutperson Person);
 
 }
