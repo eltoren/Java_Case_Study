@@ -13,13 +13,13 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 	<p:panelGrid columns="3">
   
  
-    <p:outputText value="Login ID:" />
+    <p:outputLabel value="Login ID:" />
     <p:selectOneMenu value="" immediate="true"/>
  
-    <p:outputText value="password" />
+    <p:outputLabel value="password" />
     <p:password value="" immediate="true"/>
  
-	<p:commandButton ajax="false" action=""/>
+	<p:commandButton ajax="false" action="#{frontBean.register}"/>
 </p:panelGrid>
 
 
