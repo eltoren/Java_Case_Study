@@ -3,6 +3,12 @@
 	<persistence-unit name="TRSAppJpa"
 		transaction-type="JTA">
 		<jta-data-source>jdbc:/TRSAppJpa</jta-data-source>
+		<class>be.iris.entities.Tutproject</class>
+		<class>be.iris.entities.Tutcompany</class>
+		<class>be.iris.entities.Tutcours</class>
+		<class>be.iris.entities.Tutperson</class>
+		<class>be.iris.entities.TutworkingDay</class>
+		<class>be.iris.entities.Tutactivity</class>
 		<properties>
 			<property name="openjpa.ConnectionFactoryProperties" value="PrettyPrint=true,PrintParameters=true" />
 			<property name="openjpa.jdbc.Schema" value="TU00010" />
