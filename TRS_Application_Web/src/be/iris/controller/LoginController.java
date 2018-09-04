@@ -1,7 +1,6 @@
 package be.iris.controller;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -10,13 +9,13 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import be.iris.entities.Tutperson;
-import be.iris.session.PersonBean;
+import be.iris.session.view.PersonBeanRemote;
 @Named
 @RequestScoped
 public class LoginController {
 
 	@EJB(name="personBean")
-	private PersonBean personBean;
+	private PersonBeanRemote personBean;
 	private String password;
 	@Inject
 	private Tutperson personSelected;
