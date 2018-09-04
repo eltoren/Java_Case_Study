@@ -4,14 +4,13 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -24,7 +23,7 @@ public class TutworkingDay {
 
 	@Id
 	@Column(name="WORKING_PNO")
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="pno")
 	@NotNull
 	private Tutperson personId;
