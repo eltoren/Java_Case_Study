@@ -15,7 +15,7 @@
 
 <p:growl id="msgs" showDetail="true" />
  
-    <p:panel id="basic" header="Basic" footer="Registration  working day" style="margin-bottom:20px">
+    <p:panel id="basic" header="Registration activity" footer="Registration activity" style="margin-bottom:20px">
         <h:panelGrid columns="2" cellpadding="10">
            
        
@@ -85,6 +85,19 @@
 
 <!--  End Menu select Project -->
 
+
+<!-- Start Button Time registry , end button time registry -->
+<br/>
+
+<p:outputLabel for="timeStart" value="TimeStart:" />
+<p:calendar id="timeStart" value="#{calendarView.date1}" pattern="HH:mm" timeOnly="true"  />
+<br/>
+<p:outputLabel for="timeEnd" value="TimeEnd:" />
+<p:calendar id="timeEnd" value="#{calendarView.date2}" pattern="HH:mm" timeOnly="true"  />
+<br/>
+<!-- End Start Button time registry , end button time registry -->
+
+
 <!--  2 buttons Start : register and go back -->
 
     <p:growl id="growl" life="2000" />
@@ -98,6 +111,24 @@
 
 </h:panelGrid>
 
+
+
+
+<p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+        <p:panelGrid id="display" columns="2" columnClasses="label,value">
+        
+            <h:outputText value="Time:" />
+            <h:outputText value="#{calendarView.date1}">
+                <f:convertDateTime pattern="HH:mm" />
+            </h:outputText>
+            
+            <h:outputText value="Time:" />
+            <h:outputText value="#{calendarView.date2}">
+                <f:convertDateTime pattern="HH:mm" />
+            </h:outputText>
+            
+        </p:panelGrid>
+    </p:dialog>
 
 
 

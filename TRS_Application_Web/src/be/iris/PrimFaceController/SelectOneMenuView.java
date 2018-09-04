@@ -1,4 +1,4 @@
-package be.iris.controller;
+package be.iris.PrimFaceController;
 import javax.faces.bean.ManagedBean;
 
 
