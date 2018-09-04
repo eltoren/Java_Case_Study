@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
@@ -16,6 +17,7 @@ import be.iris.entities.Tutactivity;
 import be.iris.entities.Tutperson;
 import be.iris.entities.Tutproject;
 
+@Stateless
 public class ActivityImpl implements ActivityDao {
 
 	@PersistenceContext(unitName = "TRSAppJpa")

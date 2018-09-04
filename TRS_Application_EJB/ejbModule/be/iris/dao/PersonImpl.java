@@ -91,7 +91,6 @@ public class PersonImpl implements PersonDao {
 
 	@Override
 	public List<Tutperson> listAllPersons() {
-		System.out.println("PERSON DAO HERE");
 		List<Tutperson> listPersons = new ArrayList<>();
 		TypedQuery<Tutperson> query = em.createNamedQuery("Tutperson.findPersonsLogs", Tutperson.class);
 
