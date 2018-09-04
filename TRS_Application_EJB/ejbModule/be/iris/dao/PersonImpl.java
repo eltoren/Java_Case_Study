@@ -92,10 +92,10 @@ public class PersonImpl implements PersonDao {
 	@Override
 	public List<Tutperson> listAllPersons() {
 		System.out.println("PERSON DAO HERE");
-		EntityTransaction tx = em.getTransaction();
+	//	EntityTransaction tx = em.getTransaction();
 		List<Tutperson> listPersons = new ArrayList<>();
 		try {
-			tx.begin();
+		//	tx.begin();
 
 			//TypedQuery<Tutperson> query = em.createNamedQuery("Tutperson.findAll", Tutperson.class);
 			//listPersons = query.getResultList();
@@ -104,7 +104,7 @@ public class PersonImpl implements PersonDao {
 					+ "WHERE T.PNO = P.PASS_PNO)";
 			TypedQuery<Tutperson> query = em.createQuery(q,Tutperson.class);
 			listPersons = query.getResultList();	
-			tx.commit();
+	//		tx.commit();
 		} catch (RuntimeException re) {
 			try {
 				tx.rollback();
