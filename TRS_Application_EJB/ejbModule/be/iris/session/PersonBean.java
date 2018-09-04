@@ -2,14 +2,20 @@ package be.iris.session;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import be.iris.dao.PersonDao;
+import be.iris.dao.PersonImpl;
 import be.iris.entities.Tutperson;
 import be.iris.session.view.PersonBeanRemote;
 
 @Stateless(mappedName = "personBean")
 public class PersonBean implements PersonBeanRemote {
 
+	@EJB(name="personDaoImpl")
+	PersonDao personDao;
+	
     public PersonBean() {
     }
 
@@ -33,8 +39,8 @@ public class PersonBean implements PersonBeanRemote {
 
 	@Override
 	public List<Tutperson> getAllPersons() {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("PERSON BEAN HERE");
+		return personDao.listAllPersons();
 	}
 
 	@Override

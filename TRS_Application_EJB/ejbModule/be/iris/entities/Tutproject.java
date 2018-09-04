@@ -3,6 +3,7 @@ package be.iris.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Named
+@RequestScoped
 @Entity
 @SequenceGenerator(name = "generatorKeys")
 @Inheritance(strategy=InheritanceType.JOINED)
