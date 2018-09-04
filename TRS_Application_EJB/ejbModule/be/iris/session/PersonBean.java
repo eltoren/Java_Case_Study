@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.persistence.Query;
 
 import be.iris.dao.PersonDao;
 import be.iris.entities.Tutperson;
@@ -20,37 +21,36 @@ public class PersonBean implements PersonBeanRemote {
 
 	@Override
 	public void saveNewPerson(Tutperson person) {
-		// TODO Auto-generated method stub
-
+		personDao.insertPerson(person);
 	}
 
 	@Override
 	public void updatePerson(Tutperson oldPerson, Tutperson newPerson) {
-		// TODO Auto-generated method stub
-
+		personDao.updatePerson(oldPerson, newPerson);
 	}
 
 	@Override
 	public Tutperson getPerson(Tutperson person) {
-		// TODO Auto-generated method stub
-		return null;
+		return personDao.getPerson(person);
 	}
 
 	@Override
 	public List<Tutperson> getAllPersons() {
-		System.out.println("PERSON BEAN HERE");
 		return personDao.listAllPersons();
 	}
 
 	@Override
 	public void deletePerson(Tutperson Person) {
-		// TODO Auto-generated method stub
+		personDao.deletePerson(Person);
 
 	}
 
 	@Override
 	public boolean iSLoginOk(Tutperson tutperson, String password) {
-		// TODO Auto-generated method stub
+		String realPassword = personDao.getPasswordOfPerson(tutperson);
+		if (realPassword.equals(password)) {
+			return true;
+		}
 		return false;
 	}
 

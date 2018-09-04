@@ -21,17 +21,15 @@ import javax.validation.constraints.NotNull;
 @Table(name="TUTWORKING_DAYS")
 public class TutworkingDay {
 
+
 	@Id
-	@Column(name="WORKING_PNO")
 	@ManyToOne
 	@JoinColumn(name="pno")
-	@NotNull
 	private Tutperson personId;
 	
 	
 	@Id
 	@Column(name="WORKING_DATE")
-	@NotNull
 	private LocalDate date;
 	
 	@Column(name="START_TIME", columnDefinition="TIMESTAMP")

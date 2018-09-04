@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -31,6 +30,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name="TUTPERSONS")
 @NamedQuery(name="Tutperson.findAll", query="SELECT t FROM Tutperson t ")
+@NamedNativeQuery(name="Tutperson.findPersonsLogs", query="SELECT * from tutpersons t where t.pno in (select p.pass_pno from tutpasswords p)",
+resultClass=Tutperson.class)
 public class Tutperson implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -52,10 +53,7 @@ public class Tutperson implements Serializable {
 
 	private String ptel;
 
-	@Inject
-	@Column(name="COC_PNO")
-	@OneToOne
-	@JoinColumn(name="cono")
+	@OneToOne(mappedBy="tutperson")
 	private Tutcompany cocPno;
 
 	//bi-directional many-to-one association to Tutcompany

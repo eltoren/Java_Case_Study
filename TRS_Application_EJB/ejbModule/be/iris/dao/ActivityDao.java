@@ -3,10 +3,13 @@ package be.iris.dao;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.ejb.Local;
+
 import be.iris.entities.Tutactivity;
 import be.iris.entities.Tutperson;
 import be.iris.entities.Tutproject;
 
+@Local
 public interface ActivityDao {
 
 	public void insertActivity(Tutactivity activity);
