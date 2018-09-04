@@ -128,8 +128,8 @@ public class PersonImpl implements PersonDao {
 
 	@Override
 	public String getPasswordOfPerson(Tutperson person) {
-		String sql ="select p.password from tutpasswords p where p.pno = ?";
-		Query query = em.createNativeQuery(sql, Tutperson.class);
+		String sql ="select p.password from tutpasswords p where p.pass_pno = ?";
+		Query query = em.createNativeQuery(sql);
 		query.setParameter(1, person.getPno());
 		return (String) query.getSingleResult();
 	}
