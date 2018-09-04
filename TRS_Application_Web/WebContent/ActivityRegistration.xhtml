@@ -10,13 +10,13 @@
 <title>Working day registration</title>
 </h:head>
 
-<h:body>
+<h:body style="background-color:#698dc6;">
 <h1> Working day registration</h1>
 
 <p:growl id="msgs" showDetail="true" />
  
-    <p:panel id="basic" header="Basic" footer="Registration  working day" style="margin-bottom:20px">
-        <h:panelGrid columns="2" cellpadding="10">
+    <p:panel id="basic" header="Registration activity" footer="Registration activity" style="margin-bottom:20px">
+    <h:panelGrid columns="2" cellpadding="5">
            
        
 
@@ -28,7 +28,7 @@
 <!--  Start Activity Name (change the value) -->
 <br/>
 <p:outputLabel value="Name of the activity :" />
-<p:inputText id="ln" value="#{person.lastName}" required="true"	requiredMessage="required field" />
+<p:inputText id="ln" value="" required="true"	requiredMessage="required field" />
 <br/>
 <!--  End Activity Name -->
 
@@ -67,11 +67,11 @@
     </p:messages>
  
     	 <p:outputLabel for="Project" value="Basic:" />
-        <p:selectOneMenu id="Project" value="#{selectOneMenuView.project}" style="width:125px">
+         <p:selectOneMenu id="Project" value="#{selectOneMenuView.project}" style="width:125px">
             <f:selectItem itemLabel="project" itemValue="" />
-            <f:selectItem itemLabel="project1" itemValue="Xbox One" />
-            <f:selectItem itemLabel="project2" itemValue="PS4" />
-            <f:selectItem itemLabel="project3" itemValue="Wii U" />
+            <f:selectItem itemLabel="project1" itemValue="project2" />
+            <f:selectItem itemLabel="project2" itemValue="project3" />
+            <f:selectItem itemLabel="project3" itemValue="project4" />
         </p:selectOneMenu>
         
                 
@@ -85,19 +85,56 @@
 
 <!--  End Menu select Project -->
 
+
+<!-- Start Button Time registry , end button time registry -->
+<br/>
+
+<p:outputLabel for="timeStart" value="TimeStart:" />
+<p:calendar id="timeStart" value="#{calendarView.date1}" pattern="HH:mm" timeOnly="true"  />
+<br/>
+<p:outputLabel for="timeEnd" value="TimeEnd:" />
+<p:calendar id="timeEnd" value="#{calendarView.date2}" pattern="HH:mm" timeOnly="true"  />
+<br/>
+<!-- End Start Button time registry , end button time registry -->
+
+
 <!--  2 buttons Start : register and go back -->
 
     <p:growl id="growl" life="2000" />
       <br/>
-      <p:commandButton value="Register" id="registerButton" actionListener="#{buttonView.buttonAction}" ajax="false" />
+      <p:commandButton value="Register" id="registerButton" action="#{frontBean.register}" ajax="false" />
       <br/>
-       <p:commandButton value="Go Back" id="BackButton" actionListener="#{buttonView.buttonAction}" ajax="false" />
+      <p:commandButton value="Go Back" id="BackButton" action="#{buttonView.buttonAction}" ajax="false" />
+
+
+
+	<p:dialog header="Modal Dialog" widgetVar="dlg1" modal="true" height="100">
+    <h:outputText value="Registration success" />
+	</p:dialog>  
 
 
 <!-- End Button -->
 
 </h:panelGrid>
 
+
+
+
+<p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+        <p:panelGrid id="display" columns="2" columnClasses="label,value">
+        
+            <h:outputText value="Time:" />
+            <h:outputText value="#{calendarView.date1}">
+                <f:convertDateTime pattern="HH:mm" />
+            </h:outputText>
+            
+            <h:outputText value="Time:" />
+            <h:outputText value="#{calendarView.date2}">
+                <f:convertDateTime pattern="HH:mm" />
+            </h:outputText>
+            
+        </p:panelGrid>
+    </p:dialog>
 
 
 

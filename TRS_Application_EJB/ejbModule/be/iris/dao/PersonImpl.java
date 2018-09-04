@@ -3,6 +3,7 @@ package be.iris.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
@@ -11,6 +12,7 @@ import javax.persistence.TypedQuery;
 
 import be.iris.entities.Tutperson;
 
+@Stateless(mappedName="personDaoImpl")
 public class PersonImpl implements PersonDao {
 
 	@PersistenceContext(unitName = "TRSAppJpa")
@@ -89,6 +91,7 @@ public class PersonImpl implements PersonDao {
 
 	@Override
 	public List<Tutperson> listAllPersons() {
+		System.out.println("PERSON DAO HERE");
 		EntityTransaction tx = em.getTransaction();
 		List<Tutperson> listPersons = new ArrayList<>();
 		try {
@@ -96,10 +99,11 @@ public class PersonImpl implements PersonDao {
 
 			//TypedQuery<Tutperson> query = em.createNamedQuery("Tutperson.findAll", Tutperson.class);
 			//listPersons = query.getResultList();
+			
 			String q = "SELECT * FROM TUTPERSONS T WHERE EXISTS (SELECT * FROM TUTPASSWORDS P"
 					+ "WHERE T.PNO = P.PASS_PNO)";
 			TypedQuery<Tutperson> query = em.createQuery(q,Tutperson.class);
-			listPersons = query.getResultList();
+			listPersons = query.getResultList();	
 			tx.commit();
 		} catch (RuntimeException re) {
 			try {

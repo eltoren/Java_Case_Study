@@ -3,6 +3,7 @@ package be.iris.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.Entity;
@@ -22,6 +23,7 @@ import javax.validation.constraints.NotNull;
  * 
  */
 @Named
+@RequestScoped
 @Entity
 @Table(name="TUTCOMPANIES")
 @NamedQuery(name="Tutcompany.findAll", query="SELECT t FROM Tutcompany t")

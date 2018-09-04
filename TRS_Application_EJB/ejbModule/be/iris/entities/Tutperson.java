@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.Column;
@@ -26,6 +27,7 @@ import javax.validation.constraints.NotNull;
  * 
  */
 @Named
+@RequestScoped
 @Entity
 @Table(name="TUTPERSONS")
 @NamedQuery(name="Tutperson.findAll", query="SELECT t FROM Tutperson t ")
@@ -35,10 +37,8 @@ public class Tutperson implements Serializable {
 	//id, bi-directional one-to-one association to tutworkingday
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@OneToOne(mappedBy="personId")
-	private long pno;
+	private int pno;
 
-	
 	private String padept;
 
 	private String pfname;
@@ -65,15 +65,18 @@ public class Tutperson implements Serializable {
 	
 	@OneToMany(targetEntity=Tutactivity.class, mappedBy="person")
 	private List<Tutactivity> activities = new ArrayList<>();
-
+	
+	@OneToMany(targetEntity=TutworkingDay.class, mappedBy="personId")
+	private List<TutworkingDay> listWorkingDays = new ArrayList<>();  
+	
 	public Tutperson() {
 	}
 
-	public long getPno() {
+	public int getPno() {
 		return this.pno;
 	}
 
-	public void setPno(long pno) {
+	public void setPno(int pno) {
 		this.pno = pno;
 	}
 
@@ -152,6 +155,14 @@ public class Tutperson implements Serializable {
 	}
 	
 	
+	public List<TutworkingDay> getListWorkingDays() {
+		return listWorkingDays;
+	}
+
+	public void setListWorkingDays(List<TutworkingDay> listWorkingDays) {
+		this.listWorkingDays = listWorkingDays;
+	}
+
 	public void addActivity(Tutactivity activity){
 		this.getActivities().add(activity);
 		activity.setPerson(this);
@@ -162,6 +173,15 @@ public class Tutperson implements Serializable {
 		activity.setPerson(null);
 	}
 	
+	public void addWorkingDay(TutworkingDay workingDay){
+		this.getListWorkingDays().add(workingDay);
+		workingDay.setPersonId(this);
+	}
+	
+	public void removeWorkingDay(TutworkingDay workingDay){
+		this.getListWorkingDays().remove(workingDay);
+		workingDay.setPersonId(null);
+	}
 	public String toString(){
 		return this.getPfname() + " " + this.getPlname();
 	}
