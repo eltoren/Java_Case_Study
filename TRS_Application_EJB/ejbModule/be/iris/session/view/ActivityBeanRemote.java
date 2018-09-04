@@ -14,9 +14,9 @@ public interface ActivityBeanRemote {
 
 	public void saveNewActivitie(Tutactivity activity);
 
-	public void updateActivity(Tutactivity activity);
+	public void updateActivity(Tutactivity oldActivity, Tutactivity newActivity);
 
-	public void updateListOfActivities(List<Tutactivity> activities);
+	public void updateListOfActivities(List<Tutactivity> activities, List<Tutactivity> newActivities);
 
 	public List<Tutactivity> getAllActivities();
 
