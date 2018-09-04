@@ -3,6 +3,7 @@ package be.iris.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -52,6 +53,7 @@ public class Tutcompany implements Serializable {
 	private String covat;
 
 	//bi-directional many-to-one association to Tutperson
+	@Inject
 	@OneToOne(mappedBy="cocPno")
 	private Tutperson tutperson;
 

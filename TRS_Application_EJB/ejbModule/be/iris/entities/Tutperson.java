@@ -2,6 +2,7 @@ package be.iris.entities;
 
 import java.io.Serializable;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -47,6 +48,7 @@ public class Tutperson implements Serializable {
 
 	private String ptel;
 
+	@Inject
 	@Column(name="COC_PNO")
 	@OneToOne
 	@JoinColumn(name="CONO")

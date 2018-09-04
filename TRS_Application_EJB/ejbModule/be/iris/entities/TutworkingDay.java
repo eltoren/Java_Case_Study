@@ -3,6 +3,7 @@ package be.iris.entities;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +20,7 @@ import javax.validation.constraints.NotNull;
 @Table(name="TUTWORKING_DAYS")
 public class TutworkingDay {
 
-	
+	@Inject
 	@Id
 	@Column(name="WORKING_PNO")
 	@OneToOne
