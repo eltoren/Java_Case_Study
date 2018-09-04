@@ -93,9 +93,13 @@ public class PersonImpl implements PersonDao {
 	public List<Tutperson> listAllPersons() {
 		System.out.println("PERSON DAO HERE");
 		List<Tutperson> listPersons = new ArrayList<>();
-		TypedQuery<Tutperson> query = em.createNamedQuery("Tutperson.findAll", Tutperson.class);
-		listPersons = query.getResultList();	
-		System.out.println("QUERY");
+		TypedQuery<Tutperson> query = em.createNamedQuery("Tutperson.findPersonsLogs", Tutperson.class);
+
+		for(Tutperson p : query.getResultList()){
+			em.detach(p);
+			listPersons.add(p);
+		}
+		
 		return listPersons;
 	}
 

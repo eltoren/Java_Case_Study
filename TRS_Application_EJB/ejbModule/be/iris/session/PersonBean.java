@@ -38,7 +38,6 @@ public class PersonBean implements PersonBeanRemote {
 
 	@Override
 	public List<Tutperson> getAllPersons() {
-		System.out.println("PERSON BEAN HERE");
 		return personDao.listAllPersons();
 	}
 
