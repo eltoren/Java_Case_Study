@@ -10,17 +10,20 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 </h:head>
 <h:body>
 
-	<p:panelGrid columns="3">
-  
+	<p:panelGrid columns="1">
+  <h:form> 
+     <p:outputLabel value="Login ID:" />
+
+     <p:selectOneMenu value="#{loginController.password}" required="true">
+    	<f:selectItems value="#{loginController.listOfFirstNames}" />
+    </p:selectOneMenu> 
+    <p:outputLabel value="password" />
+    <p:password value="" required="true"/>
  
-    <p:outputText value="Login ID:" />
-    <p:selectOneMenu value="" immediate="true"/>
- 
-    <p:outputText value="password" />
-    <p:password value="" immediate="true"/>
- 
-	<p:commandButton ajax="false" action=""/>
-</p:panelGrid>
+	<p:commandButton value="bonjour" ajax="false" actionListener="#{loginController.login}"/>
+</h:form>
+	</p:panelGrid>
+
 
 
 </h:body>

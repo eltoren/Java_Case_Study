@@ -3,7 +3,7 @@
   <display-name>TRS_Application_Web</display-name>
 
   <welcome-file-list>
-  <welcome-file>WorkingDay.xhtml</welcome-file>
+  <welcome-file>index.xhtml</welcome-file>
   </welcome-file-list>
 
   <servlet>

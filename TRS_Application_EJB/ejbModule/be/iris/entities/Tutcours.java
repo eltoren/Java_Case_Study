@@ -3,6 +3,7 @@ package be.iris.entities;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.Entity;
 import javax.persistence.NamedQuery;
@@ -10,6 +11,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Named
+@RequestScoped
 @Entity
 @Table(name="TUTCOURSES")
 @NamedQuery(name="Tutcours.findAll", query="SELECT t FROM Tutcours t")

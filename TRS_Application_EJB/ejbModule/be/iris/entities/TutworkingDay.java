@@ -3,6 +3,7 @@ package be.iris.entities;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.Column;
@@ -15,12 +16,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Named
+@RequestScoped
 @Entity
 @IdClass(WorkingDayPK.class)
 @Table(name="TUTWORKING_DAYS")
 public class TutworkingDay {
 
-	@Inject
 	@Id
 	@Column(name="WORKING_PNO")
 	@OneToOne

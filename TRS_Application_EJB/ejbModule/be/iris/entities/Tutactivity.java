@@ -3,6 +3,7 @@ package be.iris.entities;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.Column;
@@ -16,6 +17,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Named
+@RequestScoped
 @Entity
 @Table(name="TUTACTIVITIES")
 @NamedQuery(name="Tutactivity.ListActivities", query="SELECT a from Tutactivity a")
@@ -26,7 +28,6 @@ public class Tutactivity {
 	@Column(name="AID")
 	private int activityId;
 	
-	@Inject
 	@Column(name="ACT_PNO")
 	@ManyToOne
 	@JoinColumn(name="PNO")
@@ -44,7 +45,6 @@ public class Tutactivity {
 	@Column(name="ACT_END_TIME")
 	private LocalTime endTime;
 	
-	@Inject
 	@Column(name="ACT_PID")
 	@ManyToOne
 	@JoinColumn(name="PID")
