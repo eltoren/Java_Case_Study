@@ -92,27 +92,10 @@ public class PersonImpl implements PersonDao {
 	@Override
 	public List<Tutperson> listAllPersons() {
 		System.out.println("PERSON DAO HERE");
-	//	EntityTransaction tx = em.getTransaction();
 		List<Tutperson> listPersons = new ArrayList<>();
-		try {
-		//	tx.begin();
-
-			//TypedQuery<Tutperson> query = em.createNamedQuery("Tutperson.findAll", Tutperson.class);
-			//listPersons = query.getResultList();
-			
-			String q = "SELECT * FROM TUTPERSONS T WHERE EXISTS (SELECT * FROM TUTPASSWORDS P"
-					+ "WHERE T.PNO = P.PASS_PNO)";
-			TypedQuery<Tutperson> query = em.createQuery(q,Tutperson.class);
-			listPersons = query.getResultList();	
-	//		tx.commit();
-		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
-			System.err.println(re.getMessage());
-		}
+		TypedQuery<Tutperson> query = em.createNamedQuery("Tutperson.findAll", Tutperson.class);
+		listPersons = query.getResultList();	
+		System.out.println("QUERY");
 		return listPersons;
 	}
 

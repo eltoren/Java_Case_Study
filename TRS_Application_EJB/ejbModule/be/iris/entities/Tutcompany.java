@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -56,7 +56,8 @@ public class Tutcompany implements Serializable {
 	private String covat;
 
 	//bi-directional many-to-one association to Tutperson
-	@OneToOne(mappedBy="cocPno", fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="COC_PNO")
 	private Tutperson tutperson;
 
 	//bi-directional many-to-one association to Tutperson
