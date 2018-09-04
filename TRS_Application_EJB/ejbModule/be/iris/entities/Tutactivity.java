@@ -28,7 +28,6 @@ public class Tutactivity {
 	@Column(name="AID")
 	private int activityId;
 	
-	@Column(name="ACT_PNO")
 	@ManyToOne
 	@JoinColumn(name="PNO")
 	private Tutperson person;
@@ -45,7 +44,6 @@ public class Tutactivity {
 	@Column(name="ACT_END_TIME")
 	private LocalTime endTime;
 	
-	@Column(name="ACT_PID")
 	@ManyToOne
 	@JoinColumn(name="PID")
 	private Tutproject project;

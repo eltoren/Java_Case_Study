@@ -52,8 +52,6 @@ public class Tutperson implements Serializable {
 
 	private String ptel;
 
-	@Inject
-	@Column(name="COC_PNO")
 	@OneToOne
 	@JoinColumn(name="cono")
 	private Tutcompany cocPno;
