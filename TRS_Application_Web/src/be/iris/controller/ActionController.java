@@ -20,7 +20,6 @@ import be.iris.entities.Tutactivity;
 import be.iris.entities.Tutcours;
 import be.iris.entities.Tutperson;
 import be.iris.entities.Tutproject;
-import be.iris.session.PersonConectedBean;
 import be.iris.session.view.ActivityBeanRemote;
 import be.iris.session.view.PersonBeanRemote;
 import be.iris.session.view.PersonConectedBeanRemote;
@@ -227,7 +226,11 @@ public class ActionController implements Serializable{
 		}
 		activity.setPerson(personSelected);
 		
-	
+		try{
+			activityBean.saveNewActivitie(activity);
+		}catch(Exception ex){
+			this.sendAMessage(ex.getMessage(), FacesMessage.SEVERITY_ERROR);
+		}
 	}
 
 	public String getProject() {
