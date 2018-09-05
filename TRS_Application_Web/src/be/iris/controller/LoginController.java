@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -13,32 +13,37 @@ import be.iris.entities.Tutperson;
 import be.iris.session.view.PersonBeanRemote;
 
 @Named
-@RequestScoped
+@SessionScoped
 public class LoginController implements Serializable{
 
 	@EJB(name = "personBean")
 	private PersonBeanRemote personBean;
 	private String password;
 	private String name;
+	
 	@Inject
+	@Named("person")
 	private Tutperson personSelected;
 
-	@Inject
-	private ListingPersons listPersons;
-	private List<String> listOfFirstNames;
+	private List<Tutperson> persons= new ArrayList<>();
+	private List<String> listOfFirstNames = new ArrayList<>();
 
 	public LoginController() {
-		listOfFirstNames = new ArrayList<>();
-	
+
 	}
 
 	public List<String> getListOfFirstNames() {
-		
+		if(persons.isEmpty()){
+			persons = personBean.getAllPersons();
+			for(Tutperson p : persons){
+				listOfFirstNames.add(p.getPfname() + " " + p.getPlname());
+			}
+		}
 		return listOfFirstNames;
 	}
 
 	public void setListOfFirstNames(List<String> listOfFirstNames) {
-
+		
 		this.listOfFirstNames = listOfFirstNames;
 	}
 
@@ -58,18 +63,19 @@ public class LoginController implements Serializable{
 		this.personSelected = personSelected;
 	}
 
-	public ListingPersons getListPersons() {
-		return listPersons;
+
+	public List<Tutperson> getPersons() {
+		return persons;
 	}
 
-	public void setListPersons(ListingPersons listPersons) {
-		this.listPersons = listPersons;
+	public void setPersons(List<Tutperson> persons) {
+		this.persons = persons;
 	}
 
 	public String login(){
 		String firstName = name.split(" ")[0];
 		String lastName = name.split(" ")[1];
-		for(Tutperson p : listPersons.getPersons()){
+		for(Tutperson p : persons){
 			if(p.getPfname().equals(firstName) && p.getPlname().equals(lastName)){
 				personSelected = p;
 				

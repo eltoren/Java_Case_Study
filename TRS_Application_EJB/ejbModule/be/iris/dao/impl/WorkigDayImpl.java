@@ -53,7 +53,7 @@ public class WorkigDayImpl implements WorkingDayDao {
 			workingDay.setDate(newWorkingDay.getDate());
 			workingDay.setStartTime(newWorkingDay.getStartTime());
 			workingDay.setEndTime(newWorkingDay.getEndTime());
-			workingDay.setPersonId(workingDay.getPersonId());
+			workingDay.setCoworker(workingDay.getCoworker());
 
 			em.persist(workingDay);
 

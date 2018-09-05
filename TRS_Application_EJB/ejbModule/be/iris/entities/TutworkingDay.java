@@ -27,7 +27,7 @@ public class TutworkingDay {
 	@Id
 	@ManyToOne
 	@JoinColumn(name="pno")
-	private Tutperson personId;
+	private Tutperson coworker;
 	
 	
 	@Id
@@ -39,27 +39,26 @@ public class TutworkingDay {
 	private LocalTime startTime;
 	
 	@Column(name="END_TIME", columnDefinition="TIMESTAMP")
-	//@NotNull
 	private LocalTime endTime;
 	
 
 	public TutworkingDay() {
 	}
 
-	public TutworkingDay(Tutperson personId, LocalDate date, LocalTime startTime, LocalTime endTime) {
+	public TutworkingDay(Tutperson coworker, LocalDate date, LocalTime startTime, LocalTime endTime) {
 		super();
-		this.personId = personId;
+		this.coworker = coworker;
 		this.date = date;
 		this.startTime = startTime;
 		this.endTime = endTime;
 	}
 
-	public Tutperson getPersonId() {
-		return personId;
+	public Tutperson getCoworker() {
+		return coworker;
 	}
 
-	public void setPersonId(Tutperson personId) {
-		this.personId = personId;
+	public void setCoworker(Tutperson coworker) {
+		this.coworker = coworker;
 	}
 
 	public LocalDate getDate() {
