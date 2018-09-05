@@ -224,6 +224,8 @@ public class ActionController implements Serializable{
 			}
 		
 		}
+		activity.setPerson(personSelected);
+		
 	
 	}
 
