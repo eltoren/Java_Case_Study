@@ -78,7 +78,7 @@ public class LoginController implements Serializable{
 	}
 
 	public String login(){
-		String firstName = name.split(" ")[0];
+		String firstName = name.split(" ")[0];   /* Here change this !! Junior */
 		String lastName = name.split(" ")[1];
 		for(Tutperson p : persons){
 			if(p.getPfname().equals(firstName) && p.getPlname().equals(lastName)){
@@ -111,7 +111,7 @@ public class LoginController implements Serializable{
 	
 	public void PersonTypeCheck()
 	{
-		
+		System.out.println(personSelected);
 		/* // test manager
 		personSelected.setPtype("Manager");
 		System.out.println("Here changed ass manager");
@@ -133,13 +133,20 @@ public class LoginController implements Serializable{
 		case "Manager" :
 			fb.setBool_MAN(true);
 			break;
-		case "IW" :
-			fb.setBool_IW(true);
-			break;
+		
 		case "Accountant":
 			fb.setBool_ACC(true);
+			break;
 		
-		
+		case "Coworker": 
+			fb.setBool_CW(true);
+			System.out.println("HERE COWORKER SWITCH");
+			break;	
+			
+		default:
+			fb.setBool_EMP(true);
+			System.out.println("HERE DEFAULT");
+			
 		}
 		
 		
