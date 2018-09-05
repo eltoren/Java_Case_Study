@@ -58,11 +58,7 @@ public class ActivityImpl implements ActivityDao {
 			act.setPerson(newActivity.getPerson());
 			act.setProject(newActivity.getProject());
 
-			// need to remove first before presisting again?
-			//possible id conflict?
-			//em.remove(oldActivity);
-			
-			em.persist(act);
+			em.merge(act);
 
 			tx.commit();
 

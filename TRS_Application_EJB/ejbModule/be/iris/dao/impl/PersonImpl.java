@@ -46,7 +46,6 @@ public class PersonImpl implements PersonDao {
 			tx.begin();
 
 			Tutperson prsn = em.find(Tutperson.class, oldPerson);
-			prsn.setPno(newPerson.getPno());
 			prsn.setPadept(newPerson.getPadept());
 			prsn.setPfname(newPerson.getPfname());
 			prsn.setPfunc(newPerson.getPfunc());
@@ -56,11 +55,7 @@ public class PersonImpl implements PersonDao {
 			prsn.setCocPno(newPerson.getCocPno());
 			prsn.setActivities(newPerson.getActivities());
 			
-			// need to remove first before presisting again?
-			//possible id conflict?
-			//em.remove(oldPerson);
-			
-			em.persist(prsn);
+			em.merge(prsn);
 
 			tx.commit();
 		} catch (RuntimeException re) {

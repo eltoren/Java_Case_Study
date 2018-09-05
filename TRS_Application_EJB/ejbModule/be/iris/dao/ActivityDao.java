@@ -19,6 +19,8 @@ public interface ActivityDao {
 	public void deleteActivity(Tutactivity activity);
 
 	public List<Tutactivity> listAllActivity();
+	
+	//extra methods
 
 	public List<Tutactivity> getAllActivitiesAtDate(LocalDate date);
 
