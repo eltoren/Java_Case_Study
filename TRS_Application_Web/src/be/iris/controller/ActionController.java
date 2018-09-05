@@ -23,6 +23,7 @@ import be.iris.entities.Tutproject;
 import be.iris.session.PersonConectedBean;
 import be.iris.session.view.ActivityBeanRemote;
 import be.iris.session.view.PersonBeanRemote;
+import be.iris.session.view.PersonConectedBeanRemote;
 import be.iris.session.view.ProjectBeanRemote;
 
 @Named
@@ -35,7 +36,7 @@ public class ActionController implements Serializable{
 	private String name;
 	
 	@EJB(name= "personConnectedBean")
-	private PersonConectedBean personConnectedBean;
+	private PersonConectedBeanRemote personConnectedBean;
 	
 	@Inject
 	@Named("person")
