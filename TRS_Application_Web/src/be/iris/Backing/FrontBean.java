@@ -4,33 +4,26 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import be.iris.PrimFaceController.CalendarView;
-import be.iris.entities.Tutactivity;
 import be.iris.entities.Tutproject;
-import be.iris.session.view.ActivityBeanRemote;
-import be.iris.session.view.ProjectBeanRemote;
 
 
 @Named
 @SessionScoped
 public class FrontBean implements Serializable {
 
-	private String project;
-	
-	@Inject 
-	private Tutactivity activity;
-	
-	@EJB
-	private ProjectBeanRemote projectBean;
-	
-	@EJB
-	private ActivityBeanRemote activityBean;
+
+	private String activityName;
+	private boolean bool_IW = false;   /* IW = independant Worker*/
+	private boolean bool_ACC = false;	/* ACC = Accountant*/
+	private boolean bool_MAN = false;  /* MAN = Manager*/
+	private boolean bool_EMP = false;  /* EMP = Employee */
+
 	
 	@Inject 
 	private CalendarView calendar;
@@ -41,25 +34,11 @@ public class FrontBean implements Serializable {
 	public void registerActivity(ActionEvent e){
 		
 		
-		for(Tutproject p : listofProjects){
-			if(project.equals(p.getPtitle())){
-				activity.setProject(p);
-				break;
-			}
-		
-		}
+	
 	
 	}
 
-	public String getProject() {
-		return project;
-	}
 
-	public void setProject(String project) {
-		this.project = project;
-	}
-
-	
 
 	public CalendarView getCalendar() {
 		return calendar;
@@ -69,45 +48,32 @@ public class FrontBean implements Serializable {
 		this.calendar = calendar;
 	}
 
-	public Tutactivity getActivity() {
-		return activity;
+	public boolean isBool_IW() {
+		return bool_IW;
 	}
 
-	public void setActivity(Tutactivity activity) {
-		this.activity = activity;
+	public void setBool_IW(boolean bool_IW) {
+		this.bool_IW = bool_IW;
 	}
 
-	public List<Tutproject> getListofProjects() {
-		return listofProjects;
+	public boolean isBool_ACC() {
+		return bool_ACC;
 	}
 
-	public void setListofProjects(List<Tutproject> listofProjects) {
-		this.listofProjects = listofProjects;
+	public void setBool_ACC(boolean bool_ACC) {
+		this.bool_ACC = bool_ACC;
 	}
 
-	public ProjectBeanRemote getProjectBean() {
-		return projectBean;
+	public boolean isBool_MAN() {
+		return bool_MAN;
 	}
 
-	public void setProjectBean(ProjectBeanRemote projectBean) {
-		this.projectBean = projectBean;
-	}
-
-	public List<String> getListProjectsNames() {
-		if(listofProjects.isEmpty()){
-			this.setListofProjects(projectBean.getAllProjects());
-			for(Tutproject p : listofProjects){
-				listProjectsNames.add(p.getPtitle());
-			}
-		}
-		return listProjectsNames;
-	}
-
-	public void setListProjectsNames(List<String> listProjectsNames) {
-		this.listProjectsNames = listProjectsNames;
+	public void setBool_MAN(boolean bool_MAN) {
+		this.bool_MAN = bool_MAN;
 	}
 
 	
+
 	
 	
 }
