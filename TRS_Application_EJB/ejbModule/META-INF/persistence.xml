@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="TRSAppJpa"
-		transaction-type="JTA">
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="TRSAppJpa" transaction-type="JTA">
 		<jta-data-source>jdbc/TRSAppJpa</jta-data-source>
 		<class>be.iris.entities.Tutproject</class>
 		<class>be.iris.entities.Tutcompany</class>
-		<class>be.iris.entities.Tutcours</class>
 		<class>be.iris.entities.Tutperson</class>
 		<class>be.iris.entities.TutworkingDay</class>
 		<class>be.iris.entities.Tutactivity</class>
+		<class>be.iris.entities.Tutcours</class>
 		<properties>
 			<property name="openjpa.ConnectionFactoryProperties" value="PrettyPrint=true,PrintParameters=true" />
 			<property name="openjpa.jdbc.Schema" value="tu00010" />
 			<property name="openjpa.Log"
-				value="defaultLevel=WARN, Runtime=INFO, Tool=INFO,SQL=TRACE" />		
-			<property name="javax.persistence.schema-generation.database.action" value="create" />
+				value="defaultLevel=WARN, Runtime=INFO, Tool=INFO,SQL=TRACE" />
 		</properties>
 	</persistence-unit>
 </persistence>

@@ -124,11 +124,11 @@ public class ProjectImpl implements ProjectDao {
 	public List<Tutcours> listInvoicedProjects() {
 		List<Tutcours> listProjects = new ArrayList<>();
 		try {
-
-			TypedQuery<Tutcours> query = em.createQuery("SELECT c from Tutcours c", Tutcours.class);
+			TypedQuery<Tutcours> query = em.createNamedQuery("Tutcours.findAll", Tutcours.class);
 			for(Tutcours c : query.getResultList()){
 				em.detach(c);
 				listProjects.add(c);
+				System.out.println("THINks " + c.getCltitle());
 			}
 		} catch (RuntimeException re) {
 			System.err.println(re.getMessage());

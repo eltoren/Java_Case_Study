@@ -96,9 +96,7 @@ public class ActionController implements Serializable{
 	}
 
 	public List<String> getListProjectsNames() {
-		System.out.println("YOHOU");
 		if(listofProjects.isEmpty()){
-			System.out.println("HELLo");
 			this.setListofProjects(projectBean.getListInvoicedProject());
 			for(Tutcours p : listofProjects){
 				listProjectsNames.add(p.getCltitle());
