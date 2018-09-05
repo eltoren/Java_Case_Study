@@ -32,9 +32,7 @@ public class FrontBean implements Serializable {
 	
 	public void registerActivity(ActionEvent e){
 		
-		
-	
-	
+			
 	}
 
 
@@ -71,8 +69,29 @@ public class FrontBean implements Serializable {
 		this.bool_MAN = bool_MAN;
 	}
 
-	
+	public String registryActivity()
+	{
+		System.out.println("Link To activity registration page");
+		return "ActivityRegistration";
+	}
 
+	public String analyse()
+	{
+		System.out.println("Link To analyse page");
+		return "Analyse";
+	}
+	
+	public String workingDay()
+	{
+		System.out.println("Link To activity registration page");
+		return "WorkingDay";
+	}
+	
+	public String calculation()
+	{
+		System.out.println("Link To activity registration page");
+		return "Calculation";
+	}
 	
 	
 }

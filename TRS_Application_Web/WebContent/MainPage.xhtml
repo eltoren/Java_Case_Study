@@ -17,10 +17,10 @@
 <h:form>
 
 <h:panelGrid id = "panelButton" columns = "2" border = "0"   cellpadding = "2" cellspacing = "2">
-    <p:commandButton value="Registration activities" id="registrationAButton" style="width:150px;height:80px" rendered="#{frontBean.bool_IW == true or frontBean.bool_ACC == true or FrontBean_MAN == true}" />
-    <p:commandButton value="Working days" id="WorkingDayButton" disabled="true" style="width:150px;height:80px" rendered="#{frontBean.bool_IW == true}" />
-  	<p:commandButton value="Calculation salaries" id="CalculationSButton" disabled="true" style="width:150px;height:80px" rendered="#{frontBean.bool_ACC == true}" />
-    <p:commandButton value="Analyse" id="AnalyseButton" disabled="true" style="width:150px;height:80px" rendered="#{frontBean.bool_MAN == true}" />
+    <p:commandButton value="Registration activities" ajax="false" action="#{frontBean.registryActivity}" style="width:150px;height:80px" rendered="#{frontBean.bool_IW == true or frontBean.bool_ACC == true or FrontBean_MAN == true}"  />
+    <p:commandButton value="Working days" ajax="false" action="#{frontBean.workingDay}" disabled="true" style="width:150px;height:80px" rendered="#{frontBean.bool_IW == true}" />
+  	<p:commandButton value="Calculation salaries" ajax="false" action="#{frontBean.calculation}" disabled="true" style="width:150px;height:80px" rendered="#{frontBean.bool_ACC == true}" />
+    <p:commandButton value="Analyse" ajax="false" action="#{frontBean.analyse}" disabled="true" style="width:150px;height:80px" rendered="#{frontBean.bool_MAN == true}" />
 </h:panelGrid>
 </h:form>
 
