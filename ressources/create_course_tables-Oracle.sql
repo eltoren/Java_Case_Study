@@ -28,7 +28,7 @@
     )
    ;
 --
-  CREATE TABLE TUTCOURSES
+  CREATE TABLE TUTCOURSES 
     (CID       CHAR     (4) primary key,
      CSTITLE   CHAR    (45) NOT NULL,
      CLTITLE   VARCHAR (60),

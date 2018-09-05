@@ -1,58 +1,60 @@
 package be.iris.entities;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
-import javax.persistence.Entity;
-import javax.persistence.NamedQuery;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
 
-@Named
-@RequestScoped
+/**
+ * The persistent class for the TUTCOURSES database table.
+ * 
+ */
 @Entity
 @Table(name="TUTCOURSES")
 @NamedQuery(name="Tutcours.findAll", query="SELECT t FROM Tutcours t")
-@PrimaryKeyJoinColumn(name="PID")
-public class Tutcours extends Tutproject implements Serializable {
+public class Tutcours implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private String pid;
+	@Id 
+	@Column(name="CID", columnDefinition="CHAR(4)")
+	private String cid;
 
-	private BigDecimal caprice;
+	@Column(name="CAPRICE", columnDefinition="NUMBER(4,2)")
+	private long caprice;
+	
+	@Column(name="CDUR", columnDefinition="NUMBER")
+	private int cdur;
 
-	private BigDecimal cdur;
-
+	@Column(name="CLTITLE", columnDefinition="VARCHAR(60)")
 	private String cltitle;
 
+	@Column(name="CSTITLE", columnDefinition="CHAR(45)")
 	private String cstitle;
 
 	public Tutcours() {
 	}
 
 	public String getCid() {
-		return this.pid;
+		return this.cid;
 	}
 
 	public void setCid(String cid) {
-		this.pid = cid;
+		this.cid = cid;
 	}
 
-	public BigDecimal getCaprice() {
+	public long getCaprice() {
 		return this.caprice;
 	}
 
-	public void setCaprice(BigDecimal caprice) {
+	public void setCaprice(long caprice) {
 		this.caprice = caprice;
 	}
 
-	public BigDecimal getCdur() {
+	public int getCdur() {
 		return this.cdur;
 	}
 
-	public void setCdur(BigDecimal cdur) {
+	public void setCdur(int cdur) {
 		this.cdur = cdur;
 	}
 

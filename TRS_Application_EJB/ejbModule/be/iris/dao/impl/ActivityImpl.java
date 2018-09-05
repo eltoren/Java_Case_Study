@@ -26,29 +26,19 @@ public class ActivityImpl implements ActivityDao {
 
 	@Override
 	public void insertActivity(Tutactivity activity) {
-		EntityTransaction tx = em.getTransaction();
 		try {
-			tx.begin();
 
 			em.persist(activity);
 
-			tx.commit();
 
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
+				System.err.println(re.getMessage());
 			}
-			System.err.println(re.getMessage());
-		}
 	}
 
 	@Override
 	public void updateActivity(Tutactivity oldActivity, Tutactivity newActivity) {
-		EntityTransaction tx = em.getTransaction();
 		try {
-			tx.begin();
 
 			Tutactivity act = em.find(Tutactivity.class, oldActivity.getActivityId());
 			act.setDate(newActivity.getDate());
@@ -60,35 +50,21 @@ public class ActivityImpl implements ActivityDao {
 
 			em.merge(act);
 
-			tx.commit();
 
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
+				System.err.println(re.getMessage());
 			}
-			System.err.println(re.getMessage());
-		}
 	}
 
 	@Override
 	public void deleteActivity(Tutactivity activity) {
-		EntityTransaction tx = em.getTransaction();
 		try {
-			tx.begin();
 
 			em.merge(activity);
 			em.remove(activity);
 
-			tx.commit();
 
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 
@@ -96,22 +72,14 @@ public class ActivityImpl implements ActivityDao {
 
 	@Override
 	public List<Tutactivity> listAllActivity() {
-		EntityTransaction tx = em.getTransaction();
 		List<Tutactivity> listActivities = new ArrayList<>();
 		try {
-			tx.begin();
 
 			TypedQuery<Tutactivity> query = em.createNamedQuery("Tutactivity.ListActivities", Tutactivity.class);
 			listActivities = query.getResultList();
 
-			tx.commit();
 
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 		return listActivities;
@@ -120,23 +88,15 @@ public class ActivityImpl implements ActivityDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Tutactivity> getAllActivitiesAtDate(LocalDate date) {
-		EntityTransaction tx = em.getTransaction();
 		List<Tutactivity> listActivities = new ArrayList<>();
 		try {
-			tx.begin();
 
 			Query query = em.createQuery("SELECT a from Tutactivity a WHERE a.date = :date", Tutactivity.class);
 			query.setParameter("date", Date.valueOf(date));
 			listActivities = query.getResultList();
 
-			tx.commit();
 
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 		return listActivities;
@@ -145,35 +105,24 @@ public class ActivityImpl implements ActivityDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Tutactivity> getAllActivitiesOfPerson(Tutperson person) {
-		EntityTransaction tx = em.getTransaction();
 		List<Tutactivity> listActivities = new ArrayList<>();
 		try {
-			tx.begin();
 
 			Query query = em.createQuery("SELECT a from Tutactivity a WHERE a.person = :person", Tutactivity.class);
 			query.setParameter("person", person);
 			listActivities = query.getResultList();
 
-			tx.commit();
-
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
+				System.err.println(re.getMessage());
 			}
-			System.err.println(re.getMessage());
-		}
 		return listActivities;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Tutactivity> getAllActivitiesOfPersonAtDate(Tutperson person, LocalDate date) {
-		EntityTransaction tx = em.getTransaction();
 		List<Tutactivity> listActivities = new ArrayList<>();
 		try {
-			tx.begin();
 
 			Query query = em.createQuery("SELECT a from Tutactivity a WHERE a.person = person AND a.date = :date",
 					Tutactivity.class);
@@ -181,14 +130,8 @@ public class ActivityImpl implements ActivityDao {
 			query.setParameter("date", Date.valueOf(date));
 			listActivities = query.getResultList();
 
-			tx.commit();
 
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 		return listActivities;
@@ -197,23 +140,15 @@ public class ActivityImpl implements ActivityDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Tutactivity> getAllActivitiesOfProject(Tutproject project) {
-		EntityTransaction tx = em.getTransaction();
 		List<Tutactivity> listActivities = new ArrayList<>();
 		try {
-			tx.begin();
 
 			Query query = em.createQuery("SELECT a from Tutactivity a WHERE a.project = :project", Tutactivity.class);
 			query.setParameter("project", project);
 			listActivities = query.getResultList();
 
-			tx.commit();
 
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 		return listActivities;
@@ -222,10 +157,8 @@ public class ActivityImpl implements ActivityDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Tutactivity> getAllActivitiesOfProjectAtDate(Tutproject project, LocalDate date) {
-		EntityTransaction tx = em.getTransaction();
 		List<Tutactivity> listActivities = new ArrayList<>();
 		try {
-			tx.begin();
 
 			Query query = em.createQuery("SELECT a from Tutactivity a WHERE a.project = project AND a.date = :date",
 					Tutactivity.class);
@@ -233,14 +166,7 @@ public class ActivityImpl implements ActivityDao {
 			query.setParameter("date", Date.valueOf(date));
 			listActivities = query.getResultList();
 
-			tx.commit();
-
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 		return listActivities;
@@ -249,10 +175,8 @@ public class ActivityImpl implements ActivityDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Tutactivity> getAllActivitiesOfPersonWorkingAtProject(Tutperson person, Tutproject project) {
-		EntityTransaction tx = em.getTransaction();
 		List<Tutactivity> listActivities = new ArrayList<>();
 		try {
-			tx.begin();
 
 			Query query = em.createQuery("SELECT a from Tutactivity a WHERE a.person = person AND a.project = project",
 					Tutactivity.class);
@@ -260,14 +184,8 @@ public class ActivityImpl implements ActivityDao {
 			query.setParameter("project", project);
 			listActivities = query.getResultList();
 
-			tx.commit();
 
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 		return listActivities;
@@ -277,10 +195,8 @@ public class ActivityImpl implements ActivityDao {
 	@Override
 	public List<Tutactivity> getAllActivitiesOfPersonWorkigAtProjectOnDate(Tutperson person, Tutproject project,
 			LocalDate date) {
-		EntityTransaction tx = em.getTransaction();
 		List<Tutactivity> listActivities = new ArrayList<>();
 		try {
-			tx.begin();
 
 			Query query = em.createQuery(
 					"SELECT a from Tutactivity a WHERE a.person = person AND a.project = :project AND a.date = :date",
@@ -290,14 +206,8 @@ public class ActivityImpl implements ActivityDao {
 			query.setParameter("date", Date.valueOf(date));
 			listActivities = query.getResultList();
 
-			tx.commit();
 
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 		return listActivities;
@@ -305,44 +215,28 @@ public class ActivityImpl implements ActivityDao {
 
 	@Override
 	public void deleteListOfActivitiesOnDate(LocalDate date) {
-		EntityTransaction tx = em.getTransaction();
 		try {
-			tx.begin();
 
 			Query query = em.createQuery("DELETE from Tutactivity a WHERE a.date = :date", Tutactivity.class);
 			query.setParameter("date", Date.valueOf(date));
 			query.executeUpdate();
 
-			tx.commit();
 
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 	}
 
 	@Override
 	public void deleteListOfActivitiesOfPerson(Tutperson person) {
-		EntityTransaction tx = em.getTransaction();
 		try {
-			tx.begin();
 
 			Query query = em.createQuery("DELETE from Tutactivity a WHERE a.person = :person", Tutactivity.class);
 			query.setParameter("person", person);
 			query.executeUpdate();
 
-			tx.commit();
 
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 
@@ -350,22 +244,14 @@ public class ActivityImpl implements ActivityDao {
 
 	@Override
 	public void deleteListOfActivitiesOfProject(Tutproject project) {
-		EntityTransaction tx = em.getTransaction();
 		try {
-			tx.begin();
 
 			Query query = em.createQuery("DELETE from Tutactivity a WHERE a.project = :project", Tutactivity.class);
 			query.setParameter("project", project);
 			query.executeUpdate();
 
-			tx.commit();
 
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 
@@ -373,9 +259,7 @@ public class ActivityImpl implements ActivityDao {
 
 	@Override
 	public void deleteListOfActivitiesofProjectAtDate(Tutproject project, LocalDate date) {
-		EntityTransaction tx = em.getTransaction();
 		try {
-			tx.begin();
 
 			Query query = em.createQuery("DELETE from Tutactivity a WHERE a.project = :project AND a.date = :date",
 					Tutactivity.class);
@@ -383,23 +267,15 @@ public class ActivityImpl implements ActivityDao {
 			query.setParameter("date", Date.valueOf(date));
 			query.executeUpdate();
 
-			tx.commit();
 
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 	}
 
 	@Override
 	public void deleteListOfActivitiesOfPersonAtDate(Tutperson person, LocalDate date) {
-		EntityTransaction tx = em.getTransaction();
 		try {
-			tx.begin();
 
 			Query query = em.createQuery("DELETE from Tutactivity a WHERE a.person = :person AND a.date = :date",
 					Tutactivity.class);
@@ -407,14 +283,7 @@ public class ActivityImpl implements ActivityDao {
 			query.setParameter("date", Date.valueOf(date));
 			query.executeUpdate();
 
-			tx.commit();
-
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 	}

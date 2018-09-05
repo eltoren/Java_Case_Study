@@ -10,20 +10,20 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 </h:head>
 <h:body style="background-color:#698dc6;">
 
-
+<p:growl />
 	<p:panel id="basic" header="login" style="margin-bottom:20px">
 	       
   <h:form> 
    <h:panelGrid columns="2" cellpadding="10">
      <p:outputLabel value="Login ID:" />
 
-     <p:selectOneMenu value="#{actionController.name}" required="true">
-    	<f:selectItems value="#{actionController.listOfFirstNames}" />
+     <p:selectOneMenu value="#{loginController.name}" required="true">
+    	<f:selectItems value="#{loginController.listOfFirstNames}" />
     </p:selectOneMenu> 
     <p:outputLabel value="Password : " />
-    <p:password value="#{actionController.password}" required="true"/>
+    <p:password value="#{loginController.password}" required="true"/>
  
-	<p:commandButton value="LOGIN" ajax="false" action="#{actionController.login}"/>
+	<p:commandButton value="LOGIN" ajax="false" action="#{loginController.login}"/>
 	</h:panelGrid>
 	</h:form>
 	</p:panel>

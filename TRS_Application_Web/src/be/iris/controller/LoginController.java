@@ -112,15 +112,15 @@ public class LoginController implements Serializable{
 	public void PersonTypeCheck()
 	{
 		
-//		// test manager
-//		personSelected.setPtype("Manager");
-//		System.out.println("Here changed ass manager");
-//		System.out.println(personSelected.getPtype());
-		
-		//test IW
-		
-		personSelected.setPtype("Accountant");
+		// test manager
+		personSelected.setPtype("Manager");
+		System.out.println("Here changed ass manager");
 		System.out.println(personSelected.getPtype());
+//		
+//		//test IW
+//		
+//		personSelected.setPtype("Accountant");
+//		System.out.println(personSelected.getPtype());
 //		
 //		
 //		// test Accountant
@@ -144,15 +144,7 @@ public class LoginController implements Serializable{
 		}
 		
 		
-		
-		if(personSelected.getPtype() == "Manager")
-		{
-			fb.setBool_MAN(true);
-						
-		}
-		
-		
-		
+	
 		
 		
 	}

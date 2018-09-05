@@ -28,8 +28,7 @@ public class FrontBean implements Serializable {
 	@Inject 
 	private CalendarView calendar;
 	
-	private List<Tutproject> listofProjects = new ArrayList<>();
-	private List<String> listProjectsNames = new ArrayList<>();
+	
 	
 	public void registerActivity(ActionEvent e){
 		
@@ -94,5 +93,18 @@ public class FrontBean implements Serializable {
 		return "Calculation";
 	}
 	
+	public String goBack()
+	{
+		return "MainPage";
+		
+	}
+	
+	
+	public String logout()
+	{
+		
+		System.out.println("Logout --> clear session");
+		return "index";
+	}
 	
 }
