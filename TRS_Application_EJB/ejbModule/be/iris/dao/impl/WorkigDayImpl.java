@@ -189,8 +189,7 @@ public class WorkigDayImpl implements WorkingDayDao {
 	}
 
 	@Override
-	public TutworkingDay getWorkigDaysOfPersonAtDate(Tutperson person,
-			LocalDate date) {
+	public TutworkingDay getWorkigDaysOfPersonAtDate(Tutperson person, LocalDate date) {
 		EntityTransaction tx = em.getTransaction();
 		TutworkingDay returnWorkingDay = new TutworkingDay();
 		try {
@@ -223,7 +222,7 @@ public class WorkigDayImpl implements WorkingDayDao {
 			tx.begin();
 
 			// needs testing if between works!
-			
+
 			String sql = "select w from tutworkingDay w where w.date between  ? and ?";
 			Query query = em.createNativeQuery(sql, TutworkingDay.class);
 			query.setParameter(1, Date.valueOf(startDate));
@@ -244,15 +243,15 @@ public class WorkigDayImpl implements WorkingDayDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<TutworkingDay> getListWorkigDaysOfPersonBetweenStartDateANdEndDate(
-			Tutperson person, LocalDate startDate, LocalDate endDate) {
+	public List<TutworkingDay> getListWorkigDaysOfPersonBetweenStartDateANdEndDate(Tutperson person,
+			LocalDate startDate, LocalDate endDate) {
 		EntityTransaction tx = em.getTransaction();
 		List<TutworkingDay> listWorkingDays = new ArrayList<>();
 		try {
 			tx.begin();
 
 			// needs testing if between works!
-			
+
 			String sql = "select w from tutworkingDay w where w.personId = ? and w.date between  ? and ?";
 			Query query = em.createNativeQuery(sql, TutworkingDay.class);
 			query.setParameter(1, person.getPno());

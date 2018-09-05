@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -22,6 +23,7 @@ import javax.validation.constraints.NotNull;
 @SequenceGenerator(name = "generatorKeys")
 @Inheritance(strategy=InheritanceType.JOINED)
 @Table(name="TUTPROJECTS")
+@NamedQuery(name="Tutproject.listProjects", query="SELECT p FROM Tutproject p")
 public class Tutproject {
 
 	@Id @GeneratedValue
