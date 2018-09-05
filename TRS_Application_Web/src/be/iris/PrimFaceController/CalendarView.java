@@ -14,11 +14,11 @@ import org.primefaces.event.SelectEvent;
 @RequestScoped
 public class CalendarView implements Serializable {
          
-    
-    private Date date;
-	private Date timeStartWork;
-	private Date timeEndWork;
-     
+//    
+	private Date date;
+//	private Date timeStartWork;
+//	private Date timeEndWork;
+//     
     public void onDateSelect(SelectEvent event) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -38,31 +38,31 @@ public class CalendarView implements Serializable {
         this.date = date;
     }
     
-    
-
-    public Date getTimeStartWork() {
-		return timeStartWork;
-	}
-
-	public void setTimeStartWork(Date timeStartWork) {
-		this.timeStartWork = timeStartWork;
-	}
-
-	public Date getTimeEndWork() {
-		return timeEndWork;
-	}
-
-	public void setTimeEndWork(Date timeEndWork) {
-		this.timeEndWork = timeEndWork;
-	}
+//    
+//
+//    public Date getTimeStartWork() {
+//		return timeStartWork;
+//	}
+//
+//	public void setTimeStartWork(Date timeStartWork) {
+//		this.timeStartWork = timeStartWork;
+//	}
+//
+//	public Date getTimeEndWork() {
+//		return timeEndWork;
+//	}
+//
+//	public void setTimeEndWork(Date timeEndWork) {
+//		this.timeEndWork = timeEndWork;
+//	}
 
 	public CalendarView() {}
-	public CalendarView(Date date, Date date1, Date date2) {
-		super();
-		this.date = date;
-		this.timeStartWork = timeStartWork;
-		this.timeEndWork = timeEndWork;
-	}
- 
+//	public CalendarView(Date date, Date date1, Date date2) {
+//		super();
+//		this.date = date;
+//		this.timeStartWork = timeStartWork;
+//		this.timeEndWork = timeEndWork;
+//	}
+// 
    
 }

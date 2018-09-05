@@ -1,6 +1,7 @@
 package be.iris.session;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class WorkingDayBean implements WorkingDayBeanRemote {
 
 	@Override
 	public void StartNewWorkingDay(Tutperson person) {
-		TutworkingDay workingDay = new TutworkingDay(person, LocalDate.now(), LocalTime.now(), null);
+		TutworkingDay workingDay = new TutworkingDay(person, LocalDate.now(), LocalDateTime.now(), null);
 		workingDayDao.insertWorkingDay(workingDay);
 	}
 
@@ -36,7 +37,7 @@ public class WorkingDayBean implements WorkingDayBeanRemote {
 	public void endWorkingDay(Tutperson person) {
 		TutworkingDay oldWorkingDay = workingDayDao.getWorkigDaysOfPersonAtDate(person, LocalDate.now());
 		TutworkingDay newWorkingDay = oldWorkingDay;
-		newWorkingDay.setEndTime(LocalTime.now());
+		newWorkingDay.setEndTime(LocalDateTime.now());
 		workingDayDao.updateWorkingDay(oldWorkingDay, newWorkingDay);
 	}
 
@@ -44,7 +45,7 @@ public class WorkingDayBean implements WorkingDayBeanRemote {
 	public void endWorkingDay(TutworkingDay workingDay) {
 		TutworkingDay oldWorkingDay = workingDay;
 		TutworkingDay newWorkingDay = workingDay;
-		newWorkingDay.setEndTime(LocalTime.now());
+		newWorkingDay.setEndTime(LocalDateTime.now());
 		workingDayDao.updateWorkingDay(oldWorkingDay, newWorkingDay);
 	}
 

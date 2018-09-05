@@ -1,6 +1,7 @@
 package be.iris.entities;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import javax.enterprise.context.RequestScoped;
@@ -31,21 +32,21 @@ public class TutworkingDay {
 	
 	
 	@Id
-	@Column(name="WORKING_DATE")
+	@Column(name="WORKING_DATE", columnDefinition="DATE")
 	private LocalDate date;
 	
 	@Column(name="START_TIME", columnDefinition="TIMESTAMP")
 	@NotNull
-	private LocalTime startTime;
+	private LocalDateTime startTime;
 	
 	@Column(name="END_TIME", columnDefinition="TIMESTAMP")
-	private LocalTime endTime;
+	private LocalDateTime endTime;
 	
 
 	public TutworkingDay() {
 	}
 
-	public TutworkingDay(Tutperson coworker, LocalDate date, LocalTime startTime, LocalTime endTime) {
+	public TutworkingDay(Tutperson coworker, LocalDate date, LocalDateTime startTime, LocalDateTime endTime) {
 		super();
 		this.coworker = coworker;
 		this.date = date;
@@ -69,19 +70,19 @@ public class TutworkingDay {
 		this.date = date;
 	}
 
-	public LocalTime getStartTime() {
+	public LocalDateTime getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(LocalTime startTime) {
+	public void setStartTime(LocalDateTime startTime) {
 		this.startTime = startTime;
 	}
 
-	public LocalTime getEndTime() {
+	public LocalDateTime getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(LocalTime endTime) {
+	public void setEndTime(LocalDateTime endTime) {
 		this.endTime = endTime;
 	}
 	
