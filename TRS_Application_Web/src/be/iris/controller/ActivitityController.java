@@ -57,11 +57,11 @@ private String project;
 			this.sendAMessage("ENTER A VALID DATE, NOT A DAY OF THE WEEKEND", FacesMessage.SEVERITY_ERROR);
 			return;
 		}
-		if(activity.getStartTime().isAfter(LocalTime.of(20, 0)) || activity.getStartTime().isBefore(LocalTime.of(5,0))){
+		if(activity.getStartTime().toLocalTime().isAfter(LocalTime.of(20, 0)) || activity.getStartTime().toLocalTime().isBefore(LocalTime.of(5,0))){
 			this.sendAMessage("ENTER A VALID STAR TIME, CANNOT WORK ON THE WRONGS HOURS", FacesMessage.SEVERITY_ERROR);
 			return;
 		}
-		if(activity.getEndTime().isAfter(LocalTime.of(20, 0)) || activity.getEndTime().isBefore(LocalTime.of(5,0))){
+		if(activity.getEndTime().toLocalTime().isAfter(LocalTime.of(20, 0)) || activity.getEndTime().toLocalTime().isBefore(LocalTime.of(5,0))){
 			this.sendAMessage("ENTER A VALID END TIME, CANNOT WORK ON THE WRONGS HOURS", FacesMessage.SEVERITY_ERROR);
 			return;
 		}
