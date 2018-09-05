@@ -1,6 +1,8 @@
 package be.iris.entities;
 
+import java.security.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import javax.enterprise.context.RequestScoped;
@@ -32,16 +34,16 @@ public class Tutactivity {
 	private Tutperson person;
 	
 	@NotNull
-	@Column(name="ACT_DATE")
+	@Column(name="ACT_DATE", columnDefinition="DATE")
 	private LocalDate date;
 	
 	@NotNull
-	@Column(name="ACT_START_TIME")
-	private LocalTime startTime;
+	@Column(name="ACT_START_TIME", columnDefinition="TIMESTAMP")
+	private LocalDateTime startTime;
 	
 	@NotNull
-	@Column(name="ACT_END_TIME")
-	private LocalTime endTime;
+	@Column(name="ACT_END_TIME", columnDefinition="TIMESTAMP")
+	private LocalDateTime endTime;
 	
 	@ManyToOne
 	@JoinColumn(name="PID")
@@ -79,20 +81,20 @@ public class Tutactivity {
 		this.date = date;
 	}
 
-	public LocalTime getStartTime() {
+	public LocalDateTime getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(LocalTime startTime) {
+	public void setStartTime(LocalDateTime startTime) {
 		this.startTime = startTime;
 	}
 
 
-	public LocalTime getEndTime() {
+	public LocalDateTime getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(LocalTime endTime) {
+	public void setEndTime(LocalDateTime endTime) {
 		this.endTime = endTime;
 	}
 

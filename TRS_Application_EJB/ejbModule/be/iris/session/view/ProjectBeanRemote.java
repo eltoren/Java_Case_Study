@@ -20,10 +20,8 @@ public interface ProjectBeanRemote {
 
 	public List<Tutproject> getAllProjects();
 
-	// i don't know
 	public List<Tutcours> getListInvoicedProject();
 
-	// i don't know
 	public List<Tutproject> getListNonInvoicesProjects();
 
 }
