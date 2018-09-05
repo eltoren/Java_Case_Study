@@ -58,12 +58,7 @@ public class CompanyImpl implements CompanyDao {
 			company.setTutperson(newCompany.getTutperson());
 			company.setTutpersons(newCompany.getTutpersons());
 
-			// not gonna work
-			// id not set...
-			// not able to set a new one
-			// or will it work?
-			// check update from person of activity plz
-			em.persist(company);
+			em.merge(company);
 
 			tx.commit();
 		} catch (RuntimeException re) {
