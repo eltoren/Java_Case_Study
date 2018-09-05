@@ -40,7 +40,7 @@ public class ProjectBean implements ProjectBeanRemote {
 	}
 
 	@Override
-	public List<Tutproject> getAllPrjects() {
+	public List<Tutproject> getAllProjects() {
 		return projectDao.listAllprojects();
 	}
 
