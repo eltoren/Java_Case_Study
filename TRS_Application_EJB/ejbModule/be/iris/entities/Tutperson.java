@@ -6,11 +6,16 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQuery;
@@ -25,17 +30,18 @@ import javax.validation.constraints.NotNull;
  * The persistent class for the TUTPERSONS database table.
  * 
  */
-@Named
+@Named("person")
 @RequestScoped
 @Entity
 @Table(name="TUTPERSONS")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="ptype", discriminatorType=DiscriminatorType.STRING)
 @NamedQuery(name="Tutperson.findAll", query="SELECT t FROM Tutperson t ")
 @NamedNativeQuery(name="Tutperson.findPersonsLogs", query="SELECT * from tutpersons t where t.pno in (select p.pass_pno from tutpasswords p)",
 resultClass=Tutperson.class)
 public class Tutperson implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	//id, bi-directional one-to-one association to tutworkingday
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int pno;
@@ -64,8 +70,8 @@ public class Tutperson implements Serializable {
 	@OneToMany(targetEntity=Tutactivity.class, mappedBy="person")
 	private List<Tutactivity> activities = new ArrayList<>();
 	
-	@OneToMany(targetEntity=TutworkingDay.class, mappedBy="personId")
-	private List<TutworkingDay> listWorkingDays = new ArrayList<>();  
+	@Column(name="ptype")
+	private String ptype;
 	
 	public Tutperson() {
 	}
@@ -153,14 +159,7 @@ public class Tutperson implements Serializable {
 	}
 	
 	
-	public List<TutworkingDay> getListWorkingDays() {
-		return listWorkingDays;
-	}
-
-	public void setListWorkingDays(List<TutworkingDay> listWorkingDays) {
-		this.listWorkingDays = listWorkingDays;
-	}
-
+	
 	public void addActivity(Tutactivity activity){
 		this.getActivities().add(activity);
 		activity.setPerson(this);
@@ -171,17 +170,18 @@ public class Tutperson implements Serializable {
 		activity.setPerson(null);
 	}
 	
-	public void addWorkingDay(TutworkingDay workingDay){
-		this.getListWorkingDays().add(workingDay);
-		workingDay.setPersonId(this);
-	}
-	
-	public void removeWorkingDay(TutworkingDay workingDay){
-		this.getListWorkingDays().remove(workingDay);
-		workingDay.setPersonId(null);
-	}
+
 	public String toString(){
 		return this.getPfname() + " " + this.getPlname();
 	}
 
+	public String getPtype() {
+		return ptype;
+	}
+
+	public void setPtype(String ptype) {
+		this.ptype = ptype;
+	}
+
+	
 }

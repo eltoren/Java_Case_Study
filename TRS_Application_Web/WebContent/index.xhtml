@@ -18,7 +18,7 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
      <p:outputLabel value="Login ID:" />
 
      <p:selectOneMenu value="#{loginController.name}" required="true">
-    	<f:selectItems value="#{loginController.listingPersons.names}" />
+    	<f:selectItems value="#{loginController.listOfFirstNames}" />
     </p:selectOneMenu> 
     <p:outputLabel value="Password : " />
     <p:password value="#{loginController.password}" required="true"/>
