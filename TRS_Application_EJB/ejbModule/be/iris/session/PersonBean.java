@@ -13,7 +13,7 @@ import be.iris.session.view.PersonBeanRemote;
 public class PersonBean implements PersonBeanRemote {
 
 	@EJB(name = "personDaoImpl")
-	PersonDao personDao;
+	private PersonDao personDao;
 
 	public PersonBean() {
 	}

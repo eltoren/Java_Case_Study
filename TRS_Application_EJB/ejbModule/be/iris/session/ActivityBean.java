@@ -3,20 +3,20 @@ package be.iris.session;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import be.iris.dao.ActivityDao;
+import be.iris.entities.Tutactivity;
 import be.iris.entities.Tutperson;
 import be.iris.entities.Tutproject;
-import be.iris.dao.ActivityDao;
-import be.iris.dao.impl.ActivityImpl;
-import be.iris.entities.Tutactivity;
-
 import be.iris.session.view.ActivityBeanRemote;
 
 @Stateless(mappedName = "activityBean")
 public class ActivityBean implements ActivityBeanRemote {
 
-	private ActivityDao activityDao = new ActivityImpl();
+	@EJB(name ="activityImpl")
+	private ActivityDao activityDao;
 
 	public ActivityBean() {
 	}

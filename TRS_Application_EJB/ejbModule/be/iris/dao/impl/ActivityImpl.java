@@ -18,7 +18,7 @@ import be.iris.entities.Tutactivity;
 import be.iris.entities.Tutperson;
 import be.iris.entities.Tutproject;
 
-@Stateless
+@Stateless(mappedName = "activityImpl")
 public class ActivityImpl implements ActivityDao {
 
 	@PersistenceContext(unitName = "TRSAppJpa")

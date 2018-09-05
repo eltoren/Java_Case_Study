@@ -39,7 +39,7 @@ public class TutworkingDay {
 	private LocalTime startTime;
 	
 	@Column(name="END_TIME", columnDefinition="TIMESTAMP")
-	@NotNull
+	//@NotNull
 	private LocalTime endTime;
 	
 
