@@ -140,7 +140,6 @@ public class FrontBean implements Serializable {
 
 
 
-
 	
 	
 }

@@ -189,6 +189,6 @@ ALTER TABLE Tutpersons ADD PTYPE VARCHAR(50);
 	ALTER TABLE tutpersons MODIFY (PTYPE DEFAULT 'Employee');
 
 
-UPDATE tutpersons SET PTYPE = 'Employee' where PTYPE is null ;
+UPDATE tutpersons SET PTYPE = 'Coworker' where PLNAME = 'Duchemin' ;
   
  
