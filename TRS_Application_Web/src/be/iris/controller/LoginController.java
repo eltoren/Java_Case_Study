@@ -9,6 +9,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import be.iris.Backing.FrontBean;
 import be.iris.entities.Tutperson;
 import be.iris.session.view.PersonBeanRemote;
 
@@ -20,6 +21,9 @@ public class LoginController implements Serializable{
 	private PersonBeanRemote personBean;
 	private String password;
 	private String name;
+	
+	@Inject
+	private FrontBean fb ;
 	
 	@Inject
 	@Named("person")
@@ -84,8 +88,11 @@ public class LoginController implements Serializable{
 			}
 		}
 		if(personBean.iSLoginOk(personSelected, password))
-			return "ActivityRegistration?faces-redirect=true";
-		else
+		{
+			PersonTypeCheck();
+			return "MainPage";
+		}
+			else
 			return "index";
 	}
 
@@ -99,6 +106,54 @@ public class LoginController implements Serializable{
 
 	public PersonBeanRemote getPersonBean() {
 		return personBean;
+	}
+	
+	public void PersonTypeCheck()
+	{
+		
+//		// test manager
+//		personSelected.setPtype("Manager");
+//		System.out.println("Here changed ass manager");
+//		System.out.println(personSelected.getPtype());
+		
+		//test IW
+		
+		personSelected.setPtype("Accountant");
+		System.out.println(personSelected.getPtype());
+//		
+//		
+//		// test Accountant
+//		
+//		personSelected.setPtype("IW");
+//		System.out.println(personSelected.getPtype());
+		
+		
+		switch(personSelected.getPtype())
+		{
+		case "Manager" :
+			fb.setBool_MAN(true);
+			break;
+		case "IW" :
+			fb.setBool_IW(true);
+			break;
+		case "Accountant":
+			fb.setBool_ACC(true);
+		
+		
+		}
+		
+		
+		
+		if(personSelected.getPtype() == "Manager")
+		{
+			fb.setBool_MAN(true);
+						
+		}
+		
+		
+		
+		
+		
 	}
 
 	

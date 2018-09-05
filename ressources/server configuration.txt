@@ -45,4 +45,3 @@
 
     <enterpriseApplication id="TRS_Application_EAR" location="TRS_Application_EAR.ear" name="TRS_Application_EAR"/>
 </server>
-aa
