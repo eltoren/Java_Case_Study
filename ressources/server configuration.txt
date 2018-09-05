@@ -51,7 +51,7 @@
     <jmsQueue jndiName="jms/MessageQueue">
     	<properties.wasJms queueName="MessageQueue"/>
     </jmsQueue>
-    <jmsActivationSpec id="Exercice1EAR/exercice1EJB/MessageHandler">
+    <jmsActivationSpec id="TRS_Application_EAR/TRS_Application_EJB/MessageHandler">
     	<properties.wasJms destination="jms/MessageQueue"/>
     </jmsActivationSpec>
 

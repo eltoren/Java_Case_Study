@@ -8,7 +8,7 @@ import javax.ejb.Stateless;
 import be.iris.entities.Tutperson;
 import be.iris.entities.Tutproject;
 import be.iris.dao.ActivityDao;
-import be.iris.dao.ActivityImpl;
+import be.iris.dao.impl.ActivityImpl;
 import be.iris.entities.Tutactivity;
 
 import be.iris.session.view.ActivityBeanRemote;

@@ -5,9 +5,9 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import be.iris.entities.Tutactivity;
 import be.iris.entities.Tutperson;
 import be.iris.entities.Tutproject;
-import be.iris.entities.Tutactivity;
 
 @Remote
 public interface ActivityBeanRemote {

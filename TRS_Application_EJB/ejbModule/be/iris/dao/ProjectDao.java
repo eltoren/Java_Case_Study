@@ -9,7 +9,6 @@ import be.iris.entities.Tutproject;
 
 @Local
 public interface ProjectDao {
-
 	
 	public List<Tutproject> listAllprojects();
 	

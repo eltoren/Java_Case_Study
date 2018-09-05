@@ -1,4 +1,4 @@
-package be.iris.dao;
+package be.iris.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import javax.persistence.RollbackException;
 import javax.persistence.TypedQuery;
 
+import be.iris.dao.PersonDao;
 import be.iris.entities.Tutperson;
 
 @Stateless(mappedName = "personDaoImpl")
@@ -54,7 +55,11 @@ public class PersonImpl implements PersonDao {
 			prsn.setPtel(newPerson.getPtel());
 			prsn.setCocPno(newPerson.getCocPno());
 			prsn.setActivities(newPerson.getActivities());
-
+			
+			// need to remove first before presisting again?
+			//possible id conflict?
+			//em.remove(oldPerson);
+			
 			em.persist(prsn);
 
 			tx.commit();

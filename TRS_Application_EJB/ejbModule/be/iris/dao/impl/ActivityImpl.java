@@ -1,4 +1,4 @@
-package be.iris.dao;
+package be.iris.dao.impl;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import javax.persistence.RollbackException;
 import javax.persistence.TypedQuery;
 
+import be.iris.dao.ActivityDao;
 import be.iris.entities.Tutactivity;
 import be.iris.entities.Tutperson;
 import be.iris.entities.Tutproject;
@@ -57,6 +58,10 @@ public class ActivityImpl implements ActivityDao {
 			act.setPerson(newActivity.getPerson());
 			act.setProject(newActivity.getProject());
 
+			// need to remove first before presisting again?
+			//possible id conflict?
+			//em.remove(oldActivity);
+			
 			em.persist(act);
 
 			tx.commit();

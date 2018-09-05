@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -19,6 +20,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @IdClass(WorkingDayPK.class)
 @Table(name="TUTWORKING_DAYS")
+@NamedQuery(name="TutworkingDay.listWorkingDays", query="SELECT w from TutworkingDay w")
 public class TutworkingDay {
 
 
