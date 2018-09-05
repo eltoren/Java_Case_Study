@@ -29,33 +29,20 @@
     <!-- Automatically expand WAR files and EAR files -->
     <applicationManager autoExpand="true"/>
 
-    <dataSource connectionManagerRef="conMan" id="TRSAppJpa" jndiName="jdbc:/TRSAppJpa">
+    <dataSource connectionManagerRef="conMan" id="TRSAppJpa" jndiName="jdbc/TRSAppJpa">
     	<properties.oracle URL="jdbc:oracle:thin:@tosfeb3fc:1521:xe" databaseName="xe" password="tu00010" serverName="tosfeb3fc" user="tu00010"/>
         
         
         <jdbcDriver libraryRef="sharedOjdbc"/>
+        
     </dataSource>
     <library id="sharedOjdbc">
     	<file name="C:\Users\Duser\Desktop\ojdbc6.jar"/>
     </library>
     <connectionManager id="conMan"/>
-    
-      <enterpriseApplication id="Exercice1EAR" location="Exercice1EAR.ear" name="Exercice1EAR"/>
-    <jmsQueueConnectionFactory connectionManagerRef="ConMan" id="IrisQCF" jndiName="jms/IrisQCF">
-    	<properties.wasJms/>
-    </jmsQueueConnectionFactory>
-    <connectionManager id="ConMan"/>
-    <messagingEngine>
-    	<queue id="MessageQueue"/>
-    </messagingEngine>
-    <jmsQueue jndiName="jms/MessageQueue">
-    	<properties.wasJms queueName="MessageQueue"/>
-    </jmsQueue>
-    <jmsActivationSpec id="TRS_Application_EAR/TRS_Application_EJB/MessageHandler">
-    	<properties.wasJms destination="jms/MessageQueue"/>
-    </jmsActivationSpec>
 
     <applicationMonitor updateTrigger="mbean"/>
 
-    <webApplication id="TRS_Application_Web" location="TRS_Application_Web.war" name="TRS_Application_Web"/>
+    <enterpriseApplication id="TRS_Application_EAR" location="TRS_Application_EAR.ear" name="TRS_Application_EAR"/>
 </server>
+aa
