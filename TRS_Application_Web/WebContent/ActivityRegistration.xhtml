@@ -101,7 +101,7 @@
       <br/>
       <p:commandButton value="Register" id="registerButton" actionListener="#{actionController.registerActivity}" ajax="false" />
       <br/>
-      <p:commandButton value="Go Back" id="BackButton" action="#{buttonView.buttonAction}" ajax="false" />
+      <p:commandButton value="Go Back" id="BackButton" action="#{frontBean.goBack}" ajax="false" immediate ="true" />  <!--  here ? problem find a sol -->
 
 
 

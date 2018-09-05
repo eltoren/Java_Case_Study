@@ -93,5 +93,18 @@ public class FrontBean implements Serializable {
 		return "Calculation";
 	}
 	
+	public String goBack()
+	{
+		return "MainPage";
+		
+	}
+	
+	
+	public String logout()
+	{
+		
+		System.out.println("Logout --> clear session");
+		return "index";
+	}
 	
 }

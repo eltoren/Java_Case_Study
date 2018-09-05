@@ -22,6 +22,8 @@
   	<p:commandButton value="Calculation salaries" ajax="false" action="#{frontBean.calculation}" disabled="true" style="width:150px;height:80px" rendered="#{frontBean.bool_ACC == true}" />
     <p:commandButton value="Analyse" ajax="false" action="#{frontBean.analyse}" disabled="true" style="width:150px;height:80px" rendered="#{frontBean.bool_MAN == true}" />
 </h:panelGrid>
+
+ <p:commandButton value="Logout" id="logout"  action="#{frontBean.logout}" styleClass="ui-priority-primary" />
 </h:form>
 
 </p:panel>
