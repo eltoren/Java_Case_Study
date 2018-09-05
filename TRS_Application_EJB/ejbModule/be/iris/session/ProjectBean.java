@@ -44,15 +44,11 @@ public class ProjectBean implements ProjectBeanRemote {
 		return projectDao.listAllprojects();
 	}
 
-	// needs more impl
-	// don't know meaning
 	@Override
 	public List<Tutcours> getListInvoicedProject() {
 		return projectDao.listInvoicedProjects();
 	}
 
-	// needs more impl
-	// don't know meaning
 	@Override
 	public List<Tutproject> getListNonInvoicesProjects() {
 		return projectDao.listAllNonInvoicedProjects();
