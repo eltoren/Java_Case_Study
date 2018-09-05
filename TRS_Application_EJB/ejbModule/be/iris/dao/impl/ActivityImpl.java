@@ -27,11 +27,12 @@ public class ActivityImpl implements ActivityDao {
 	@Override
 	public void insertActivity(Tutactivity activity) {
 		try {
-
+			em.persist(activity.getProject());
 			em.persist(activity);
 
 
 		} catch (RuntimeException re) {
+			System.out.println("error bro");
 				System.err.println(re.getMessage());
 			}
 	}

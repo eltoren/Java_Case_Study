@@ -13,7 +13,7 @@
 <h:body style="background-color:#698dc6;">
 <h1> Activity registration</h1>
 
-<p:growl id="msgs" showDetail="true" />
+<p:growl showDetail="true" />
  
     <p:panel id="basic" header="Registration activity" footer="Registration activity" style="margin-bottom:20px">
     <h:panelGrid columns="2" cellpadding="5">
@@ -28,7 +28,7 @@
 <!--  Start Activity Name (change the value) -->
 <br/>
 <p:outputLabel value="Name of the activity :" />
-<p:inputText id="ln" value="#{actionController.project}" required="true"	requiredMessage="required field" />
+<p:inputText id="ln" value="#{actionController.activityName}" required="true"	requiredMessage="required field" />
 <br/>
 <!--  End Activity Name -->
 

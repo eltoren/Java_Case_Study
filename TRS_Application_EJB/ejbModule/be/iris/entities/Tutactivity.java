@@ -9,6 +9,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -17,7 +18,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-@Named
+@Named("activity")
 @RequestScoped
 @Entity
 @Table(name="TUTACTIVITIES")
@@ -45,7 +46,7 @@ public class Tutactivity {
 	@Column(name="ACT_END_TIME", columnDefinition="TIMESTAMP")
 	private LocalDateTime endTime;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="PID")
 	private Tutproject project;
 	

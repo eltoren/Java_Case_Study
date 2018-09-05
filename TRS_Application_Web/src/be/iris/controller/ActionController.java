@@ -25,11 +25,16 @@ import be.iris.session.view.ActivityBeanRemote;
 import be.iris.session.view.PersonBeanRemote;
 import be.iris.session.view.PersonConectedBeanRemote;
 import be.iris.session.view.ProjectBeanRemote;
+import be.iris.utilities.DateFormat;
 
 @Named
 @SessionScoped
 public class ActionController implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8804029671948475633L;
 	@EJB(name = "personBean")
 	private PersonBeanRemote personBean;
 	private String password;
@@ -40,13 +45,23 @@ public class ActionController implements Serializable{
 	
 	private List<Tutperson> persons= new ArrayList<>();
 	private List<String> listOfFirstNames = new ArrayList<>();
-	private String project;
 	@Inject 
+	@Named("activity")
 	private Tutactivity activity;
+	
+	@Inject
+	@Named("project")
+	private Tutproject projectActivity;
+
+	@Inject
+	@Named("person")
+	private Tutperson personConnected;
+	private String project;
 	
 	private LocalTime startTime;
 	private LocalTime endTime;
 	
+	private String activityName;
 	@EJB
 	private ProjectBeanRemote projectBean;
 	
@@ -56,7 +71,7 @@ public class ActionController implements Serializable{
 	@Inject 
 	private CalendarView calendar;
 	
-	private List<Tutcours> listofProjects = new ArrayList<>();
+	private List<Tutproject> listofProjects = new ArrayList<>();
 	private List<String> listProjectsNames = new ArrayList<>();
 	
 	
@@ -79,11 +94,11 @@ public class ActionController implements Serializable{
 		this.activity = activity;
 	}
 
-	public List<Tutcours> getListofProjects() {
+	public List<Tutproject> getListofProjects() {
 		return listofProjects;
 	}
 
-	public void setListofProjects(List<Tutcours> listofProjects) {
+	public void setListofProjects(List<Tutproject> listofProjects) {
 		this.listofProjects = listofProjects;
 	}
 
@@ -96,10 +111,10 @@ public class ActionController implements Serializable{
 	}
 
 	public List<String> getListProjectsNames() {
-		if(listofProjects.isEmpty()){
-			this.setListofProjects(projectBean.getListInvoicedProject());
-			for(Tutcours p : listofProjects){
-				listProjectsNames.add(p.getCltitle());
+		if(listProjectsNames.isEmpty()){
+			listofProjects = projectBean.getAllProjects();
+			for(Tutproject p : listofProjects){
+				listProjectsNames.add(p.getProtitle());
 			}
 		}
 		return listProjectsNames;
@@ -158,11 +173,11 @@ public class ActionController implements Serializable{
 		String lastName = name.split(" ")[1];
 		for(Tutperson p : persons){
 			if(p.getPfname().equals(firstName) && p.getPlname().equals(lastName)){
-				this.personConnectedBean.setConnectedPerson(p);
+				personConnected = p;
 				break;
 			}
 		}
-		if(personBean.iSLoginOk(this.personConnectedBean.getConnectedPerson(), password)){
+		if(personBean.iSLoginOk(personConnected, password)){
 			return "ActivityRegistration?faces-redirect=true";
 		}else{
 			this.sendAMessage("WRONG PASSWORD / EMAIL COMBINATION", FacesMessage.SEVERITY_ERROR);
@@ -186,7 +201,8 @@ public class ActionController implements Serializable{
 	public void registerActivity(ActionEvent e){
 		
 		dateConversionsSetter();
-		
+		activity.setDescription(activityName);
+		activity.setPerson(personConnected);
 			
 		if(activity.getDate().isAfter(LocalDate.now())){
 			this.sendAMessage("ENTER A VALID DATE, MAXIMUM IS TODAY", FacesMessage.SEVERITY_ERROR);
@@ -204,15 +220,14 @@ public class ActionController implements Serializable{
 			this.sendAMessage("ENTER A VALID END TIME, CANNOT WORK ON THE WRONGS HOURS", FacesMessage.SEVERITY_ERROR);
 			return;
 		}
-//		for(Tutproject p : listofProjects){
-//			if(project.equals(p.getPtitle())){
-//				activity.setProject(p);
-//				break;
-//			}
+		for(Tutproject p : listofProjects){
+			if(project.equals(p.getProtitle())){
+				p.addActivity(activity);
+				break;
+		}
 		
-//		}
-		activity.setPerson(this.personConnectedBean.getConnectedPerson());
-		
+		}
+		System.out.println(personConnected.getPfname());
 		try{
 			activityBean.saveNewActivitie(activity);
 		}catch(Exception ex){
@@ -222,23 +237,16 @@ public class ActionController implements Serializable{
 
 	@Deprecated
 	private void dateConversionsSetter() {
-		int day = calendar.getDate().getDate();
-		int month = calendar.getDate().getMonth();
-		int year = calendar.getDate().getYear();
+		int day = calendar.getDate().getDate() + 1;
+		int month = calendar.getDate().getMonth() +1;
+		int year = calendar.getDate().getYear() + 1900;
 		LocalDate date = LocalDate.of(year, month, day);
 		activity.setDate(date);
 		activity.setStartTime(LocalDateTime.of(date, startTime));
 		activity.setEndTime(LocalDateTime.of(date, endTime));
 	}
 
-	public String getProject() {
-		return project;
-	}
-
-	public void setProject(String project) {
-		this.project = project;
-	}
-
+	
 	public LocalTime getStartTime() {
 		return startTime;
 	}
@@ -253,6 +261,30 @@ public class ActionController implements Serializable{
 
 	public void setEndTime(LocalTime endTime) {
 		this.endTime = endTime;
+	}
+
+	public String getActivityName() {
+		return activityName;
+	}
+
+	public void setActivityName(String activityName) {
+		this.activityName = activityName;
+	}
+
+	public Tutproject getProjectActivity() {
+		return projectActivity;
+	}
+
+	public void setProjectActivity(Tutproject projectActivity) {
+		this.projectActivity = projectActivity;
+	}
+
+	public void setProject(String project) {
+		this.project = project;
+	}
+
+	public String getProject() {
+		return project;
 	}
 	
 	

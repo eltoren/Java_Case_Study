@@ -39,7 +39,7 @@ private String project;
 	public void registerActivity(ActionEvent e){
 		
 		for(Tutproject p : listofProjects){
-			if(project.equals(p.getPtitle())){
+			if(project.equals(p.getProtitle())){
 				activity.setProject(p);
 				break;
 			}
@@ -94,7 +94,7 @@ private String project;
 		if(listofProjects.isEmpty()){
 			this.setListofProjects(projectBean.getAllProjects());
 			for(Tutproject p : listofProjects){
-				listProjectsNames.add(p.getPtitle());
+				listProjectsNames.add(p.getProtitle());
 			}
 		}
 		return listProjectsNames;

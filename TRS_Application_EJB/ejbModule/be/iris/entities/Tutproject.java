@@ -1,73 +1,59 @@
 package be.iris.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
-@Named
+
+/**
+ * The persistent class for the TUTPROJECTS database table.
+ * 
+ */
+@Named("project")
 @RequestScoped
 @Entity
-@SequenceGenerator(name = "generatorKeys")
-@Inheritance(strategy=InheritanceType.JOINED)
 @Table(name="TUTPROJECTS")
-@NamedQuery(name="Tutproject.listProjects", query="SELECT p FROM Tutproject p")
-public class Tutproject {
+@NamedQuery(name="Tutproject.findAll", query="SELECT t FROM Tutproject t")
+public class Tutproject implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-	@Id 
-	@Column(name="PID")
+	@Id
 	private String pid;
-	
-	@Column(name="PROTITLE", columnDefinition="CHAR(40)")
-	@NotNull
-	private String ptitle;
-	
-	@OneToMany(targetEntity=Tutactivity.class, mappedBy="project")
+
+	private String protitle;
+
+	@OneToMany(targetEntity=Tutactivity.class,mappedBy="project",fetch=FetchType.EAGER)
 	private List<Tutactivity> activities = new ArrayList<>();
-	
-	public String getPtitle() {
-		return ptitle;
-	}
-
-	public void setPtitle(String ptitle) {
-		this.ptitle = ptitle;
-	}
-
-	public Tutproject(){}
-	
-	
-	public Tutproject(String pid, String ptitle) {
-		super();
-		this.pid = pid;
-		this.ptitle = ptitle;
-	}
-
-	
-	public Tutproject(String ptitle) {
-		super();
-		this.ptitle = ptitle;
+	public Tutproject() {
 	}
 
 	public String getPid() {
-		return pid;
+		return this.pid;
 	}
 
 	public void setPid(String pid) {
 		this.pid = pid;
 	}
 
+	public String getProtitle() {
+		return this.protitle;
+	}
+
+	public void setProtitle(String protitle) {
+		this.protitle = protitle;
+	}
+	
+
+	
 	public List<Tutactivity> getActivities() {
 		return activities;
 	}
@@ -78,7 +64,7 @@ public class Tutproject {
 	
 	
 	public void addActivity(Tutactivity activity){
-		this.getActivities().add(activity);
+		activities.add(activity);
 		activity.setProject(this);
 	}
 
@@ -86,4 +72,7 @@ public class Tutproject {
 		this.getActivities().remove(activity);
 		activity.setProject(null);
 	}
+
+	
+
 }
