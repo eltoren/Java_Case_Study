@@ -67,17 +67,14 @@
     </p:messages>
  
     	 <p:outputLabel for="Project" value="Basic:" />
-         <p:selectOneMenu id="Project" value="#{selectOneMenuView.project}" style="width:125px">
-            <f:selectItem itemLabel="project" itemValue="project1" />
-            <f:selectItem itemLabel="project1" itemValue="project2" />
-            <f:selectItem itemLabel="project2" itemValue="project3" />
-            <f:selectItem itemLabel="project3" itemValue="project4" />
+         <p:selectOneMenu id="Project" value="#{frontBean.project}" style="width:125px">
+            <f:selectItems value="#{frontBean.listProjectsNames}" />
         </p:selectOneMenu>
         
          
          <p:dialog header="Values" modal="true" showEffect="bounce" widgetVar="dlg" resizable="false">
             <h:outputText value="Basic:" />
-            <h:outputText value="#{selectOneMenuView.project}" />  
+            <h:outputText value="#{frontBean.project}" />  
          
     </p:dialog>
 
@@ -89,11 +86,11 @@
 <!-- Start Button Time registry , end button time registry -->
 <br/>
 
-<p:outputLabel for="timeStart" value="TimeStart:" />
-<p:calendar id="timeStart" value="#{calendarView.timeStartWork}" pattern="HH:mm" timeOnly="true"  />
+<p:outputLabel for="timeStart" value="Start Time : " />
+<p:calendar id="timeStart" value="#{frontBean.activity.startTime}" pattern="HH:mm" timeOnly="true" required="true" />
 <br/>
-<p:outputLabel for="timeEnd" value="TimeEnd:" />
-<p:calendar id="timeEnd" value="#{calendarView.timeEndWork}" pattern="HH:mm" timeOnly="true"  />
+<p:outputLabel for="timeEnd" value="End Time : " />
+<p:calendar id="timeEnd" value="#{frontBean.activity.endTime}" pattern="HH:mm" timeOnly="true"   required="true"/>
 <br/>
 <!-- End Start Button time registry , end button time registry -->
 
@@ -102,7 +99,7 @@
 
     <p:growl id="growl" life="2000" />
       <br/>
-      <p:commandButton value="Register" id="registerButton" action="#{frontBean.register}" ajax="false" />
+      <p:commandButton value="Register" id="registerButton" actionListener="#{frontBean.registerActivity}" ajax="false" />
       <br/>
       <p:commandButton value="Go Back" id="BackButton" action="#{buttonView.buttonAction}" ajax="false" />
 
@@ -121,14 +118,9 @@
         <p:panelGrid id="display" columns="2" columnClasses="label,value">
         
             <h:outputText value="Time:" />
-            <h:outputText value="#{calendarView.timeStartWork}">
-                <f:convertDateTime pattern="HH:mm" /> <!--  replace -->
-            </h:outputText>
-            
+            <h:outputText value="#{frontBean.activity.endTime}" />
             <h:outputText value="Time:" />
-            <h:outputText value="#{calendarView.timeEndWork}">
-                <f:convertDateTime pattern="HH:mm" />
-            </h:outputText>
+            <h:outputText value="#{frontBean.activity.startTime}" />
             
         </p:panelGrid>
     </p:dialog>

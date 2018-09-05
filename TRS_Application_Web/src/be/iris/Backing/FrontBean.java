@@ -1,17 +1,22 @@
 package be.iris.Backing;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.enterprise.context.SessionScoped;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import be.iris.PrimFaceController.CalendarView;
+import be.iris.entities.Tutproject;
 
 
 @Named
 @SessionScoped
 public class FrontBean implements Serializable {
+
 
 	private String activityName;
 	private boolean bool_IW = false;   /* IW = independant Worker*/
@@ -23,23 +28,17 @@ public class FrontBean implements Serializable {
 	@Inject 
 	private CalendarView calendar;
 	
+	private List<Tutproject> listofProjects = new ArrayList<>();
+	private List<String> listProjectsNames = new ArrayList<>();
 	
-	public String register()
-	{
-		System.out.println("Hello");
-		System.out.println(activityName +  " " + calendar.getDate() + " " + calendar.getTimeStartWork() + " " + calendar.getTimeEndWork());
-		return "ActivityRegistration";
-	}
-
-	public String getActivityName() {
-		return activityName;
-	}
-
-	public void setActivityName(String activityName) {
-		this.activityName = activityName;
-	}
-
+	public void registerActivity(ActionEvent e){
+		
+		
 	
+	
+	}
+
+
 
 	public CalendarView getCalendar() {
 		return calendar;
