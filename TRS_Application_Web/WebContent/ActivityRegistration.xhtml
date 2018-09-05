@@ -28,7 +28,7 @@
 <!--  Start Activity Name (change the value) -->
 <br/>
 <p:outputLabel value="Name of the activity :" />
-<p:inputText id="ln" value="#{actionController.activityName}" required="true"	requiredMessage="required field" />
+<p:inputText id="ln" value="#{actionController.project}" required="true"	requiredMessage="required field" />
 <br/>
 <!--  End Activity Name -->
 
@@ -66,7 +66,7 @@
         <p:autoUpdate />
     </p:messages>
  
-    	 <p:outputLabel for="Project" value="Basic:" />
+    	 <p:outputLabel for="Project" value="Project:" />
          <p:selectOneMenu id="Project" value="#{actionController.project}" style="width:125px">
             <f:selectItems value="#{actionController.listProjectsNames}" />
         </p:selectOneMenu>
@@ -87,10 +87,10 @@
 <br/>
 
 <p:outputLabel for="timeStart" value="Start Time : " />
-<p:calendar id="timeStart" value="#{actionController.activity.startTime}" pattern="HH:mm" timeOnly="true" required="true" />
+<p:calendar id="timeStart" value="#{actionController.startTime}" pattern="HH:mm" timeOnly="true" required="true" />
 <br/>
 <p:outputLabel for="timeEnd" value="End Time : " />
-<p:calendar id="timeEnd" value="#{actionController.activity.endTime}" pattern="HH:mm" timeOnly="true"   required="true"/>
+<p:calendar id="timeEnd" value="#{actionController.endTime}" pattern="HH:mm" timeOnly="true"   required="true"/>
 <br/>
 <!-- End Start Button time registry , end button time registry -->
 
@@ -118,9 +118,9 @@
         <p:panelGrid id="display" columns="2" columnClasses="label,value">
         
             <h:outputText value="Time:" />
-            <h:outputText value="#{actionController.activity.endTime}" />
+            <h:outputText value="#{actionController.endTime}" />
             <h:outputText value="Time:" />
-            <h:outputText value="#{actionController.activity.startTime}" />
+            <h:outputText value="#{actionController.startTime}" />
             
         </p:panelGrid>
     </p:dialog>

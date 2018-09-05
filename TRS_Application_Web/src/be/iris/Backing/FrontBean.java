@@ -28,8 +28,7 @@ public class FrontBean implements Serializable {
 	@Inject 
 	private CalendarView calendar;
 	
-	private List<Tutproject> listofProjects = new ArrayList<>();
-	private List<String> listProjectsNames = new ArrayList<>();
+	
 	
 	public void registerActivity(ActionEvent e){
 		
