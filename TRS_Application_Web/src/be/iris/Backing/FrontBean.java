@@ -94,5 +94,4 @@ public class FrontBean implements Serializable {
 	public void setBool_EMP(boolean bool_EMP) {
 		this.bool_EMP = bool_EMP;
 	}
-
 }

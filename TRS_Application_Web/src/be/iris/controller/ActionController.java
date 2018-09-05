@@ -255,6 +255,16 @@ public class ActionController implements Serializable{
 		this.endTime = endTime;
 	}
 	
+	public String checkIn()
+	{
+		System.out.println("Check in ...");
+		return "MainPage";
+	}
 	
+	public String checkOut()
+	{
+		System.out.println("Check out...");
+		return "MainPage";
+	}
 	
 }
