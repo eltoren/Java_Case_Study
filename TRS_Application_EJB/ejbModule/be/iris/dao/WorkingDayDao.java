@@ -3,9 +3,12 @@ package be.iris.dao;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.ejb.Local;
+
 import be.iris.entities.Tutperson;
 import be.iris.entities.TutworkingDay;
 
+@Local
 public interface WorkingDayDao {
 
 	public void insertWorkingDay(TutworkingDay workingDay);

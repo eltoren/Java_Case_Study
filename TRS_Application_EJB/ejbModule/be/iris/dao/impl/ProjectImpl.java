@@ -47,7 +47,6 @@ public class ProjectImpl implements ProjectDao {
 			tx.begin();
 
 			Tutproject project = em.find(Tutproject.class, oldProject);
-			project.setPid(newProject.getPid());
 			project.setPtitle(newProject.getPtitle());
 			project.setActivities(newProject.getActivities());
 
