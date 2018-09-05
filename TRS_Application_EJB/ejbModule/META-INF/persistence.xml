@@ -14,6 +14,7 @@
 			<property name="openjpa.jdbc.Schema" value="tu00010" />
 			<property name="openjpa.Log"
 				value="defaultLevel=WARN, Runtime=INFO, Tool=INFO,SQL=TRACE" />
+			<property name="eclipselink.deploy-on-startup" value="true" />
 		</properties>
 	</persistence-unit>
 </persistence>
