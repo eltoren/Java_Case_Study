@@ -15,22 +15,22 @@ import be.iris.session.view.PersonBeanRemote;
 
 @Named
 @SessionScoped
-public class LoginController implements Serializable{
+public class LoginController implements Serializable {
 
 	@EJB(name = "personBean")
 	private PersonBeanRemote personBean;
 
 	private String password;
 	private String name;
-	
+
 	@Inject
-	private FrontBean fb ;
-	
+	private FrontBean fb;
+
 	@Inject
 	@Named("person")
 	private Tutperson personSelected;
 
-	private List<Tutperson> persons= new ArrayList<>();
+	private List<Tutperson> persons = new ArrayList<>();
 	private List<String> listOfFirstNames = new ArrayList<>();
 
 	public LoginController() {
@@ -38,9 +38,9 @@ public class LoginController implements Serializable{
 	}
 
 	public List<String> getListOfFirstNames() {
-		if(persons.isEmpty()){
+		if (persons.isEmpty()) {
 			persons = personBean.getAllPersons();
-			for(Tutperson p : persons){
+			for (Tutperson p : persons) {
 				listOfFirstNames.add(p.getPfname() + " " + p.getPlname());
 			}
 		}
@@ -48,7 +48,7 @@ public class LoginController implements Serializable{
 	}
 
 	public void setListOfFirstNames(List<String> listOfFirstNames) {
-		
+
 		this.listOfFirstNames = listOfFirstNames;
 	}
 
@@ -68,7 +68,6 @@ public class LoginController implements Serializable{
 		this.personSelected = personSelected;
 	}
 
-
 	public List<Tutperson> getPersons() {
 		return persons;
 	}
@@ -77,23 +76,21 @@ public class LoginController implements Serializable{
 		this.persons = persons;
 	}
 
-	public String login(){
-		String firstName = name.split(" ")[0];   /* Here change this !! Junior */
+	public String login() {
+		String firstName = name.split(" ")[0]; /* Here change this !! Junior */
 		String lastName = name.split(" ")[1];
-		for(Tutperson p : persons){
-			if(p.getPfname().equals(firstName) && p.getPlname().equals(lastName)){
+		for (Tutperson p : persons) {
+			if (p.getPfname().equals(firstName) && p.getPlname().equals(lastName)) {
 				personSelected = p;
-				
+
 				System.out.println(personSelected.getPno());
 				break;
 			}
 		}
-		if(personBean.iSLoginOk(personSelected, password))
-		{
+		if (personBean.iSLoginOk(personSelected, password)) {
 			PersonTypeCheck();
 			return "MainPage";
-		}
-			else
+		} else
 			return "index";
 	}
 
@@ -108,52 +105,42 @@ public class LoginController implements Serializable{
 	public PersonBeanRemote getPersonBean() {
 		return personBean;
 	}
-	
-	public void PersonTypeCheck()
-	{
+
+	public void PersonTypeCheck() {
 		System.out.println(personSelected);
-		/* // test manager
-		personSelected.setPtype("Manager");
-		System.out.println("Here changed ass manager");
-		System.out.println(personSelected.getPtype());
-		
-	//test IW
-	
-	personSelected.setPtype("Accountant");
-	System.out.println(personSelected.getPtype());
-		
-		
-	// test Accountant			
-		personSelected.setPtype("IW");
-		System.out.println(personSelected.getPtype());
-		*/
-		
-		switch(personSelected.getPtype())
-		{
-		case "Manager" :
+		/*
+		 * // test manager personSelected.setPtype("Manager");
+		 * System.out.println("Here changed ass manager");
+		 * System.out.println(personSelected.getPtype());
+		 * 
+		 * //test IW
+		 * 
+		 * personSelected.setPtype("Accountant");
+		 * System.out.println(personSelected.getPtype());
+		 * 
+		 * 
+		 * // test Accountant personSelected.setPtype("IW");
+		 * System.out.println(personSelected.getPtype());
+		 */
+
+		switch (personSelected.getPtype()) {
+		case "Manager":
 			fb.setBool_MAN(true);
 			break;
-		
+
 		case "Accountant":
 			fb.setBool_ACC(true);
 			break;
-		
-		case "Coworker": 
+
+		case "Coworker":
 			fb.setBool_CW(true);
-			System.out.println("HERE COWORKER SWITCH");
-			break;	
-			
+			break;
+
 		default:
 			fb.setBool_EMP(true);
-			System.out.println("HERE DEFAULT");
-			
+
 		}
-		
-		
-	
-		
-		
+
 	}
 
-	
 }
