@@ -26,7 +26,7 @@ import javax.validation.constraints.NotNull;
 @NamedQuery(name="Tutproject.listProjects", query="SELECT p FROM Tutproject p")
 public class Tutproject {
 
-	@Id @GeneratedValue
+	@Id 
 	@Column(name="PID")
 	private String pid;
 	

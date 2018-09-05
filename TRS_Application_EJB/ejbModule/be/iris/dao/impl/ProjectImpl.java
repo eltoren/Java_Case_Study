@@ -126,6 +126,7 @@ public class ProjectImpl implements ProjectDao {
 		try {
 			TypedQuery<Tutcours> query = em.createNamedQuery("Tutcours.findAll", Tutcours.class);
 			for(Tutcours c : query.getResultList()){
+				System.out.println("DAO THERE FOR");
 				em.detach(c);
 				listProjects.add(c);
 				System.out.println("THINks " + c.getCltitle());
