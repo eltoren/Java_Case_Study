@@ -54,7 +54,7 @@ public class PersonImpl implements PersonDao {
 			prsn.setPtel(newPerson.getPtel());
 			prsn.setCocPno(newPerson.getCocPno());
 			prsn.setActivities(newPerson.getActivities());
-			
+
 			em.merge(prsn);
 
 			tx.commit();
@@ -89,7 +89,7 @@ public class PersonImpl implements PersonDao {
 		}
 
 	}
-	
+
 	@Override
 	public Tutperson getPerson(Tutperson person) {
 		EntityTransaction tx = em.getTransaction();
@@ -100,7 +100,7 @@ public class PersonImpl implements PersonDao {
 			tx.commit();
 		} catch (RuntimeException re) {
 			try {
-				
+
 			} catch (RollbackException rbe) {
 				System.err.println(rbe.getMessage());
 			}
@@ -108,7 +108,6 @@ public class PersonImpl implements PersonDao {
 		}
 		return returnPerson;
 	}
-
 
 	@Override
 	public List<Tutperson> listAllPersons() {
@@ -128,9 +127,15 @@ public class PersonImpl implements PersonDao {
 
 	@Override
 	public String getPasswordOfPerson(Tutperson person) {
-		String sql ="select p.password from tutpasswords p where p.pass_pno = ?";
-		Query query = em.createNativeQuery(sql);
-		query.setParameter(1, person.getPno());
-		return (String) query.getSingleResult();
+		System.out.println("pno = " + person.getPno());
+		try {
+			String sql = "select password from tutpasswords where pass_pno = ?";
+			Query query = em.createNativeQuery(sql);
+			query.setParameter(1, person.getPno());
+			return (String) query.getSingleResult();
+		} catch (RuntimeException re) {
+			System.err.println(re.getMessage());
+		}
+		return null;
 	}
 }
