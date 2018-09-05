@@ -19,7 +19,7 @@ public interface CompanyDao {
 	
 	public List<Tutcompany> listAllCompanies();
 	
-	// extra
+	// extra methods
 	
 	public List<Tutcompany> listComapniesInCountry(String country);
 	

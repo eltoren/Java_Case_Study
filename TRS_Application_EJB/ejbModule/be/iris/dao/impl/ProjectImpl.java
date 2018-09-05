@@ -50,13 +50,7 @@ public class ProjectImpl implements ProjectDao {
 			project.setPtitle(newProject.getPtitle());
 			project.setActivities(newProject.getActivities());
 
-			// not gonna work
-			// id not set...
-			// not able to set a new one
-			// or will it work?
-			// check update from person of activity plz
-
-			em.persist(project);
+			em.merge(project);
 
 			tx.commit();
 		} catch (RuntimeException re) {
@@ -128,16 +122,30 @@ public class ProjectImpl implements ProjectDao {
 
 	@Override
 	public List<Tutcours> listInvoicedProjects() {
-		// TODO Auto-generated method stub
-		// i don't know what this is for
-		return null;
+		List<Tutcours> listProjects = new ArrayList<>();
+		try {
+
+			TypedQuery<Tutcours> query = em.createNamedQuery("Tutcours.findAll", Tutcours.class);
+			listProjects = query.getResultList();
+
+		} catch (RuntimeException re) {
+			System.err.println(re.getMessage());
+		}
+		return listProjects;
 	}
 
 	@Override
 	public List<Tutproject> listAllNonInvoicedProjects() {
-		// TODO Auto-generated method stub
-		// i don't know what this is for
-		return null;
+		List<Tutproject> listProjects = new ArrayList<>();
+		try {
+
+			TypedQuery<Tutproject> query = em.createNamedQuery("Tutproject.listProjects", Tutproject.class);
+			listProjects = query.getResultList();
+
+		} catch (RuntimeException re) {
+			System.err.println(re.getMessage());
+		}
+		return listProjects;
 	}
 
 }

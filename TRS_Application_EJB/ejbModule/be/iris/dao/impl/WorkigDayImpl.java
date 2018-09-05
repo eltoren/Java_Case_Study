@@ -55,11 +55,6 @@ public class WorkigDayImpl implements WorkingDayDao {
 			workingDay.setEndTime(newWorkingDay.getEndTime());
 			workingDay.setCoworker(workingDay.getCoworker());
 
-			// not gonna work
-			// id not set...
-			// not able to set a new one
-			// or will it work?
-			// check update from person of activity plz
 			em.persist(workingDay);
 
 			tx.commit();
