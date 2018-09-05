@@ -19,6 +19,7 @@ public class LoginController implements Serializable{
 
 	@EJB(name = "personBean")
 	private PersonBeanRemote personBean;
+
 	private String password;
 	private String name;
 	
