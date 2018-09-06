@@ -23,16 +23,18 @@ import javax.persistence.TemporalType;
  * The persistent class for the TUTACTIVITIES database table.
  * 
  */
-@Named("activity")
-@RequestScoped
-@Entity
+
+@Entity(name="Tutactivity")
 @Table(name="TUTACTIVITIES")
-@NamedQuery(name="Tutactivity.findAll", query="SELECT t FROM Tutactivity t")
 public class Tutactivity implements Serializable {
-	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7720086255696017210L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue
 	private long aid;
 
 	@Temporal(TemporalType.DATE)

@@ -47,16 +47,10 @@ public class ActionController implements Serializable{
 	
 	private List<Tutperson> persons= new ArrayList<>();
 	private List<String> listOfFirstNames = new ArrayList<>();
-	@Inject 
-	@Named("activity")
 	private Tutactivity activity;
 	
-	@Inject
-	@Named("project")
 	private Tutproject projectActivity;
 
-	@Inject
-	@Named("person")
 	private Tutperson personConnected;
 	private String project;
 	
@@ -135,7 +129,9 @@ public class ActionController implements Serializable{
 
 	
 	public ActionController() {
-
+			activity = new Tutactivity();
+			personConnected = new Tutperson();
+			projectActivity = new Tutproject();
 	}
 
 	public List<String> getListOfFirstNames() {
@@ -174,7 +170,7 @@ public class ActionController implements Serializable{
 		String firstName = name.split(" ")[0];
 		String lastName = name.split(" ")[1];
 		for(Tutperson p : persons){
-			if(p.getPfname().equals(firstName) && p.getPlname().equals(lastName)){
+			if(p.getPfname().trim().equals(firstName) && p.getPlname().trim().equals(lastName)){
 				personConnected = p;
 				break;
 			}
@@ -217,7 +213,7 @@ public class ActionController implements Serializable{
 		System.out.println(activity.getPerson().getPfname());
 		System.out.println(activity.getProject().getProtitle());
 		try{
-			activityBean.saveNewActivitie(activity, activity.getProject().getPid());
+			activityBean.saveNewActivitie(activity, activity.getProject().getPid(), personConnected.getPno());
 		}catch(Exception ex){
 			this.sendAMessage(ex.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}

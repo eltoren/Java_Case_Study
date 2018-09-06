@@ -26,15 +26,14 @@ public class LoginController implements Serializable {
 	@Inject
 	private FrontBean fb;
 
-	@Inject
-	@Named("person")
+	
 	private Tutperson personSelected;
 
 	private List<Tutperson> persons = new ArrayList<>();
 	private List<String> listOfFirstNames = new ArrayList<>();
 
 	public LoginController() {
-
+		personSelected = new Tutperson();
 	}
 
 	public List<String> getListOfFirstNames() {
@@ -82,7 +81,7 @@ public class LoginController implements Serializable {
 		for (Tutperson p : persons) {
 			if (p.getPfname().equals(firstName) && p.getPlname().equals(lastName)) {
 				personSelected = p;
-
+				System.out.println(personSelected.getPfname());
 				System.out.println(personSelected.getPno());
 				break;
 			}

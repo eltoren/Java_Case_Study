@@ -30,9 +30,7 @@ import javax.validation.constraints.NotNull;
  * The persistent class for the TUTPERSONS database table.
  * 
  */
-@Named("person")
-@RequestScoped
-@Entity
+@Entity(name="Tutperson")
 @Table(name="TUTPERSONS")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="ptype", discriminatorType=DiscriminatorType.STRING)

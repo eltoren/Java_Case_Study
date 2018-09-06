@@ -25,17 +25,13 @@ public class ActivityImpl implements ActivityDao {
 	private EntityManager em;
 
 	@Override
-	public void insertActivity(Tutactivity activity, String pid) {
+	public void insertActivity(Tutactivity activity, String pid, int pno) {
 		try {
 			Tutproject p = em.find(Tutproject.class, pid);
-			em.detach(p);
-			p.addActivity(activity);
-			em.merge(p);
-//			em.persist(activity);
-
+			Tutperson person = em.find(Tutperson.class, pno);
+			em.merge(activity);
 
 		} catch (RuntimeException re) {
-				System.err.println(re.getMessage());
 				re.printStackTrace();
 			}
 	}
