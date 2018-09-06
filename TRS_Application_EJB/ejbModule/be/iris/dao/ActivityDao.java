@@ -12,7 +12,7 @@ import be.iris.entities.Tutproject;
 @Local
 public interface ActivityDao {
 
-	public void insertActivity(Tutactivity activity);
+	public void insertActivity(Tutactivity activity, String pid);
 
 	public void updateActivity(Tutactivity oldActivity, Tutactivity newActivity);
 

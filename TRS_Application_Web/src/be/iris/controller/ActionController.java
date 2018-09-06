@@ -1,6 +1,8 @@
 package be.iris.controller;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -201,35 +203,21 @@ public class ActionController implements Serializable{
 	public void registerActivity(ActionEvent e){
 		
 		dateConversionsSetter();
-		activity.setDescription(activityName);
+		activity.setActDescription(activityName);
 		activity.setPerson(personConnected);
 			
-		if(activity.getDate().isAfter(LocalDate.now())){
-			this.sendAMessage("ENTER A VALID DATE, MAXIMUM IS TODAY", FacesMessage.SEVERITY_ERROR);
-			return;
-		}
-		if(activity.getDate().getDayOfWeek().getValue() == 6 || activity.getDate().getDayOfWeek().getValue() == 7){
-			this.sendAMessage("ENTER A VALID DATE, NOT A DAY OF THE WEEKEND", FacesMessage.SEVERITY_ERROR);
-			return;
-		}
-		if(activity.getStartTime().toLocalTime().isAfter(LocalTime.of(20, 0)) || activity.getStartTime().toLocalTime().isBefore(LocalTime.of(5,0))){
-			this.sendAMessage("ENTER A VALID STAR TIME, CANNOT WORK ON THE WRONGS HOURS", FacesMessage.SEVERITY_ERROR);
-			return;
-		}
-		if(activity.getEndTime().toLocalTime().isAfter(LocalTime.of(20, 0)) || activity.getEndTime().toLocalTime().isBefore(LocalTime.of(5,0))){
-			this.sendAMessage("ENTER A VALID END TIME, CANNOT WORK ON THE WRONGS HOURS", FacesMessage.SEVERITY_ERROR);
-			return;
-		}
+		
 		for(Tutproject p : listofProjects){
 			if(project.equals(p.getProtitle())){
-				p.addActivity(activity);
+				activity.setProject(p);
 				break;
 		}
 		
 		}
-		System.out.println(personConnected.getPfname());
+		System.out.println(activity.getPerson().getPfname());
+		System.out.println(activity.getProject().getProtitle());
 		try{
-			activityBean.saveNewActivitie(activity);
+			activityBean.saveNewActivitie(activity, activity.getProject().getPid());
 		}catch(Exception ex){
 			this.sendAMessage(ex.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
@@ -237,13 +225,32 @@ public class ActionController implements Serializable{
 
 	@Deprecated
 	private void dateConversionsSetter() {
+		System.out.println(startTime.format(DateFormat.dtfHours));
 		int day = calendar.getDate().getDate() + 1;
 		int month = calendar.getDate().getMonth() +1;
 		int year = calendar.getDate().getYear() + 1900;
 		LocalDate date = LocalDate.of(year, month, day);
-		activity.setDate(date);
-		activity.setStartTime(LocalDateTime.of(date, startTime));
-		activity.setEndTime(LocalDateTime.of(date, endTime));
+		LocalDateTime startDateTime = LocalDateTime.of(date, startTime);
+		LocalDateTime endDateTime = LocalDateTime.of(date, endTime);
+		if(date.isAfter(LocalDate.now())){
+			this.sendAMessage("ENTER A VALID DATE, MAXIMUM IS TODAY", FacesMessage.SEVERITY_ERROR);
+			return;
+		}
+		if(date.getDayOfWeek().getValue() == 6 || date.getDayOfWeek().getValue() == 7){
+			this.sendAMessage("ENTER A VALID DATE, NOT A DAY OF THE WEEKEND", FacesMessage.SEVERITY_ERROR);
+			return;
+		}
+		if(startTime.isAfter(LocalTime.of(20, 0)) || startTime.isBefore(LocalTime.of(5,0))){
+			this.sendAMessage("ENTER A VALID STAR TIME, CANNOT WORK ON THE WRONGS HOURS", FacesMessage.SEVERITY_ERROR);
+			return;
+		}
+		if(endTime.isAfter(LocalTime.of(20, 0)) || endTime.isBefore(LocalTime.of(5,0))){
+			this.sendAMessage("ENTER A VALID END TIME, CANNOT WORK ON THE WRONGS HOURS", FacesMessage.SEVERITY_ERROR);
+			return;
+		}
+		activity.setActDate(Date.valueOf(date));
+		activity.setActStartTime(Timestamp.valueOf(startDateTime));
+		activity.setActEndTime(Timestamp.valueOf(endDateTime));
 	}
 
 	

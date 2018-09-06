@@ -6,14 +6,15 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
-@DiscriminatorValue("Coworker")
 @Named("coworker")
 @RequestScoped
+@DiscriminatorValue("Coworker")
 public class Tutcoworker extends Tutperson{
 
-	@OneToMany(targetEntity=TutworkingDay.class, mappedBy="personId")
+	@OneToMany(targetEntity=TutworkingDay.class, mappedBy="coworker")
 	private List<TutworkingDay> listWorkingDays = new ArrayList<>();  
 	
 	public Tutcoworker(){

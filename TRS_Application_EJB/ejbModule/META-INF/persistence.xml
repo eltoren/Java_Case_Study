@@ -7,9 +7,9 @@
 		<class>be.iris.entities.Tutcompany</class>
 		<class>be.iris.entities.Tutperson</class>
 		<class>be.iris.entities.TutworkingDay</class>
-		<class>be.iris.entities.Tutactivity</class>
 		<class>be.iris.entities.Tutcours</class>
 		<class>be.iris.entities.Tutproject</class>
+		<class>be.iris.entities.Tutactivity</class>
 		<properties>
 		<property name="openjpa.jdbc.SynchronizeMappings"
 						value="buildSchema(ForeignKeys=true)"/>

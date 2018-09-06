@@ -1,15 +1,12 @@
 package be.iris.dao.impl;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.RollbackException;
 import javax.persistence.TypedQuery;
 
 import be.iris.dao.ProjectDao;
@@ -83,7 +80,7 @@ public class ProjectImpl implements ProjectDao {
 		try {
 				Query q =  em.createNamedQuery("Tutproject.findAll");
 				for(Tutproject p : (List<Tutproject>) q.getResultList()){
-					em.detach(p);
+					//em.detach(p);
 				listProjects.add(p);
 				}
 		} catch (RuntimeException re) {

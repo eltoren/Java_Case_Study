@@ -12,7 +12,7 @@ import be.iris.entities.Tutproject;
 @Remote
 public interface ActivityBeanRemote {
 
-	public void saveNewActivitie(Tutactivity activity);
+	public void saveNewActivitie(Tutactivity activity, String pid);
 
 	public void updateActivity(Tutactivity oldActivity, Tutactivity newActivity);
 

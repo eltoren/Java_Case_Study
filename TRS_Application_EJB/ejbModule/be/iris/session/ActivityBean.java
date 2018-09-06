@@ -22,8 +22,8 @@ public class ActivityBean implements ActivityBeanRemote {
 	}
 
 	@Override
-	public void saveNewActivitie(Tutactivity activity) {
-		activityDao.insertActivity(activity);
+	public void saveNewActivitie(Tutactivity activity, String pid) {
+		activityDao.insertActivity(activity, pid);
 
 	}
 

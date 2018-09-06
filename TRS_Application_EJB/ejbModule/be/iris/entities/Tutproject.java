@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -31,7 +32,7 @@ public class Tutproject implements Serializable {
 
 	private String protitle;
 
-	@OneToMany(targetEntity=Tutactivity.class,mappedBy="project",fetch=FetchType.EAGER)
+	@OneToMany(targetEntity=Tutactivity.class,mappedBy="project",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	private List<Tutactivity> activities = new ArrayList<>();
 	public Tutproject() {
 	}

@@ -25,15 +25,18 @@ public class ActivityImpl implements ActivityDao {
 	private EntityManager em;
 
 	@Override
-	public void insertActivity(Tutactivity activity) {
+	public void insertActivity(Tutactivity activity, String pid) {
 		try {
-			em.persist(activity.getProject());
-			em.persist(activity);
+			Tutproject p = em.find(Tutproject.class, pid);
+			em.detach(p);
+			p.addActivity(activity);
+			em.merge(p);
+//			em.persist(activity);
 
 
 		} catch (RuntimeException re) {
-			System.out.println("error bro");
 				System.err.println(re.getMessage());
+				re.printStackTrace();
 			}
 	}
 
@@ -41,11 +44,11 @@ public class ActivityImpl implements ActivityDao {
 	public void updateActivity(Tutactivity oldActivity, Tutactivity newActivity) {
 		try {
 
-			Tutactivity act = em.find(Tutactivity.class, oldActivity.getActivityId());
-			act.setDate(newActivity.getDate());
-			act.setDescription(newActivity.getDescription());
-			act.setEndTime(newActivity.getEndTime());
-			act.setStartTime(newActivity.getStartTime());
+			Tutactivity act = em.find(Tutactivity.class, oldActivity.getAid());
+			act.setActDate(newActivity.getActDate());
+			act.setActDescription(newActivity.getActDescription());
+			act.setActEndTime(newActivity.getActEndTime());
+			act.setActStartTime(newActivity.getActStartTime());
 			act.setPerson(newActivity.getPerson());
 			act.setProject(newActivity.getProject());
 
