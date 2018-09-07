@@ -222,3 +222,17 @@ ALTER TABLE Tutpersons ADD PTYPE VARCHAR(50);
 UPDATE tutpersons SET PTYPE = 'Coworker' where PLNAME = 'Duchemin' ;
   
  
+update TUTPERSONS SET PLNAME='DEKEYSER' where PLNAME ='DE KEYSER';
+
+update TUTPERSONS SET PLNAME='VANHEIJKOOP' where PLNAME ='VAN HEIJKOOP';
+
+update TUTPasswords SET Password='4' where pass_pno ='5';
+
+
+INSERT INTO TUTPERSONS VALUES (4, 'Duchemin', 'Junior', 'ACCOUNT', 41, 'AUDIT', NULL, 'F','Coworker');
+
+INSERT INTO TUTPASSWORDS VALUES (4,'4');
+
+update TUTPERSONS SET PFNAME='RUUD' where PLNAME ='NIEHOF';
+
+	

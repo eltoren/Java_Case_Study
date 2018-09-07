@@ -306,4 +306,15 @@ public class ActionController implements Serializable{
 		return "MainPage";
 	}
 	
+	public float calculationSalary(float pricePerHour,float totalHour)
+	{
+		float salaryTotal;
+		
+		salaryTotal = pricePerHour * totalHour;
+		
+		return salaryTotal;
+		
+	}
+	
+	
 }
