@@ -19,9 +19,8 @@ import javax.persistence.Table;
  * The persistent class for the TUTPROJECTS database table.
  * 
  */
-@Named("project")
-@RequestScoped
-@Entity
+
+@Entity(name="Tutproject")
 @Table(name="TUTPROJECTS")
 @NamedQuery(name="Tutproject.findAll", query="SELECT t FROM Tutproject t")
 public class Tutproject implements Serializable {
