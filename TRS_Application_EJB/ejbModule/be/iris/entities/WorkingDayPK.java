@@ -10,7 +10,7 @@ public class WorkingDayPK implements Serializable{
 
 
 	@Column(name="WORKING_PNO")
-	private int coworker;
+	private long coworker;
 	
 	private LocalDate date;
 
@@ -25,11 +25,11 @@ public class WorkingDayPK implements Serializable{
 		this.date = date;
 	}
 
-	public int getCoworker() {
+	public long getCoworker() {
 		return coworker;
 	}
 
-	public void setCoworker(int coworker) {
+	public void setCoworker(long coworker) {
 		this.coworker = coworker;
 	}
 
@@ -41,12 +41,11 @@ public class WorkingDayPK implements Serializable{
 		this.date = date;
 	}
 
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + coworker;
+		result = prime * result + Long.hashCode(coworker);
 		return result;
 	}
 

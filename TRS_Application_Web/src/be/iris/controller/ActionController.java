@@ -197,23 +197,17 @@ public class ActionController implements Serializable{
 	
 	
 	public void registerActivity(ActionEvent e){
-		
+		activity = new Tutactivity();
 		dateConversionsSetter();
 		activity.setActDescription(activityName);
-		activity.setPerson(personConnected);
-			
-		
 		for(Tutproject p : listofProjects){
 			if(project.equals(p.getProtitle())){
-				activity.setProject(p);
+				project = p.getPid();
 				break;
 		}
-		
 		}
-		System.out.println(activity.getPerson().getPfname());
-		System.out.println(activity.getProject().getProtitle());
 		try{
-			activityBean.saveNewActivitie(activity, activity.getProject().getPid(), personConnected.getPno());
+			activityBean.saveNewActivitie(activity, project, personConnected.getPno());
 		}catch(Exception ex){
 			this.sendAMessage(ex.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}

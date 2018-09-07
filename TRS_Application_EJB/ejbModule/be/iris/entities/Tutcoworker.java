@@ -1,4 +1,4 @@
-package be.iris.entities;
+/*package be.iris.entities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,4 +37,4 @@ public class Tutcoworker extends Tutperson{
 		this.getListWorkingDays().remove(workingDay);
 		workingDay.setCoworker(null);
 	}
-}
+}*/

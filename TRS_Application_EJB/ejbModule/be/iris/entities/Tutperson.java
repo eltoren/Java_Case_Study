@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -18,6 +19,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -32,17 +34,20 @@ import javax.validation.constraints.NotNull;
  */
 @Entity(name="Tutperson")
 @Table(name="TUTPERSONS")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="ptype", discriminatorType=DiscriminatorType.STRING)
 @NamedQuery(name="Tutperson.findAll", query="SELECT t FROM Tutperson t ")
-@NamedNativeQuery(name="Tutperson.findPersonsLogs", query="SELECT * from tutpersons t where t.pno in (select p.pass_pno from tutpasswords p)",
-resultClass=Tutperson.class)
+@NamedNativeQueries({@NamedNativeQuery(name="Tutperson.findPersonsLogs", 
+					query="SELECT * from tutpersons t where t.pno in (select p.pass_pno from tutpasswords p)",
+					resultClass = Tutperson.class),
+					@NamedNativeQuery(name="Tutperson.findPersonConnected", 
+					query="SELECT * from tutpersons t where t.pno = :pno",
+					resultClass = Tutperson.class)})
 public class Tutperson implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int pno;
+	@Column(name="PNO")
+	private long pno;
 
 	private String padept;
 
@@ -65,7 +70,7 @@ public class Tutperson implements Serializable {
 	@JoinColumn(name="PA_CONO")
 	private Tutcompany tutcompany;
 	
-	@OneToMany(targetEntity=Tutactivity.class, mappedBy="person")
+	@OneToMany(targetEntity=Tutactivity.class, mappedBy="person",fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
 	private List<Tutactivity> activities = new ArrayList<>();
 	
 	@Column(name="ptype")
@@ -74,11 +79,11 @@ public class Tutperson implements Serializable {
 	public Tutperson() {
 	}
 
-	public int getPno() {
+	public long getPno() {
 		return this.pno;
 	}
 
-	public void setPno(int pno) {
+	public void setPno(long pno) {
 		this.pno = pno;
 	}
 
@@ -159,12 +164,12 @@ public class Tutperson implements Serializable {
 	
 	
 	public void addActivity(Tutactivity activity){
-		this.getActivities().add(activity);
+		activities.add(activity);
 		activity.setPerson(this);
 	}
 	
 	public void removeActivity(Tutactivity activity){
-		this.getActivities().remove(activity);
+		activities.remove(activity);
 		activity.setPerson(null);
 	}
 	

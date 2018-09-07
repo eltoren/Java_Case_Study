@@ -25,11 +25,22 @@ public class ActivityImpl implements ActivityDao {
 	private EntityManager em;
 
 	@Override
-	public void insertActivity(Tutactivity activity, String pid, int pno) {
+	public void insertActivity(Tutactivity activity, String pid, long pno) {
 		try {
+			System.out.println(pid +" " + pno);
 			Tutproject p = em.find(Tutproject.class, pid);
+			em.persist(activity);
 			Tutperson person = em.find(Tutperson.class, pno);
-			em.merge(activity);
+			System.out.println(person.getPlname());
+			/*Query q  = em.createNativeQuery("Tutperson.findPersonConnected", Tutperson.class);
+			q.setParameter("pno", pno);
+			Tutperson person = (Tutperson) q.getSingleResult();*/
+			p.addActivity(activity);
+			person.addActivity(activity);
+		//	person.addActivity(activity);
+			em.merge(p);
+			em.merge(person);
+		
 
 		} catch (RuntimeException re) {
 				re.printStackTrace();
