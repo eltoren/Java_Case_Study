@@ -45,11 +45,16 @@
 --
 
 CREATE TABLE TUTPROJECTS(
-	pid varchar(25) primary key,
-	protitle varchar(30)
+	PID varchar(25) primary key,
+	PROTITLE varchar(30)
 	
 );
 
+
+CREATE TABLE TUTACTIVITIES(
+AID varchar(10) primary key
+	
+);
 --SOME ALTER TABLE
 
 

@@ -41,6 +41,7 @@ public class LoginController implements Serializable {
 			persons = personBean.getAllPersons();
 			for (Tutperson p : persons) {
 				listOfFirstNames.add(p.getPfname() + " " + p.getPlname());
+				
 			}
 		}
 		return listOfFirstNames;
@@ -78,6 +79,8 @@ public class LoginController implements Serializable {
 	public String login() {
 		String firstName = name.split(" ")[0]; /* Here change this !! Junior */
 		String lastName = name.split(" ")[1];
+		
+				
 		for (Tutperson p : persons) {
 			if (p.getPfname().equals(firstName) && p.getPlname().equals(lastName)) {
 				personSelected = p;
