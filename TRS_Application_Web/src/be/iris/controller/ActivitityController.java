@@ -21,7 +21,6 @@ public class ActivitityController {
 
 private String project;
 	
-	@Inject 
 	private Tutactivity activity;
 	
 	@EJB

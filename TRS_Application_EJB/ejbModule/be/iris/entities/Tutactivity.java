@@ -4,16 +4,14 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,16 +21,18 @@ import javax.persistence.TemporalType;
  * The persistent class for the TUTACTIVITIES database table.
  * 
  */
-@Named("activity")
-@RequestScoped
-@Entity
+
+@Entity(name="Tutactivity")
 @Table(name="TUTACTIVITIES")
-@NamedQuery(name="Tutactivity.findAll", query="SELECT t FROM Tutactivity t")
 public class Tutactivity implements Serializable {
-	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7720086255696017210L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue
 	private long aid;
 
 	@Temporal(TemporalType.DATE)
@@ -48,12 +48,12 @@ public class Tutactivity implements Serializable {
 	@Column(name="ACT_START_TIME")
 	private Timestamp actStartTime;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name="PNO")
 	private Tutperson person;
 	
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name="PID")
 	private Tutproject project;
 	

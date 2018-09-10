@@ -1,4 +1,4 @@
-package be.iris.entities;
+/*package be.iris.entities;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -17,3 +17,4 @@ public class Tutacountant extends Tutperson{
 		super();
 	}
 }
+*/

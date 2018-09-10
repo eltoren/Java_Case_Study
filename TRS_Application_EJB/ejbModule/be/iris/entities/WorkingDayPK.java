@@ -1,52 +1,49 @@
 package be.iris.entities;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDate;
-
-import javax.persistence.Column;
 
 
 public class WorkingDayPK implements Serializable{
 
 
-	@Column(name="WORKING_PNO")
-	private int coworker;
+	private long coworker;
 	
-	private LocalDate date;
+	private Date date;
 
 	
 	public WorkingDayPK() {
 		super();
 	}
 
-	public WorkingDayPK(int coworker, LocalDate date) {
+	public WorkingDayPK(int coworker, Date date) {
 		super();
 		this.coworker = coworker;
 		this.date = date;
 	}
 
-	public int getCoworker() {
+	public long getCoworker() {
 		return coworker;
 	}
 
-	public void setCoworker(int coworker) {
+	public void setCoworker(long coworker) {
 		this.coworker = coworker;
 	}
 
-	public LocalDate getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + coworker;
+		result = prime * result + Long.hashCode(coworker);
 		return result;
 	}
 

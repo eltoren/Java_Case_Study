@@ -1,5 +1,6 @@
 package be.iris.session;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,21 +23,23 @@ public class WorkingDayBean implements WorkingDayBeanRemote {
 	}
 
 	@Override
-	public void StartNewWorkingDay(Tutperson person) {
-		TutworkingDay workingDay = new TutworkingDay(person, LocalDate.now(), LocalDateTime.now(), null);
-		workingDayDao.insertWorkingDay(workingDay);
+	public void StartNewWorkingDay(long person) {
+		TutworkingDay workingDay = new TutworkingDay();
+		workingDay.setDate(LocalDate.now());
+		workingDay.setStartTime(Timestamp.valueOf(LocalDateTime.now()));
+		workingDayDao.insertWorkingDay(workingDay, person);
 	}
 
-	@Override
+	/*@Override
 	public void StartNewWorkingDay(TutworkingDay workingDay) {
 		workingDayDao.insertWorkingDay(workingDay);
 	}
-
+*/
 	@Override
-	public void endWorkingDay(Tutperson person) {
+	public void endWorkingDay(long person) {
 		TutworkingDay oldWorkingDay = workingDayDao.getWorkigDaysOfPersonAtDate(person, LocalDate.now());
 		TutworkingDay newWorkingDay = oldWorkingDay;
-		newWorkingDay.setEndTime(LocalDateTime.now());
+		newWorkingDay.setEndTime(Timestamp.valueOf(LocalDateTime.now()));
 		workingDayDao.updateWorkingDay(oldWorkingDay, newWorkingDay);
 	}
 
@@ -44,7 +47,7 @@ public class WorkingDayBean implements WorkingDayBeanRemote {
 	public void endWorkingDay(TutworkingDay workingDay) {
 		TutworkingDay oldWorkingDay = workingDay;
 		TutworkingDay newWorkingDay = workingDay;
-		newWorkingDay.setEndTime(LocalDateTime.now());
+		newWorkingDay.setEndTime(Timestamp.valueOf(LocalDateTime.now()));
 		workingDayDao.updateWorkingDay(oldWorkingDay, newWorkingDay);
 	}
 
@@ -54,7 +57,7 @@ public class WorkingDayBean implements WorkingDayBeanRemote {
 	}
 
 	@Override
-	public void removeWorkingDay(Tutperson person, LocalDate date) {
+	public void removeWorkingDay(long person, LocalDate date) {
 		TutworkingDay workingDay = workingDayDao.getWorkigDaysOfPersonAtDate(person, date);
 		workingDayDao.deleteWorkingDay(workingDay);
 	}
@@ -80,12 +83,12 @@ public class WorkingDayBean implements WorkingDayBeanRemote {
 	}
 
 	@Override
-	public List<TutworkingDay> getListWorkigDaysOfPerson(Tutperson person) {
+	public List<TutworkingDay> getListWorkigDaysOfPerson(long person) {
 		return workingDayDao.getListWorkigDaysOfPerson(person);
 	}
 
 	@Override
-	public TutworkingDay getWorkigDaysOfPersonAtDate(Tutperson person, LocalDate date) {
+	public TutworkingDay getWorkigDaysOfPersonAtDate(long person, LocalDate date) {
 		return workingDayDao.getWorkigDaysOfPersonAtDate(person, date);
 	}
 
@@ -95,7 +98,7 @@ public class WorkingDayBean implements WorkingDayBeanRemote {
 	}
 
 	@Override
-	public List<TutworkingDay> getListWorkigDaysOfPersonBetweenStartDateANdEndDate(Tutperson person,
+	public List<TutworkingDay> getListWorkigDaysOfPersonBetweenStartDateANdEndDate(long person,
 			LocalDate startDate, LocalDate endDate) {
 		return workingDayDao.getListWorkigDaysOfPersonBetweenStartDateANdEndDate(person, startDate, endDate);
 	}

@@ -19,9 +19,8 @@ import javax.persistence.Table;
  * The persistent class for the TUTPROJECTS database table.
  * 
  */
-@Named("project")
-@RequestScoped
-@Entity
+
+@Entity(name="Tutproject")
 @Table(name="TUTPROJECTS")
 @NamedQuery(name="Tutproject.findAll", query="SELECT t FROM Tutproject t")
 public class Tutproject implements Serializable {
@@ -32,7 +31,7 @@ public class Tutproject implements Serializable {
 
 	private String protitle;
 
-	@OneToMany(targetEntity=Tutactivity.class,mappedBy="project",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@OneToMany(targetEntity=Tutactivity.class,mappedBy="project",fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
 	private List<Tutactivity> activities = new ArrayList<>();
 	public Tutproject() {
 	}

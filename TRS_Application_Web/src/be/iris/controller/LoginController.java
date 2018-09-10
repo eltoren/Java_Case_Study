@@ -26,15 +26,14 @@ public class LoginController implements Serializable {
 	@Inject
 	private FrontBean fb;
 
-	@Inject
-	@Named("person")
+	
 	private Tutperson personSelected;
 
 	private List<Tutperson> persons = new ArrayList<>();
 	private List<String> listOfFirstNames = new ArrayList<>();
 
 	public LoginController() {
-
+		personSelected = new Tutperson();
 	}
 
 	public List<String> getListOfFirstNames() {
@@ -42,6 +41,7 @@ public class LoginController implements Serializable {
 			persons = personBean.getAllPersons();
 			for (Tutperson p : persons) {
 				listOfFirstNames.add(p.getPfname() + " " + p.getPlname());
+				
 			}
 		}
 		return listOfFirstNames;
@@ -79,10 +79,12 @@ public class LoginController implements Serializable {
 	public String login() {
 		String firstName = name.split(" ")[0]; /* Here change this !! Junior */
 		String lastName = name.split(" ")[1];
+		
+				
 		for (Tutperson p : persons) {
 			if (p.getPfname().equals(firstName) && p.getPlname().equals(lastName)) {
 				personSelected = p;
-
+				System.out.println(personSelected.getPfname());
 				System.out.println(personSelected.getPno());
 				break;
 			}

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Calculation salary</title>
+</h:head>
+
+<h:body style="background-color:#698dc6;">
+<h1>Calculation salary</h1>
+
+<p:panel id="CalculationSalary" header="Calculation salary" footer="Calculation salary" style="margin-bottom:20px">
+
+<h:form>
+
+
+<p> Here the calculation of salary</p>
+
+<p:dataTable var="coWorker" value="#{dtSalaryView.coWorker}">
+    <p:column headerText="Last Name">
+        <h:outputText value="#{coWorker.plname}" />
+    </p:column>
+ 
+    <p:column headerText="First Name">
+        <h:outputText value="#{coWorker.pfname}" />
+    </p:column>
+ <!--  
+    <p:column headerText="Number of Work Hours">
+        <h:outputText value="#{coWorker.totalHours}" />
+    </p:column>
+ 
+    <p:column headerText="Price per hour">
+        <h:outputText value="#{coWorker.pricePerHour}" />
+    </p:column>
+    -->
+    
+     <p:column headerText="Statut">
+        <h:outputText value="#{coWorker.ptype}" />
+    </p:column>
+    
+     <p:column headerText="Total">
+        <h:outputText value="#{actionController.calculationSalary(100,50)}" />
+    </p:column>
+     
+</p:dataTable>
+
+<p:commandButton value="Go Back" id="BackButton" action="#{frontBean.goBack}" ajax="false"  styleClass="ui-priority-primary" style="float: right;" />
+ 
+</h:form>
+
+<br/>
+      
+</p:panel>
+
+<p:commandButton value="Logout" id="logout"  action="#{frontBean.logout}" styleClass="ui-priority-primary" style="float: right;" />
+
+
+
+
+
+</h:body>
+</html>

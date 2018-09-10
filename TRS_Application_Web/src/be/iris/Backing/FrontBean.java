@@ -44,8 +44,8 @@ public class FrontBean implements Serializable {
 	}
 
 	public String calculation() {
-		System.out.println("Link To activity registration page");
-		return "Calculation";
+		System.out.println("Link To CalculationSalary");
+		return "CalculationSalary";
 	}
 
 	public String goBack() {

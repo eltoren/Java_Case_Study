@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1"
-	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+ xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="TRSAppJpa" transaction-type="JTA">
 		<jta-data-source>jdbc/TRSAppJpa</jta-data-source>
-		<class>be.iris.entities.Tutcompany</class>
-		<class>be.iris.entities.Tutperson</class>
-		<class>be.iris.entities.TutworkingDay</class>
-		<class>be.iris.entities.Tutcours</class>
-		<class>be.iris.entities.Tutproject</class>
 		<class>be.iris.entities.Tutactivity</class>
+		<class>be.iris.entities.Tutcompany</class>
+		<class>be.iris.entities.Tutcours</class>
+		<class>be.iris.entities.Tutperson</class>
+		<class>be.iris.entities.Tutproject</class>
+		<class>be.iris.entities.TutworkingDay</class>
 		<properties>
 		<property name="openjpa.jdbc.SynchronizeMappings"
 						value="buildSchema(ForeignKeys=true)"/>
@@ -17,6 +17,23 @@
 			<property name="openjpa.jdbc.Schema" value="tu00010" />
 			<property name="openjpa.Log"
 				value="defaultLevel=WARN, Runtime=INFO, Tool=INFO,SQL=TRACE" />
+
+		<!--  TEST Génération table WORKING (for localhost! 
+		 
+            <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+            <property name="javax.persistence.jdbc.user" value="TU00010"/>
+            <property name="javax.persistence.jdbc.password" value="tu00010"/>
+          
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+            <property name="eclipselink.create-ddl-jdbc-file-name" value="createDDL_ddlGeneration.jdbc"/>
+            <property name="eclipselink.drop-ddl-jdbc-file-name" value="dropDDL_ddlGeneration.jdbc"/>
+            <property name="eclipselink.ddl-generation.output-mode" value="both"/> -->
+       
+
+
+
 		</properties>
+		
 	</persistence-unit>	
 </persistence>
