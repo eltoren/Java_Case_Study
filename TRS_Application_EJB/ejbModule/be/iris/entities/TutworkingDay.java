@@ -1,8 +1,8 @@
 package be.iris.entities;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -16,6 +16,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.sun.istack.internal.Nullable;
+
 @Named
 @RequestScoped
 @Entity
@@ -27,29 +29,31 @@ public class TutworkingDay {
 
 	@Id
 	@ManyToOne
-	@JoinColumn(name="pno")
+	@JoinColumn(name="PNO")
 	private Tutperson coworker;
 	
 	
 	@Id
-	@Column(name="WORKING_DATE", columnDefinition="DATE")
-	private LocalDate date;
+	@Column(name="WORKING_DATE")
+	private Date date;
 	
-	@Column(name="START_TIME", columnDefinition="TIMESTAMP")
+	
+	@Column(name="START_TIME")
 	@NotNull
-	private LocalDateTime startTime;
+	private Timestamp startTime;
 	
-	@Column(name="END_TIME", columnDefinition="TIMESTAMP")
-	private LocalDateTime endTime;
+	@Column(name="END_TIME")
+	@Nullable
+	private Timestamp endTime;
 	
 
 	public TutworkingDay() {
 	}
 
-	public TutworkingDay(Tutperson coworker, LocalDate date, LocalDateTime startTime, LocalDateTime endTime) {
+	public TutworkingDay(Tutperson coworker, LocalDate date, Timestamp startTime, Timestamp endTime) {
 		super();
 		this.coworker = coworker;
-		this.date = date;
+		this.date = Date.valueOf(date);
 		this.startTime = startTime;
 		this.endTime = endTime;
 	}
@@ -62,27 +66,29 @@ public class TutworkingDay {
 		this.coworker = coworker;
 	}
 
-	public LocalDate getDate() {
+	public Date getDate() {
 		return date;
 	}
-
-	public void setDate(LocalDate date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
+	public void setDate(LocalDate date) {
+		this.date = Date.valueOf(date);
+	}
 
-	public LocalDateTime getStartTime() {
+	public Timestamp getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(LocalDateTime startTime) {
+	public void setStartTime(Timestamp startTime) {
 		this.startTime = startTime;
 	}
 
-	public LocalDateTime getEndTime() {
+	public Timestamp getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(LocalDateTime endTime) {
+	public void setEndTime(Timestamp endTime) {
 		this.endTime = endTime;
 	}
 	

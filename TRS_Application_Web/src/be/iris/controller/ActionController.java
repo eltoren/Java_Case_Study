@@ -20,7 +20,6 @@ import javax.inject.Named;
 
 import be.iris.PrimFaceController.CalendarView;
 import be.iris.entities.Tutactivity;
-import be.iris.entities.Tutcours;
 import be.iris.entities.Tutperson;
 import be.iris.entities.Tutproject;
 import be.iris.session.view.ActivityBeanRemote;
@@ -37,21 +36,11 @@ public class ActionController implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -8804029671948475633L;
-	@EJB(name = "personBean")
-	private PersonBeanRemote personBean;
-	private String password;
-	private String name;
-	
-	@EJB(name= "personConnectedBean")
-	private PersonConectedBeanRemote personConnectedBean;
-	
-	private List<Tutperson> persons= new ArrayList<>();
-	private List<String> listOfFirstNames = new ArrayList<>();
+
 	private Tutactivity activity;
 	
 	private Tutproject projectActivity;
 
-	private Tutperson personConnected;
 	private String project;
 	
 	private LocalTime startTime;
@@ -70,7 +59,8 @@ public class ActionController implements Serializable{
 	private List<Tutproject> listofProjects = new ArrayList<>();
 	private List<String> listProjectsNames = new ArrayList<>();
 	
-	
+	@Inject
+	private LoginController loginController;
 
 	
 
@@ -130,72 +120,10 @@ public class ActionController implements Serializable{
 	
 	public ActionController() {
 			activity = new Tutactivity();
-			personConnected = new Tutperson();
 			projectActivity = new Tutproject();
 	}
 
-	public List<String> getListOfFirstNames() {
-		if(persons.isEmpty()){
-			persons = personBean.getAllPersons();
-			for(Tutperson p : persons){
-				listOfFirstNames.add(p.getPfname() + " " + p.getPlname());
-			}
-		}
-		return listOfFirstNames;
-	}
-
-	public void setListOfFirstNames(List<String> listOfFirstNames) {
 		
-		this.listOfFirstNames = listOfFirstNames;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-
-	public List<Tutperson> getPersons() {
-		return persons;
-	}
-
-	public void setPersons(List<Tutperson> persons) {
-		this.persons = persons;
-	}
-
-	public String login(){
-		String firstName = name.split(" ")[0];
-		String lastName = name.split(" ")[1];
-		for(Tutperson p : persons){
-			if(p.getPfname().trim().equals(firstName) && p.getPlname().trim().equals(lastName)){
-				personConnected = p;
-				break;
-			}
-		}
-		if(personBean.iSLoginOk(personConnected, password)){
-			return "ActivityRegistration?faces-redirect=true";
-		}else{
-			this.sendAMessage("WRONG PASSWORD / EMAIL COMBINATION", FacesMessage.SEVERITY_ERROR);
-			return "index";
-		}
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public PersonBeanRemote getPersonBean() {
-		return personBean;
-	}
-	
-	
 	public void registerActivity(ActionEvent e){
 		activity = new Tutactivity();
 		dateConversionsSetter();
@@ -207,7 +135,7 @@ public class ActionController implements Serializable{
 		}
 		}
 		try{
-			activityBean.saveNewActivitie(activity, project, personConnected.getPno());
+			activityBean.saveNewActivitie(activity, project, loginController.getPersonSelected().getPno());
 		}catch(Exception ex){
 			this.sendAMessage(ex.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}

@@ -1,25 +1,23 @@
 package be.iris.entities;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDate;
-
-import javax.persistence.Column;
 
 
 public class WorkingDayPK implements Serializable{
 
 
-	@Column(name="WORKING_PNO")
 	private long coworker;
 	
-	private LocalDate date;
+	private Date date;
 
 	
 	public WorkingDayPK() {
 		super();
 	}
 
-	public WorkingDayPK(int coworker, LocalDate date) {
+	public WorkingDayPK(int coworker, Date date) {
 		super();
 		this.coworker = coworker;
 		this.date = date;
@@ -33,11 +31,11 @@ public class WorkingDayPK implements Serializable{
 		this.coworker = coworker;
 	}
 
-	public LocalDate getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
