@@ -11,7 +11,7 @@ import be.iris.entities.TutworkingDay;
 @Local
 public interface WorkingDayDao {
 
-	public void insertWorkingDay(TutworkingDay workingDay);
+	public void insertWorkingDay(TutworkingDay workingDay, long person);
 
 	public void updateWorkingDay(TutworkingDay oldWorkingDay, TutworkingDay newWorkingDay);
 
@@ -25,13 +25,13 @@ public interface WorkingDayDao {
 
 	public List<TutworkingDay> getListWorkingDaysAtDate(LocalDate date);
 
-	public List<TutworkingDay> getListWorkigDaysOfPerson(Tutperson person);
+	public List<TutworkingDay> getListWorkigDaysOfPerson(long person);
 
-	public TutworkingDay getWorkigDaysOfPersonAtDate(Tutperson person, LocalDate date);
+	public TutworkingDay getWorkigDaysOfPersonAtDate(long person, LocalDate date);
 
 	public List<TutworkingDay> getListWorkigDaysBetweenStartDateANdEndDate(LocalDate startDate, LocalDate endDate);
 
-	public List<TutworkingDay> getListWorkigDaysOfPersonBetweenStartDateANdEndDate(Tutperson person,
+	public List<TutworkingDay> getListWorkigDaysOfPersonBetweenStartDateANdEndDate(long person,
 			LocalDate startDate, LocalDate endDate);
 
 }
