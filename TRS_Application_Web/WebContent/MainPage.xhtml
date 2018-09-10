@@ -22,7 +22,7 @@
   	<p:commandButton value="Calculation salaries" ajax="false" action="#{frontBean.calculation}" disabled="false" style="width:150px;height:80px" rendered="#{frontBean.bool_ACC == true}" />
     <p:commandButton value="Analyse" ajax="false" action="#{frontBean.analyse}" disabled="false" style="width:150px;height:80px" rendered="#{frontBean.bool_MAN == true}" />
     <p:commandButton value="Check-in" ajax="false" action="#{actionController.checkIn}" disabled="true" style="width:150px;height:80px" rendered="#{frontBean.bool_CW == true}" />
-    <p:commandButton value="Chek-out" ajax="false" action="#{frontBean.checkOut}" disabled="true" style="width:150px;height:80px" rendered="#{frontBean.bool_CW == true}" />
+    <p:commandButton value="Chek-out" ajax="false" action="#{actionController.checkOut}" disabled="true" style="width:150px;height:80px" rendered="#{frontBean.bool_CW == true}" />
 </h:panelGrid>
 
 
