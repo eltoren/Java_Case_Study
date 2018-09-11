@@ -7,13 +7,14 @@ import javax.ejb.Local;
 
 import be.iris.entities.Tutperson;
 import be.iris.entities.TutworkingDay;
+import be.iris.exceptions.NoWorkingDayInProgressException;
 
 @Local
 public interface WorkingDayDao {
 
 	public void insertWorkingDay(TutworkingDay workingDay, long person);
 
-	public void updateWorkingDay(TutworkingDay oldWorkingDay, TutworkingDay newWorkingDay);
+	public void updateWorkingDay(long person) throws NoWorkingDayInProgressException;
 
 	public void deleteWorkingDay(TutworkingDay workingDay);
 

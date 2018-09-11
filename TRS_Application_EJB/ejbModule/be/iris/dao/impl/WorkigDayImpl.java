@@ -1,7 +1,9 @@
 package be.iris.dao.impl;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +18,8 @@ import javax.persistence.TypedQuery;
 import be.iris.dao.WorkingDayDao;
 import be.iris.entities.Tutperson;
 import be.iris.entities.TutworkingDay;
+import be.iris.entities.WorkingDayPK;
+import be.iris.exceptions.NoWorkingDayInProgressException;
 
 @Stateless(mappedName = "workingDayDaoImpl")
 public class WorkigDayImpl implements WorkingDayDao {
@@ -38,26 +42,27 @@ public class WorkigDayImpl implements WorkingDayDao {
 	}
 
 	@Override
-	public void updateWorkingDay(TutworkingDay oldWorkingDay, TutworkingDay newWorkingDay) {
-		EntityTransaction tx = em.getTransaction();
+	public void updateWorkingDay(long pno) throws NoWorkingDayInProgressException{
 		try {
-			tx.begin();
-
-			TutworkingDay workingDay = em.find(TutworkingDay.class, oldWorkingDay);
-			workingDay.setDate(newWorkingDay.getDate());
-			workingDay.setStartTime(newWorkingDay.getStartTime());
-			workingDay.setEndTime(newWorkingDay.getEndTime());
-			workingDay.setCoworker(workingDay.getCoworker());
-
-			em.persist(workingDay);
-
-			tx.commit();
-		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
+			Tutperson person = em.find(Tutperson.class, pno);
+			Date date = Date.valueOf(LocalDate.now());
+			String queryString = "Select w.* from TUTWORKING_DAYS w  where w.WORKING_DATE = ? and w.PNO = ?";
+			Query  query= em.createNativeQuery(queryString, TutworkingDay.class);
+			System.out.println(date.toString() + " " + pno);
+			query.setParameter(1, date);
+			query.setParameter(2, pno);
+			TutworkingDay wd = (TutworkingDay)query.getSingleResult();
+			if(wd.getEndTime() != null){
+				throw new NoWorkingDayInProgressException("You Have already check out !");
 			}
+			System.out.println("there");
+			wd.setEndTime(Timestamp.valueOf(LocalDateTime.now()));
+			System.out.println("time out setted");
+			em.merge(wd);
+			System.out.println("merged");
+
+		} catch (RuntimeException re) {
+			System.out.println("erroooor");
 			System.err.println(re.getMessage());
 		}
 

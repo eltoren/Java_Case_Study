@@ -7,6 +7,7 @@ import javax.ejb.Remote;
 
 import be.iris.entities.Tutperson;
 import be.iris.entities.TutworkingDay;
+import be.iris.exceptions.NoWorkingDayInProgressException;
 
 @Remote
 public interface WorkingDayBeanRemote {
@@ -15,12 +16,12 @@ public interface WorkingDayBeanRemote {
 	
 //	public void StartNewWorkingDay(TutworkingDay workingDay);
 	
-	public void endWorkingDay(long pno);
+	public void endWorkingDay(long pno) throws NoWorkingDayInProgressException;
 	
-	public void endWorkingDay(TutworkingDay workingDay);
+/*	public void endWorkingDay(TutworkingDay workingDay);
 	
 	public void changeWorkingDay(TutworkingDay oldWorkingDay, TutworkingDay newWorkingDay);
-	
+	*/
 	public void removeWorkingDay(long person, LocalDate date);
 	
 	public void removeWorkingDay(TutworkingDay workingDay);

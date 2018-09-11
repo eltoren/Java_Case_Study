@@ -17,7 +17,7 @@ public class WorkingDayPK implements Serializable{
 		super();
 	}
 
-	public WorkingDayPK(int coworker, Date date) {
+	public WorkingDayPK(long coworker, Date date) {
 		super();
 		this.coworker = coworker;
 		this.date = date;
