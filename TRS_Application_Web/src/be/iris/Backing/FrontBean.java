@@ -16,6 +16,9 @@ public class FrontBean implements Serializable {
 	private boolean bool_ACC = false; /* ACC = Accountant */
 	private boolean bool_MAN = false; /* MAN = Manager */
 	private boolean bool_EMP = false; /* EMP = Employee */
+	private boolean coworkerBoolean = false;
+	private boolean projectBoolean = false;
+	
 
 	@Inject
 	private CalendarView calendar;
@@ -33,15 +36,22 @@ public class FrontBean implements Serializable {
 		return "ActivityRegistration";
 	}
 
-	public String analyse() {
-		System.out.println("Link To analyse page");
+	public String analysePersons() {
+		this.setCoworkerBoolean(true);
+		this.setProjectBoolean(false);
+		return "Analyse";
+	}
+	
+	public String analyseProjects() {
+		this.setCoworkerBoolean(false);
+		this.setProjectBoolean(true);
 		return "Analyse";
 	}
 
-	public String workingDay() {
+	/*public String workingDay() {
 		System.out.println("Link To activity registration page");
 		return "WorkingDay";
-	}
+	}*/
 
 	public String calculation() {
 		System.out.println("Link To CalculationSalary");
@@ -94,4 +104,23 @@ public class FrontBean implements Serializable {
 	public void setBool_EMP(boolean bool_EMP) {
 		this.bool_EMP = bool_EMP;
 	}
+
+	public boolean isCoworkerBoolean() {
+		return coworkerBoolean;
+	}
+
+	public void setCoworkerBoolean(boolean coworkerBoolean) {
+		this.coworkerBoolean = coworkerBoolean;
+	}
+
+	public boolean isProjectBoolean() {
+		return projectBoolean;
+	}
+
+	public void setProjectBoolean(boolean projectBoolean) {
+		this.projectBoolean = projectBoolean;
+	}
+	
+	
+	
 }
