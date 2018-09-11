@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -17,52 +16,39 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import be.iris.PrimFaceController.CalendarView;
 import be.iris.entities.Tutactivity;
-import be.iris.entities.Tutperson;
 import be.iris.entities.Tutproject;
 import be.iris.session.view.ActivityBeanRemote;
-import be.iris.session.view.PersonBeanRemote;
-import be.iris.session.view.PersonConectedBeanRemote;
 import be.iris.session.view.ProjectBeanRemote;
 import be.iris.utilities.DateFormat;
 
 @Named
 @SessionScoped
-public class ActionController implements Serializable{
+public class ActionController implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8804029671948475633L;
-
 	private Tutactivity activity;
-	
 	private Tutproject projectActivity;
-
 	private String project;
-	
 	private LocalTime startTime;
 	private LocalTime endTime;
-	
+
 	private String activityName;
 	@EJB
 	private ProjectBeanRemote projectBean;
-	
+
 	@EJB
 	private ActivityBeanRemote activityBean;
-	
-	@Inject 
+
+	@Inject
 	private CalendarView calendar;
-	
+
 	private List<Tutproject> listofProjects = new ArrayList<>();
 	private List<String> listProjectsNames = new ArrayList<>();
-	
+
 	@Inject
 	private LoginController loginController;
-
-	
 
 	public CalendarView getCalendar() {
 		return calendar;
@@ -97,9 +83,9 @@ public class ActionController implements Serializable{
 	}
 
 	public List<String> getListProjectsNames() {
-		if(listProjectsNames.isEmpty()){
+		if (listProjectsNames.isEmpty()) {
 			listofProjects = projectBean.getAllProjects();
-			for(Tutproject p : listofProjects){
+			for (Tutproject p : listofProjects) {
 				listProjectsNames.add(p.getProtitle());
 			}
 		}
@@ -117,26 +103,24 @@ public class ActionController implements Serializable{
 		context.addMessage(null, message);
 	}
 
-	
 	public ActionController() {
-			activity = new Tutactivity();
-			projectActivity = new Tutproject();
+		activity = new Tutactivity();
+		projectActivity = new Tutproject();
 	}
 
-		
-	public void registerActivity(ActionEvent e){
+	public void registerActivity(ActionEvent e) {
 		activity = new Tutactivity();
 		dateConversionsSetter();
 		activity.setActDescription(activityName);
-		for(Tutproject p : listofProjects){
-			if(project.equals(p.getProtitle())){
+		for (Tutproject p : listofProjects) {
+			if (project.equals(p.getProtitle())) {
 				project = p.getPid();
 				break;
+			}
 		}
-		}
-		try{
+		try {
 			activityBean.saveNewActivitie(activity, project, loginController.getPersonSelected().getPno());
-		}catch(Exception ex){
+		} catch (Exception ex) {
 			this.sendAMessage(ex.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}
@@ -145,24 +129,24 @@ public class ActionController implements Serializable{
 	private void dateConversionsSetter() {
 		System.out.println(startTime.format(DateFormat.dtfHours));
 		int day = calendar.getDate().getDate() + 1;
-		int month = calendar.getDate().getMonth() +1;
+		int month = calendar.getDate().getMonth() + 1;
 		int year = calendar.getDate().getYear() + 1900;
 		LocalDate date = LocalDate.of(year, month, day);
 		LocalDateTime startDateTime = LocalDateTime.of(date, startTime);
 		LocalDateTime endDateTime = LocalDateTime.of(date, endTime);
-		if(date.isAfter(LocalDate.now())){
+		if (date.isAfter(LocalDate.now())) {
 			this.sendAMessage("ENTER A VALID DATE, MAXIMUM IS TODAY", FacesMessage.SEVERITY_ERROR);
 			return;
 		}
-		if(date.getDayOfWeek().getValue() == 6 || date.getDayOfWeek().getValue() == 7){
+		if (date.getDayOfWeek().getValue() == 6 || date.getDayOfWeek().getValue() == 7) {
 			this.sendAMessage("ENTER A VALID DATE, NOT A DAY OF THE WEEKEND", FacesMessage.SEVERITY_ERROR);
 			return;
 		}
-		if(startTime.isAfter(LocalTime.of(20, 0)) || startTime.isBefore(LocalTime.of(5,0))){
+		if (startTime.isAfter(LocalTime.of(20, 0)) || startTime.isBefore(LocalTime.of(5, 0))) {
 			this.sendAMessage("ENTER A VALID STAR TIME, CANNOT WORK ON THE WRONGS HOURS", FacesMessage.SEVERITY_ERROR);
 			return;
 		}
-		if(endTime.isAfter(LocalTime.of(20, 0)) || endTime.isBefore(LocalTime.of(5,0))){
+		if (endTime.isAfter(LocalTime.of(20, 0)) || endTime.isBefore(LocalTime.of(5, 0))) {
 			this.sendAMessage("ENTER A VALID END TIME, CANNOT WORK ON THE WRONGS HOURS", FacesMessage.SEVERITY_ERROR);
 			return;
 		}
@@ -171,7 +155,6 @@ public class ActionController implements Serializable{
 		activity.setActEndTime(Timestamp.valueOf(endDateTime));
 	}
 
-	
 	public LocalTime getStartTime() {
 		return startTime;
 	}
@@ -211,28 +194,24 @@ public class ActionController implements Serializable{
 	public String getProject() {
 		return project;
 	}
-	
-	public String checkIn()
-	{
-		System.out.println("Check in ...");
+
+	public String checkIn() {
+
 		return "MainPage";
 	}
-	
-	public String checkOut()
-	{
-		System.out.println("Check out...");
+
+	public String checkOut() {
+
 		return "MainPage";
 	}
-	
-	public float calculationSalary(float pricePerHour,float totalHour)
-	{
+
+	public float calculationSalary(float pricePerHour, float totalHour) {
 		float salaryTotal;
-		
+
 		salaryTotal = pricePerHour * totalHour;
-		
+
 		return salaryTotal;
-		
+
 	}
-	
-	
+
 }

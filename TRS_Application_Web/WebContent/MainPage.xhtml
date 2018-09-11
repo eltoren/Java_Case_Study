@@ -6,35 +6,55 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Menu main page</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Menu main page</title>
 </h:head>
 <h:body style="background-color:#698dc6;">
-<h1>Menu</h1>
+	<h1>Menu</h1>
 
-<p:panel id="Menu" header="Menu" footer="Menu" style="margin-bottom:20px">
+	<p:panel id="Menu" header="Menu" footer="Menu"
+		style="margin-bottom:20px">
 
-<h:form>
-<p:growl />
-<h:panelGrid id = "panelButton" columns = "2" border = "0"   cellpadding = "2" cellspacing = "2">
-    <p:commandButton value="Registration activities" ajax="false" action="#{frontBean.registryActivity}" style="width:150px;height:80px" rendered="#{frontBean.bool_CW == true or frontBean.bool_ACC == true or frontBean.bool_MAN == true or frontBean.bool_EMP == true}"  />
-  	<p:commandButton value="Calculation salaries" ajax="false" action="#{frontBean.calculation}" disabled="false" style="width:150px;height:80px" rendered="#{frontBean.bool_ACC == true}" />
-    <p:commandButton value="Analyse Workers Activitities" ajax="false" action="#{frontBean.analysePersons}" style="width:150px;height:80px" rendered="#{frontBean.bool_MAN == true}" />
-       <p:commandButton value="Analyse Projects Activitities" ajax="false" action="#{frontBean.analyseProjects}"  style="width:150px;height:80px" rendered="#{frontBean.bool_MAN == true}" />
-    <p:commandButton value="Check-in" ajax="false" actionListener="#{workingDayController.checkIn}" style="width:150px;height:80px" rendered="#{frontBean.bool_CW == true}" />
-    <p:commandButton value="Chek-out" ajax="false" actionListener="#{workingDayController.checkOut}"  style="width:150px;height:80px" rendered="#{frontBean.bool_CW == true}" />
-</h:panelGrid>
+		<h:form>
+			<p:growl />
+			<h:panelGrid id="panelButton" columns="2" border="0" cellpadding="2"
+				cellspacing="2">
+				<p:commandButton value="Registration activities" ajax="false"
+					action="#{frontBean.registryActivity}"
+					style="width:150px;height:80px"
+					rendered="#{frontBean.bool_CW == true or frontBean.bool_ACC == true or frontBean.bool_MAN == true or frontBean.bool_EMP == true}" />
+				<p:commandButton value="Calculation salaries" ajax="false"
+					action="#{frontBean.calculation}" disabled="false"
+					style="width:150px;height:80px"
+					rendered="#{frontBean.bool_ACC == true}" />
+				<p:commandButton value="Analyse Workers Activitities" ajax="false"
+					action="#{frontBean.analysePersons}"
+					style="width:150px;height:80px"
+					rendered="#{frontBean.bool_MAN == true}" />
+				<p:commandButton value="Analyse Projects Activitities" ajax="false"
+					action="#{frontBean.analyseProjects}"
+					style="width:150px;height:80px"
+					rendered="#{frontBean.bool_MAN == true}" />
+				<p:commandButton value="Check-in" ajax="false"
+					actionListener="#{workingDayController.checkIn}"
+					style="width:150px;height:80px"
+					rendered="#{frontBean.bool_CW == true}" />
+				<p:commandButton value="Chek-out" ajax="false"
+					actionListener="#{workingDayController.checkOut}"
+					style="width:150px;height:80px"
+					rendered="#{frontBean.bool_CW == true}" />
+			</h:panelGrid>
 
 
- 
-</h:form>
+
+		</h:form>
 
 
-</p:panel>
+	</p:panel>
 
-<p:commandButton value="Logout" id="logout"  action="#{frontBean.logout}" styleClass="ui-priority-primary" style="float: right;" />
-
-
+	<p:commandButton value="Logout" id="logout"
+		action="#{frontBean.logout}" styleClass="ui-priority-primary"
+		style="float: right;" />
 
 </h:body>
 

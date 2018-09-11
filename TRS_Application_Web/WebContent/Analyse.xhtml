@@ -6,73 +6,72 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Analyse page for manager</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Analyse page for manager</title>
 </h:head>
 
 <h:body style="background-color:#698dc6;">
-<h1>Analyse</h1>
-<!-- 
+	<h1>Analyse</h1>
+	<p:panel id="basic" header="Analyse" footer="Analyse"
+		style="margin-bottom:20px">
+		<p:panel id="panelProjects" header="Analyses for a project"
+			rendered="#{frontBean.projectBoolean}">
+			<p:selectOneMenu id="analyseProjectMenuId"
+				value="#{analyseController.tutproject.protitle}">
+				<f:selectItems value="#{actionController.listProjectsNames}">
+					<p:ajax event="#{analyseController.personsChangeListener}"
+						render="dataTableid" />
+				</f:selectItems>
+			</p:selectOneMenu>
+		</p:panel>
+
+		<p:panel id="panelCoWorkers" header="Analyses for a Co-worker"
+			rendered="#{frontBean.coworkerBoolean}">
+			<p:selectOneMenu id="analysePersontMenuId"
+				value="#{analyseController.name}">
+				<f:selectItems value="#{loginController.listOfFirstNames}">
+					<p:ajax event="#{analyseController.projectsChangeListener}"
+						render="dataTableid" />
+				</f:selectItems>
+			</p:selectOneMenu>
+		</p:panel>
 
 
-		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-        <p:outputLabel for="analyse" value="Choice:" />
-        <p:selectOneMenu id="analyse" value="#{selectOneMenuView.analyse}" style="width:125px" onclick="submit();"  >
-            <f:selectItem itemLabel="Activities list" itemValue="Activitylist"  />
-            <f:selectItem itemLabel="Employee list" itemValue="Employeelist" />
-            <f:selectItem itemLabel="Project list" itemValue="Projectlist" />
-        </p:selectOneMenu>
-        </h:panelGrid>
-		
-			
+		<p:dataTable var="activity" id="dataTableid"
+			value="#{analyseController.listingActivities}">
+			<p:column headerText="Person id">
+				<h:outputText value="#{activity.person.pno}" />
+			</p:column>
 
- -->
- <p:panel id="basic" header="Analyse" footer="Analyse" style="margin-bottom:20px">
-<p:panel id="panelProjects" header="Analyses for a project" rendered="#{frontBean.projectBoolean}" >
-	<p:selectOneMenu id="analyseProjectMenuId" value="#{analyseController.tutproject.protitle}">
-			<f:selectItems value="#{actionController.listProjectsNames}">
-			<p:ajax event="#{analyseController.personsChangeListener}" render="dataTableid"/></f:selectItems>
-	</p:selectOneMenu>
-</p:panel>
+			<p:column headerText="project id">
+				<h:outputText value="#{activity.project.pid}" />
+			</p:column>
 
-<p:panel id="panelCoWorkers" header="Analyses for a Co-worker" rendered="#{frontBean.coworkerBoolean}" >
-	<p:selectOneMenu id="analysePersontMenuId" value="#{analyseController.name}">
-			<f:selectItems value="#{loginController.listOfFirstNames}">
-			<p:ajax event="#{analyseController.projectsChangeListener}" render="dataTableid"/></f:selectItems>
-	</p:selectOneMenu>
-</p:panel>
+			<p:column headerText="date">
+				<h:outputText value="#{activity.date}" />
+			</p:column>
 
+			<p:column headerText="start-time">
+				<h:outputText value="#{activity.actStartTime}" />
+			</p:column>
 
-<p:dataTable var="activity" id="dataTableid" value="#{analyseController.listingActivities}">
-    <p:column headerText="Person id">
-        <h:outputText value="#{activity.person.pno}" />
-    </p:column>
- 
-    <p:column headerText="project id">
-        <h:outputText value="#{activity.project.pid}" />
-    </p:column>
- 
-    <p:column headerText="date">
-        <h:outputText value="#{activity.date}" />
-    </p:column>
- 
-    <p:column headerText="start-time">
-        <h:outputText value="#{activity.actStartTime}" />
-    </p:column>
-   
-       <p:column headerText="end-time">
-        <h:outputText value="#{activity.actEndTime}" />
-    </p:column>
-  
-     <p:column headerText="description">
-        <h:outputText value="#{activity.actDescription}" />
-    </p:column>
-     
-</p:dataTable>
-	<h:form>
-			<p:commandButton value="Go Back" id="BackButton" action="#{frontBean.goBack}" ajax="false"  styleClass="ui-priority-primary" style="float: right;" />
-			<p:commandButton value="Logout" id="logout"  action="#{frontBean.logout}" styleClass="ui-priority-primary" style="float: right;" />
-	</h:form>
- </p:panel>
+			<p:column headerText="end-time">
+				<h:outputText value="#{activity.actEndTime}" />
+			</p:column>
+
+			<p:column headerText="description">
+				<h:outputText value="#{activity.actDescription}" />
+			</p:column>
+
+		</p:dataTable>
+		<h:form>
+			<p:commandButton value="Go Back" id="BackButton"
+				action="#{frontBean.goBack}" ajax="false"
+				styleClass="ui-priority-primary" style="float: right;" />
+			<p:commandButton value="Logout" id="logout"
+				action="#{frontBean.logout}" styleClass="ui-priority-primary"
+				style="float: right;" />
+		</h:form>
+	</p:panel>
 </h:body>
 </html>

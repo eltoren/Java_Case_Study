@@ -42,13 +42,10 @@ public class SelectOneMenuView {
 			
 			System.out.println("Changer datatable");
 			break;
-		
-		
+				
 		}
-		
 		
 	}
   
-    
-   
+       
 }

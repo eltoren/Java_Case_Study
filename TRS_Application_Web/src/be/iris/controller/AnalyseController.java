@@ -2,12 +2,10 @@ package be.iris.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.event.ValueChangeListener;
 import javax.inject.Named;
-
 import be.iris.entities.Tutactivity;
 import be.iris.entities.Tutproject;
 import be.iris.session.view.ActivityBeanRemote;
@@ -17,9 +15,7 @@ import be.iris.session.view.ActivityBeanRemote;
 public class AnalyseController {
 
 	private List<Tutactivity> listingActivities = new ArrayList<>();
-
 	private String name;
-	
 	private Tutproject tutproject;
 
 	@EJB

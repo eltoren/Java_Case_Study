@@ -3,12 +3,10 @@ package be.iris.controller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import be.iris.Backing.FrontBean;
 import be.iris.entities.Tutperson;
 import be.iris.session.view.PersonBeanRemote;
@@ -28,7 +26,6 @@ public class LoginController implements Serializable {
 
 	
 	private Tutperson personSelected;
-
 	private List<Tutperson> persons = new ArrayList<>();
 	private List<String> listOfFirstNames = new ArrayList<>();
 
@@ -84,8 +81,6 @@ public class LoginController implements Serializable {
 		for (Tutperson p : persons) {
 			if (p.getPfname().equals(firstName) && p.getPlname().equals(lastName)) {
 				personSelected = p;
-				System.out.println(personSelected.getPfname());
-				System.out.println(personSelected.getPno());
 				break;
 			}
 		}
@@ -109,22 +104,6 @@ public class LoginController implements Serializable {
 	}
 
 	public void PersonTypeCheck() {
-		System.out.println(personSelected);
-		/*
-		 * // test manager personSelected.setPtype("Manager");
-		 * System.out.println("Here changed ass manager");
-		 * System.out.println(personSelected.getPtype());
-		 * 
-		 * //test IW
-		 * 
-		 * personSelected.setPtype("Accountant");
-		 * System.out.println(personSelected.getPtype());
-		 * 
-		 * 
-		 * // test Accountant personSelected.setPtype("IW");
-		 * System.out.println(personSelected.getPtype());
-		 */
-
 		switch (personSelected.getPtype()) {
 		case "Manager":
 			fb.setBool_MAN(true);
