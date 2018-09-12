@@ -31,7 +31,7 @@ public class Tutproject implements Serializable {
 
 	private String protitle;
 
-	@OneToMany(targetEntity=Tutactivity.class,mappedBy="project",fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
+	@OneToMany(targetEntity=Tutactivity.class,mappedBy="project",fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
 	private List<Tutactivity> activities = new ArrayList<>();
 	public Tutproject() {
 	}

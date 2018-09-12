@@ -1,8 +1,8 @@
 package be.iris.entities;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -35,7 +36,6 @@ public class Tutactivity implements Serializable {
 	@GeneratedValue
 	private long aid;
 
-	@Temporal(TemporalType.DATE)
 	@Column(name="ACT_DATE")
 	private Date actDate;
 
@@ -48,12 +48,12 @@ public class Tutactivity implements Serializable {
 	@Column(name="ACT_START_TIME")
 	private Timestamp actStartTime;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="PNO")
 	private Tutperson person;
 	
 
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="PID")
 	private Tutproject project;
 	

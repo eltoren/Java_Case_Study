@@ -22,11 +22,11 @@ public interface ActivityBeanRemote {
 
 	public List<Tutactivity> getAllActivitiesAtDate(LocalDate date);
 
-	public List<Tutactivity> getAllActivitiesOfPerson(Tutperson person);
+	public List<Tutactivity> getAllActivitiesOfPerson(long person);
 
 	public List<Tutactivity> getAllActivitiesOfPersonAtDate(Tutperson person, LocalDate date);
 
-	public List<Tutactivity> getAllActivitiesOfProject(Tutproject Project);
+	public List<Tutactivity> getAllActivitiesOfProject(String Project);
 
 	public List<Tutactivity> getAllActivitiesOfProjectAtDate(Tutproject project, LocalDate date);
 

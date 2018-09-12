@@ -144,7 +144,7 @@ public class ActionController implements Serializable{
 	@Deprecated
 	private void dateConversionsSetter() {
 		System.out.println(startTime.format(DateFormat.dtfHours));
-		int day = calendar.getDate().getDate() + 1;
+		int day = calendar.getDate().getDate();
 		int month = calendar.getDate().getMonth() +1;
 		int year = calendar.getDate().getYear() + 1900;
 		LocalDate date = LocalDate.of(year, month, day);
@@ -164,6 +164,10 @@ public class ActionController implements Serializable{
 		}
 		if(endTime.isAfter(LocalTime.of(20, 0)) || endTime.isBefore(LocalTime.of(5,0))){
 			this.sendAMessage("ENTER A VALID END TIME, CANNOT WORK ON THE WRONGS HOURS", FacesMessage.SEVERITY_ERROR);
+			return;
+		}
+		if(endTime.isBefore(startTime)){
+			this.sendAMessage("ENTER VALID HOURS, CANNOT END BEFORE BEGINNING RIGHT ?", FacesMessage.SEVERITY_ERROR);
 			return;
 		}
 		activity.setActDate(Date.valueOf(date));

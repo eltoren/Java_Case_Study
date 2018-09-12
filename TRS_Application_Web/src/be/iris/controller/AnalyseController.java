@@ -1,39 +1,49 @@
 package be.iris.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.event.ValueChangeListener;
+import javax.faces.event.AjaxBehaviorEvent;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import be.iris.entities.Tutactivity;
+import be.iris.entities.Tutperson;
 import be.iris.entities.Tutproject;
+import be.iris.model.Activity;
 import be.iris.session.view.ActivityBeanRemote;
+import be.iris.utilities.DateFormat;
 
 @Named
 @RequestScoped
 public class AnalyseController {
 
-	private List<Tutactivity> listingActivities = new ArrayList<>();
-
+	private List<Activity> listingActivities = new ArrayList<>();
+	private List<String> descList = new ArrayList<>();
 	private String name;
 	
-	private Tutproject tutproject;
+	@Inject
+	private LoginController loginController;
+	
+	@Inject
+	private ActionController actionController;
+	
+	private String project;
 
 	@EJB
 	private ActivityBeanRemote activityBean;
 	
 	public AnalyseController() {
-		tutproject = new Tutproject();
 	}
 
-	public List<Tutactivity> getListingActivities() {
+	public List<Activity> getListingActivities() {
 		return listingActivities;
 	}
 
-	public void setListingActivities(List<Tutactivity> listingActivities) {
+	public void setListingActivities(List<Activity> listingActivities) {
 		this.listingActivities = listingActivities;
 	}
 
@@ -45,19 +55,82 @@ public class AnalyseController {
 		this.name = name;
 	}
 
-	public Tutproject getTutproject() {
-		return tutproject;
+
+	
+	public String getProject() {
+		return project;
 	}
 
-	public void setTutproject(Tutproject tutproject) {
-		this.tutproject = tutproject;
+	public void setProject(String project) {
+		this.project = project;
+	}
+
+	public void personsChangeListener(AjaxBehaviorEvent e){
+		long pno = 0;
+		for(Tutperson p : loginController.getPersons()){
+			String qName = p.getPfname() + " " + p.getPlname();
+			if(name.equalsIgnoreCase(qName)){
+				pno = p.getPno();
+				break;
+			}
+		}
+		List<Tutactivity> list =activityBean.getAllActivitiesOfPerson(pno);
+		this.setListingActivities(ListActivityFromEntities(list));
 	}
 	
-	public void personsChangeListener(ValueChangeListener e){
+	public void projectsChangeListener(AjaxBehaviorEvent e){
+		String pid = "";
+		project =(String) e.getComponent().getAttributes().get("value");
+		for(Tutproject p : actionController.getListofProjects()){
+			String qName = p.getProtitle();
+			if(project.equals(qName)){
+				pid = p.getPid();
+				break;
+			}
+		}
+		List<Tutactivity> list = activityBean.getAllActivitiesOfProject(pid);
+		this.setListingActivities(ListActivityFromEntities(list));
 		
+	}
+
+	public List<Activity> ListActivityFromEntities(List<Tutactivity> activities){
+		List<Activity> list = new ArrayList<>();
+		for(Tutactivity a : activities){
+			Activity act = new Activity();
+			act.setAid(a.getAid());
+			act.setPerson(a.getPerson().getPno());
+			act.setProject(a.getProject().getPid());
+			act.setActDescription(a.getActDescription());
+			act.setActDate(a.getActDate().toLocalDate().format(DateFormat.dtfDays));
+			act.setActStartTime(a.getActStartTime().toLocalDateTime().toLocalTime().format(DateFormat.dtfHours));
+			act.setActEndTime(a.getActEndTime().toLocalDateTime().toLocalTime().format(DateFormat.dtfHours));
+			list.add(act);
+		}
+		return list;
+	}
+	public LoginController getLoginController() {
+		return loginController;
+	}
+
+	public void setLoginController(LoginController loginController) {
+		this.loginController = loginController;
+	}
+
+	public ActionController getActionController() {
+		return actionController;
+	}
+
+	public void setActionController(ActionController actionController) {
+		this.actionController = actionController;
+	}
+
+	public List<String> getDescList() {
+		return descList;
+	}
+
+	public void setDescList(List<String> descList) {
+		this.descList = descList;
 	}
 	
-	public void projectsChangeListener(ValueChangeListener e){
-		
-	}
+	
 }

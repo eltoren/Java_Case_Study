@@ -115,19 +115,40 @@ public class ActivityImpl implements ActivityDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Tutactivity> getAllActivitiesOfPerson(Tutperson person) {
+	public List<Tutactivity> getAllActivitiesOfPerson(long person) {
 		List<Tutactivity> listActivities = new ArrayList<>();
 		try {
+			Tutperson p = em.find(Tutperson.class, person);
+			int i = 0;
+			for(; i <p.getActivities().size();i++){
+				listActivities.add(p.getActivities().get(i));
+			}
 
-			Query query = em.createQuery("SELECT a from Tutactivity a WHERE a.person = :person", Tutactivity.class);
-			query.setParameter("person", person);
-			listActivities = query.getResultList();
 
 		} catch (RuntimeException re) {
 				System.err.println(re.getMessage());
 			}
 		return listActivities;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Tutactivity> getAllActivitiesOfProject(String project) {
+		List<Tutactivity> listActivities = new ArrayList<>();
+		try {
+
+			Tutproject p = em.find(Tutproject.class, project);
+			int i = 0;
+			for(; i <p.getActivities().size();i++){
+				listActivities.add(p.getActivities().get(i));
+			}
+
+		} catch (RuntimeException re) {
+			System.err.println(re.getMessage());
+		}
+		return listActivities;
+	}
+
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -148,22 +169,6 @@ public class ActivityImpl implements ActivityDao {
 		return listActivities;
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Tutactivity> getAllActivitiesOfProject(Tutproject project) {
-		List<Tutactivity> listActivities = new ArrayList<>();
-		try {
-
-			Query query = em.createQuery("SELECT a from Tutactivity a WHERE a.project = :project", Tutactivity.class);
-			query.setParameter("project", project);
-			listActivities = query.getResultList();
-
-
-		} catch (RuntimeException re) {
-			System.err.println(re.getMessage());
-		}
-		return listActivities;
-	}
 
 	@SuppressWarnings("unchecked")
 	@Override

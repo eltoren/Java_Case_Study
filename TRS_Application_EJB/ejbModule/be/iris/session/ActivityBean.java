@@ -57,7 +57,7 @@ public class ActivityBean implements ActivityBeanRemote {
 	}
 
 	@Override
-	public List<Tutactivity> getAllActivitiesOfPerson(Tutperson person) {
+	public List<Tutactivity> getAllActivitiesOfPerson(long person) {
 		return activityDao.getAllActivitiesOfPerson(person);
 	}
 
@@ -67,7 +67,7 @@ public class ActivityBean implements ActivityBeanRemote {
 	}
 
 	@Override
-	public List<Tutactivity> getAllActivitiesOfProject(Tutproject project) {
+	public List<Tutactivity> getAllActivitiesOfProject(String project) {
 		return activityDao.getAllActivitiesOfProject(project);
 	}
 

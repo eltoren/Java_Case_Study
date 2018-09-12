@@ -24,11 +24,11 @@ public interface ActivityDao {
 
 	public List<Tutactivity> getAllActivitiesAtDate(LocalDate date);
 
-	public List<Tutactivity> getAllActivitiesOfPerson(Tutperson person);
+	public List<Tutactivity> getAllActivitiesOfPerson(long person);
 
 	public List<Tutactivity> getAllActivitiesOfPersonAtDate(Tutperson person, LocalDate date);
 
-	public List<Tutactivity> getAllActivitiesOfProject(Tutproject project);
+	public List<Tutactivity> getAllActivitiesOfProject(String project);
 
 	public List<Tutactivity> getAllActivitiesOfProjectAtDate(Tutproject project, LocalDate date);
 
