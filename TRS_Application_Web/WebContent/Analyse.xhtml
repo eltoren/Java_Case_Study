@@ -6,66 +6,66 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Analyse page for manager</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Analyse page for manager</title>
 </h:head>
 
 <h:body style="background-color:#698dc6;">
-<h1>Analyse</h1>
-<!-- 
+	<h1>Analyse</h1>
 
+	<p:panel header="Analyse" footer="Analyse" style="margin-bottom:20px">
+		<h:form id="formId">
 
-		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-        <p:outputLabel for="analyse" value="Choice:" />
-        <p:selectOneMenu id="analyse" value="#{selectOneMenuView.analyse}" style="width:125px" onclick="submit();"  >
-            <f:selectItem itemLabel="Activities list" itemValue="Activitylist"  />
-            <f:selectItem itemLabel="Employee list" itemValue="Employeelist" />
-            <f:selectItem itemLabel="Project list" itemValue="Projectlist" />
-        </p:selectOneMenu>
-        </h:panelGrid>
-		
-			
+			<p:panel id="panelProjects" header="Analyses for a project"
+				rendered="#{frontBean.projectBoolean}">
+				<p:selectOneMenu id="analyseProjectMenuId"
+					value="#{analyseController.project}">
+					<f:selectItems value="#{actionController.listProjectsNames}" />
+					<f:ajax event="change"
+						listener="#{analyseController.projectsChangeListener}"
+						render="@all" />
+				</p:selectOneMenu>
+			</p:panel>
 
- --> <p:panel header="Analyse" footer="Analyse" style="margin-bottom:20px">
-<h:form id="formId">
+			<p:panel id="panelCoWorkers" header="Analyses for a Co-worker"
+				rendered="#{frontBean.coworkerBoolean}">
+				<p:selectOneMenu id="analysePersonMenuId"
+					value="#{analyseController.name}">
+					<f:selectItems value="#{loginController.listOfFirstNames}" />
+					<f:ajax event="change"
+						listener="#{analyseController.personsChangeListener}"
+						render="@all" />
+				</p:selectOneMenu>
+			</p:panel>
 
-<p:panel id="panelProjects" header="Analyses for a project" rendered="#{frontBean.projectBoolean}" >
-	<p:selectOneMenu id="analyseProjectMenuId" value="#{analyseController.project}">
-			<f:selectItems value="#{actionController.listProjectsNames}"/>
-			<f:ajax event="change"  listener="#{analyseController.projectsChangeListener}" render="@all"/>
-	</p:selectOneMenu>
-</p:panel>
-
-<p:panel id="panelCoWorkers" header="Analyses for a Co-worker" rendered="#{frontBean.coworkerBoolean}" >
-	<p:selectOneMenu id="analysePersonMenuId" value="#{analyseController.name}">
-			<f:selectItems value="#{loginController.listOfFirstNames}"/>
-			<f:ajax event="change" listener="#{analyseController.personsChangeListener}" render="@all"/>
-	</p:selectOneMenu>
-</p:panel>
-
-<p:dataTable var="activityDesc" id="data" value="#{analyseController.listingActivities}">
-  <p:column headerText="Person Id">
+			<p:dataTable var="activityDesc" id="data"
+				value="#{analyseController.listingActivities}">
+				<p:column headerText="Person Id">
   	#{activityDesc.person}
   </p:column>
-  <p:column hearderText="Project id">
+				<p:column hearderText="Project id">
    #{activityDesc.project}
    </p:column>
-   <p:column headerText="description">
+				<p:column headerText="description">
   #{activityDesc.actDescription}
   </p:column>
-  <p:column headerText="date">
+				<p:column headerText="date">
   #{activityDesc.actDate}
   </p:column>
-  <p:column headerText="Start Time">
+				<p:column headerText="Start Time">
   #{activityDesc.actStartTime}
   </p:column>
-  <p:column headerText="End Time">
+				<p:column headerText="End Time">
   #{activityDesc.actEndTime}
   </p:column>
-</p:dataTable>
-			<p:commandButton value="Go Back" id="BackButton" action="#{frontBean.goBack}" ajax="false"  styleClass="ui-priority-primary" style="float: right;" />
-			<p:commandButton value="Logout" id="logout"  action="#{frontBean.logout}" styleClass="ui-priority-primary" style="float: right;" />
-	</h:form>
- </p:panel>
+			</p:dataTable>
+			<p:commandButton value="Go Back" id="BackButton"
+				action="#{frontBean.goBack}" ajax="false"
+				styleClass="ui-priority-primary" style="float: right;" />
+			<p:commandButton value="Logout" id="logout"
+				action="#{frontBean.logout}" styleClass="ui-priority-primary"
+				style="float: right;" />
+		</h:form>
+	</p:panel>
 </h:body>
 </html>

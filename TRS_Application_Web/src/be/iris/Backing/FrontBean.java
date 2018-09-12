@@ -1,7 +1,6 @@
 package be.iris.Backing;
 
 import java.io.Serializable;
-
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -32,7 +31,7 @@ public class FrontBean implements Serializable {
 	}
 
 	public String registryActivity() {
-		System.out.println("Link To activity registration page");
+	
 		return "ActivityRegistration";
 	}
 
@@ -48,13 +47,9 @@ public class FrontBean implements Serializable {
 		return "Analyse";
 	}
 
-	/*public String workingDay() {
-		System.out.println("Link To activity registration page");
-		return "WorkingDay";
-	}*/
+	
 
 	public String calculation() {
-		System.out.println("Link To CalculationSalary");
 		return "CalculationSalary";
 	}
 
@@ -64,8 +59,8 @@ public class FrontBean implements Serializable {
 	}
 
 	public String logout() {
-
-		System.out.println("Logout --> clear session");
+		/*Clean FOR real*/
+		System.out.println("Logout --> clear boolean session");
 		bool_CW = false;
 		bool_ACC = false;
 		bool_MAN = false;

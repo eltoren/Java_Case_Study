@@ -2,13 +2,11 @@ package be.iris.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import be.iris.PrimFaceController.CalendarView;
 import be.iris.entities.Tutactivity;
 import be.iris.entities.Tutproject;
@@ -42,9 +40,7 @@ private String project;
 				activity.setProject(p);
 				break;
 			}
-		
 		}
-	
 	}
 
 	public String getProject() {

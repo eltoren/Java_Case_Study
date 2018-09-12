@@ -1,13 +1,11 @@
 package be.iris.converter;
 
 import java.time.LocalTime;
-
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
-
 import be.iris.utilities.DateFormat;
 
 @FacesConverter(forClass=LocalTime.class)

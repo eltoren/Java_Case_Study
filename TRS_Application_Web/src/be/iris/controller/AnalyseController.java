@@ -3,13 +3,11 @@ package be.iris.controller;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import be.iris.entities.Tutactivity;
 import be.iris.entities.Tutperson;
 import be.iris.entities.Tutproject;
@@ -20,6 +18,7 @@ import be.iris.utilities.DateFormat;
 @Named
 @RequestScoped
 public class AnalyseController {
+
 
 	private List<Activity> listingActivities = new ArrayList<>();
 	private List<String> descList = new ArrayList<>();
@@ -32,6 +31,7 @@ public class AnalyseController {
 	private ActionController actionController;
 	
 	private String project;
+
 
 	@EJB
 	private ActivityBeanRemote activityBean;
