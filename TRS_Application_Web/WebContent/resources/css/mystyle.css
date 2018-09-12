@@ -1,0 +1,25 @@
+@charset "ISO-8859-1";
+
+body
+{
+	background-color:#698dc6;
+}
+
+#login
+{
+	width:50%;
+	height:50%;
+	margin:auto;
+	margin-top: 20%;
+	
+}
+
+#basicActivity,#basicMain
+{
+	width:80%;
+	margin:auto;
+	
+}
+
+
+

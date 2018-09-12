@@ -7,9 +7,10 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<h:outputStylesheet name="css/mystyle.css"/>
 	<title>Menu main page</title>
 </h:head>
-<h:body style="background-color:#698dc6;">
+<h:body id="basicMain">
 	<h1>Menu</h1>
 
 	<p:panel id="Menu" header="Menu" footer="Menu"
@@ -45,10 +46,7 @@
 					rendered="#{frontBean.bool_CW == true}" />
 			</h:panelGrid>
 
-
-
 		</h:form>
-
 
 	</p:panel>
 
