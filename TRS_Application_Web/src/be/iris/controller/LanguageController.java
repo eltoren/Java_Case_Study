@@ -21,7 +21,7 @@ public class LanguageController implements Serializable{
 	public void changeCurrentLanguage(ActionEvent ae) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		UIViewRoot viewRoot = context.getViewRoot();
-		String language = (String) ae.getComponent().getAttributes().get("value");
+		String language = (String)ae.getComponent().getAttributes().get("value");
 		this.setLanguage(language);
 		viewRoot.setLocale(new Locale(language));
 	}

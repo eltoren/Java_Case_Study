@@ -8,6 +8,7 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Analyse page for manager</title>
+	<h:outputStylesheet name="css/mystyle.css"/>
 </h:head>
 
 <h:body style="background-color:#698dc6;">
@@ -19,10 +20,10 @@
 	<h1>Analyse</h1>
 
 
-	<p:panel header="#{msgs.analysePanel}" footer="#{msgs.analysePanel}"
-		style="margin-bottom:20px">
+	<p:panel header="#{msgs.analysePanel}" footer="#{msgs.analysePanel}">
 	 <ui:include src="templates/language.xhtml" />
-		<h:form id="formId">
+	 
+		<h:form id="formId" style ="margin-top:40px">
 
 			<p:panel id="panelProjects" header="#{msgs.analysePanelProject}"
 				rendered="#{frontBean.projectBoolean}">
@@ -67,12 +68,15 @@
  				 #{activityDesc.actEndTime}
   				</p:column>
 			</p:dataTable>
+			<br/>
+			
 			<p:commandButton value="#{msgs.goBackButton}" id="BackButton"
 				action="#{frontBean.goBack}" ajax="false"
 				styleClass="ui-priority-primary" style="float: right;" />
 			<p:commandButton value="#{msgs.logoutButton}" id="logout"
 				action="#{frontBean.logout}" styleClass="ui-priority-primary"
 				style="float: right;" />
+				<br/>
 		</h:form>
 	</p:panel>
 

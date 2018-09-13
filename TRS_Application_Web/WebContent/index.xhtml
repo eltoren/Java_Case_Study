@@ -11,18 +11,14 @@ xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://java.sun.com/jsf/facele
 </h:head>
 <h:body>
 
-
-<p:growl />
-
-
 <f:view locale="#{languageController.language}"> 
-
   
 <p:growl showDetail="false"/>
-	<p:panel id="login" header="login">
-	       <ui:include src="templates/language.xhtml" />
-
+	
+	<p:panel id="login" header="#{msgs.panelheader}">
+	<ui:include src="templates/language.xhtml" />
   <h:form> 
+   
    <h:panelGrid columns="2" cellpadding="10">
      <p:outputLabel value="#{msgs.indexUserId}"/>
 
@@ -32,7 +28,7 @@ xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://java.sun.com/jsf/facele
     <p:outputLabel value="#{msgs.indexPwd}" />
     <p:password value="#{loginController.password}" required="true" requiredMessage="#{msgs.passwordNeed}"/>
  
-	<p:commandButton value="#{msgs.loginButton}" ajax="false" action="#{loginController.login}" style="width:150px;height:70px"/>
+	<p:commandButton value="#{msgs.loginButton}" ajax="false" action="#{loginController.login}" style="width:150px;height:45px"/>
 	</h:panelGrid>
 	</h:form>
 	</p:panel>
