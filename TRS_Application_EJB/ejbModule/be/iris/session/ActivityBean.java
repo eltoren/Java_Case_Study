@@ -5,6 +5,10 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import be.iris.dao.ActivityDao;
 import be.iris.entities.Tutactivity;
@@ -14,6 +18,8 @@ import be.iris.exceptions.ActivityException;
 import be.iris.session.view.ActivityBeanRemote;
 
 @Stateless(mappedName = "activityBean")
+//@Path("activities")
+//@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class ActivityBean implements ActivityBeanRemote {
 
 	@EJB(name ="activityImpl")
@@ -22,7 +28,8 @@ public class ActivityBean implements ActivityBeanRemote {
 	public ActivityBean() {
 	}
 
-	@Override
+	@POST
+	//@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public void saveNewActivitie(Tutactivity activity, String pid, long pno)
 			throws ActivityException{
 		activityDao.insertActivity(activity, pid, pno);
