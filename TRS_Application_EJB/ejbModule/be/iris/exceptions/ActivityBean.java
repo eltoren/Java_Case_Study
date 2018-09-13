@@ -1,12 +1,15 @@
-package be.iris.session;
+package be.iris.exceptions;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -14,7 +17,6 @@ import be.iris.dao.ActivityDao;
 import be.iris.entities.Tutactivity;
 import be.iris.entities.Tutperson;
 import be.iris.entities.Tutproject;
-import be.iris.exceptions.ActivityException;
 import be.iris.session.view.ActivityBeanRemote;
 
 @Stateless(mappedName = "activityBean")
@@ -28,7 +30,7 @@ public class ActivityBean implements ActivityBeanRemote {
 	public ActivityBean() {
 	}
 
-	@POST
+	//@POST
 	//@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public void saveNewActivitie(Tutactivity activity, String pid, long pno)
 			throws ActivityException{
@@ -65,8 +67,10 @@ public class ActivityBean implements ActivityBeanRemote {
 		return activityDao.getAllActivitiesAtDate(date);
 	}
 
-	@Override
-	public List<Tutactivity> getAllActivitiesOfPerson(long person)
+	//@Path("persons/{person}")
+	//@GET
+	//@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public List<Tutactivity> getAllActivitiesOfPerson(@PathParam("person") long person)
 			throws ActivityException {
 		return activityDao.getAllActivitiesOfPerson(person);
 	}
@@ -76,8 +80,10 @@ public class ActivityBean implements ActivityBeanRemote {
 		return activityDao.getAllActivitiesOfPersonAtDate(person, date);
 	}
 
-	@Override
-	public List<Tutactivity> getAllActivitiesOfProject(String project)
+	//@Path("projects/{project}")
+	//@GET
+	//@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public List<Tutactivity> getAllActivitiesOfProject(@PathParam("project") String project)
 			throws ActivityException {
 		return activityDao.getAllActivitiesOfProject(project);
 	}

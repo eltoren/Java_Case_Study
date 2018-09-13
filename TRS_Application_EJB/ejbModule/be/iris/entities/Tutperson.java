@@ -20,6 +20,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 
 /**
@@ -35,6 +39,8 @@ import javax.validation.constraints.NotNull;
 					@NamedNativeQuery(name="Tutperson.findPersonConnected", 
 					query="SELECT * from tutpersons t where t.pno = :pno",
 					resultClass = Tutperson.class)})
+//@XmlRootElement(name="person")
+//@XmlAccessorType(XmlAccessType.FIELD)
 public class Tutperson implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -56,14 +62,17 @@ public class Tutperson implements Serializable {
 
 	private String ptel;
 
+	@XmlTransient
 	@OneToOne(mappedBy="tutperson")
 	private Tutcompany cocPno;
 
 	//bi-directional many-to-one association to Tutcompany
+//	@XmlTransient
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="PA_CONO")
 	private Tutcompany tutcompany;
 	
+//	@XmlTransient
 	@OneToMany(targetEntity=Tutactivity.class, mappedBy="person",fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
 	private List<Tutactivity> activities = new ArrayList<>();
 	

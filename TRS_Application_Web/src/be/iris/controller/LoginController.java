@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -165,5 +167,11 @@ public class LoginController implements Serializable {
 				selectedPersonList = p;
 			}
 		}
+	}
+	
+	public String logOut(){
+		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+		context.invalidateSession();
+		return "index?faces-redirect=true";
 	}
 }

@@ -2,7 +2,7 @@
     <wb-module deploy-name="TRS_Application_Web">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="TRS_Application_Web"/>
         <property name="java-output-path" value="/TRS_Application_Web/build/classes"/>
+        <property name="context-root" value="timeapplication"/>
     </wb-module>
 </project-modules>

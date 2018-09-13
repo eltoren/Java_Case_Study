@@ -58,16 +58,6 @@ public class FrontBean implements Serializable {
 
 	}
 
-	public String logout() {
-		/*Clean FOR real*/
-		System.out.println("Logout --> clear boolean session");
-		bool_CW = false;
-		bool_ACC = false;
-		bool_MAN = false;
-		bool_EMP = false;
-		return "index";
-	}
-
 	public boolean isBool_CW() {
 		return bool_CW;
 	}

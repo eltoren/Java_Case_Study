@@ -12,13 +12,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlAccessOrder;
 import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorOrder;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import be.iris.services.DateAdapter;
+import be.iris.services.TimestampAdapter;
 
 
 /**
@@ -28,39 +30,42 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @Entity(name="Tutactivity")
 @Table(name="TUTACTIVITIES")
-@XmlRootElement(name="activity")
-@XmlAccessorType(XmlAccessType.FIELD)
+//@XmlRootElement(name="activity")
+//@XmlAccessorType(XmlAccessType.FIELD)
 public class Tutactivity implements Serializable {
 	
 	/**
 	 * 
 	 */
-	@XmlTransient
+	//@XmlTransient
 	private static final long serialVersionUID = 7720086255696017210L;
 
 	
 	@Id
 	@GeneratedValue
 	private long aid;
-
+	
+//	@XmlJavaTypeAdapter(value = DateAdapter.class)
 	@Column(name="ACT_DATE")
 	private Date actDate;
 
 	@Column(name="ACT_DESCRIPTION")
 	private String actDescription;
 
+//	@XmlJavaTypeAdapter(value = TimestampAdapter.class)
 	@Column(name="ACT_END_TIME")
 	private Timestamp actEndTime;
 
+//	@XmlJavaTypeAdapter(value = TimestampAdapter.class)
 	@Column(name="ACT_START_TIME")
 	private Timestamp actStartTime;
 	
-	@XmlElement(name="person")
+//	@XmlElement(name="person")
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="PNO")
 	private Tutperson person;
 	
-	@XmlElement(name="project")
+//	@XmlElement(name="project")
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="PID")
 	private Tutproject project;

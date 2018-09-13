@@ -11,6 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorOrder;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 
 /**
@@ -21,6 +26,8 @@ import javax.persistence.Table;
 @Entity(name="Tutproject")
 @Table(name="TUTPROJECTS")
 @NamedQuery(name="Tutproject.findAll", query="SELECT t FROM Tutproject t")
+//@XmlRootElement(name="project")
+//@XmlAccessorType(XmlAccessType.FIELD)
 public class Tutproject implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -29,6 +36,7 @@ public class Tutproject implements Serializable {
 
 	private String protitle;
 
+//	@XmlTransient
 	@OneToMany(targetEntity=Tutactivity.class,mappedBy="project",fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
 	private List<Tutactivity> activities = new ArrayList<>();
 	public Tutproject() {

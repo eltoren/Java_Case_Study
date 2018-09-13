@@ -112,6 +112,9 @@
 						actionListener="#{actionController.registerActivity}" ajax="false" style="width:120px;height:40px"/>
 					<p:commandButton value="#{msgs.goBackButton}" id="BackButton"
 						action="#{frontBean.goBack}" ajax="false" immediate="true" style="width:120px;height:40px"/>
+						<p:commandButton value="#{msgs.logoutButton}" id="logout"
+				action="#{loginController.logOut}" styleClass="ui-priority-primary"
+				style="float: right;" immediate="true"/>
 					</h:panelGroup>
 				
 					<!-- End Button -->
