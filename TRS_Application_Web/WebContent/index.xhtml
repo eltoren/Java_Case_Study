@@ -11,8 +11,9 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:outputStylesheet name="css/mystyle.css"/>
 </h:head>
 <h:body>
-<!-- comment Junior -->
-<p:growl />
+<f:view locale="#{languageController.language}">
+  <ui:include src="templates/language.xhtml" />
+<p:growl showDetail="false"/>
 	<p:panel id="login" header="login">
 	       
   <h:form> 
@@ -29,6 +30,6 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 	</h:panelGrid>
 	</h:form>
 	</p:panel>
-
+</f:view>
 </h:body>
 </html>

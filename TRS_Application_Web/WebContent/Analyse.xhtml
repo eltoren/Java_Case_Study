@@ -11,6 +11,9 @@
 </h:head>
 
 <h:body style="background-color:#698dc6;">
+<f:view locale="#{languageController.language}">
+  <ui:include src="templates/language.xhtml" />
+<p:growl showDetail="false"/>
 	<h1>Analyse</h1>
 
 	<p:panel header="Analyse" footer="Analyse" style="margin-bottom:20px">
@@ -67,5 +70,6 @@
 				style="float: right;" />
 		</h:form>
 	</p:panel>
+	</f:view>
 </h:body>
 </html>
