@@ -51,7 +51,7 @@ public class WorkigDayImpl implements WorkingDayDao {
 			Date date = Date.valueOf(LocalDate.now());
 			TutworkingDay wd = getWorkingDay(date, pno);
 			if(wd == null){
-				throw new WorkingDayException("You Have to check in befor checking out !");
+				throw new WorkingDayException("You Have to check in before checking out !");
 			}
 			wd.setEndTime(Timestamp.valueOf(LocalDateTime.now()));
 			em.merge(wd);
