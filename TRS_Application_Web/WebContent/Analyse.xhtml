@@ -16,11 +16,16 @@
 <p:growl showDetail="false"/>
 	<h1>Analyse</h1>
 
+<<<<<<< HEAD
+	<p:panel header="#{msgs.analysePanel}" footer="#{msgs.analysePanel}"
+		style="margin-bottom:20px">
+=======
 	<p:panel header="Analyse" footer="Analyse" style="margin-bottom:20px">
 	 <ui:include src="templates/language.xhtml" />
+>>>>>>> 45f4f4f3c7088db1e228ba10a4ceca6dea47b63b
 		<h:form id="formId">
 
-			<p:panel id="panelProjects" header="Analyses for a project"
+			<p:panel id="panelProjects" header="#{msgs.analysePanelProject}"
 				rendered="#{frontBean.projectBoolean}">
 				<p:selectOneMenu id="analyseProjectMenuId"
 					value="#{analyseController.project}">
@@ -31,7 +36,7 @@
 				</p:selectOneMenu>
 			</p:panel>
 
-			<p:panel id="panelCoWorkers" header="Analyses for a Co-worker"
+			<p:panel id="panelCoWorkers" header="#{msgs.analysePanelCoWorker}"
 				rendered="#{frontBean.coworkerBoolean}">
 				<p:selectOneMenu id="analysePersonMenuId"
 					value="#{analyseController.name}">
@@ -44,29 +49,29 @@
 
 			<p:dataTable var="activityDesc" id="data"
 				value="#{analyseController.listingActivities}">
-				<p:column headerText="Person Id">
-  	#{activityDesc.person}
-  </p:column>
-				<p:column hearderText="Project id">
-   #{activityDesc.project}
-   </p:column>
-				<p:column headerText="description">
-  #{activityDesc.actDescription}
-  </p:column>
-				<p:column headerText="date">
-  #{activityDesc.actDate}
-  </p:column>
-				<p:column headerText="Start Time">
-  #{activityDesc.actStartTime}
-  </p:column>
-				<p:column headerText="End Time">
-  #{activityDesc.actEndTime}
-  </p:column>
+				<p:column headerText="#{msgs.dataTablePersonID}">
+  				#{activityDesc.person}
+ 				 </p:column>
+				<p:column headerText="#{msgs.dataTableProjectID}">
+   				#{activityDesc.project}
+  				 </p:column>
+				<p:column headerText="#{msgs.dataTableProjectDescription}">
+ 				 #{activityDesc.actDescription}
+ 				 </p:column>
+				<p:column headerText="#{msgs.dataTableProjectDate}">
+ 				 #{activityDesc.actDate}
+  				</p:column>
+				<p:column headerText="#{msgs.dataTableProjectStart}">
+  				#{activityDesc.actStartTime}
+  				</p:column>
+				<p:column headerText="#{msgs.dataTableProjectEnd}">
+ 				 #{activityDesc.actEndTime}
+  				</p:column>
 			</p:dataTable>
-			<p:commandButton value="Go Back" id="BackButton"
+			<p:commandButton value="#{msgs.goBackButton}" id="BackButton"
 				action="#{frontBean.goBack}" ajax="false"
 				styleClass="ui-priority-primary" style="float: right;" />
-			<p:commandButton value="Logout" id="logout"
+			<p:commandButton value="#{msgs.logoutButton}" id="logout"
 				action="#{frontBean.logout}" styleClass="ui-priority-primary"
 				style="float: right;" />
 		</h:form>
