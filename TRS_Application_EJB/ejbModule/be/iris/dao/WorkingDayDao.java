@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import be.iris.entities.Tutperson;
 import be.iris.entities.TutworkingDay;
 import be.iris.exceptions.WorkingDayException;
 

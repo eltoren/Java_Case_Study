@@ -1,53 +1,96 @@
 package be.iris.controller;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
+import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import be.iris.PrimFaceController.CalendarView;
 import be.iris.entities.Tutactivity;
 import be.iris.entities.Tutperson;
 import be.iris.entities.Tutproject;
+import be.iris.entities.TutworkingDay;
 import be.iris.exceptions.ActivityException;
 import be.iris.model.Activity;
 import be.iris.session.view.ActivityBeanRemote;
+import be.iris.session.view.WorkingDayBeanRemote;
 import be.iris.utilities.DateFormat;
 
 @Named
 @RequestScoped
 public class CalculationSalaryController {
 
+	private List<TutworkingDay> workingDays = new ArrayList<>();
 
-	private List<Activity> listingActivities = new ArrayList<>();
-	private List<String> descList = new ArrayList<>();
 	private String name;
-	
+	private LocalDate startOfMonth;
+	private LocalDate endOfMonth;
+	private float pricePerHour;
+	private float salary;
+
 	@Inject
 	private LoginController loginController;
-	
+
 	@Inject
 	private ActionController actionController;
-	
-	private String project;
 
+	@Inject
+	private CalendarView calendar;
 
 	@EJB
-	private ActivityBeanRemote activityBean;
-	
+	private WorkingDayBeanRemote workingDayBean;
+
 	public CalculationSalaryController() {
 	}
 
-	public List<Activity> getListingActivities() {
-		return listingActivities;
+	@Deprecated
+	private void dateConversionsSetter() {
+		int month = calendar.getDate().getMonth() + 1;
+		int year = calendar.getDate().getYear() + 1900;
+		startOfMonth = LocalDate.of(year, month, 1);
+		endOfMonth = startOfMonth.plusMonths(1).minusDays(1);
 	}
 
-	public void setListingActivities(List<Activity> listingActivities) {
-		this.listingActivities = listingActivities;
+	public void calculateSalarie() {
+		this.dateConversionsSetter();
+		loginController.setSelectedPersonfromList(name);
+		Tutperson p = loginController.getSelectedPersonList();
+		workingDays = workingDayBean.getListWorkigDaysOfPersonBetweenStartDateANdEndDate(p.getPno(), startOfMonth,
+				endOfMonth);
+		float timeWorked = getHoursWorkedInMonth();
+		salary = pricePerHour * timeWorked;
+	}
+	
+	private float getHoursWorkedInMonth() {
+		float timeWorked = 0;
+		for (TutworkingDay workingDay : workingDays) {
+			LocalDateTime startTime = workingDay.getStartTime().toLocalDateTime();
+			LocalDateTime endTime = workingDay.getEndTime().toLocalDateTime();
+			int hours = (endTime.getHour() - startTime.getHour());
+			int minuts = (endTime.getMinute() - startTime.getMinute());
+			timeWorked += hours + ((minuts/60)*100);
+		}
+		return timeWorked;
+	}
+
+	public List<TutworkingDay> getWorkingDays() {
+		return workingDays;
+	}
+
+	public void setWorkingDays(List<TutworkingDay> workingDays) {
+		this.workingDays = workingDays;
 	}
 
 	public String getName() {
@@ -58,61 +101,6 @@ public class CalculationSalaryController {
 		this.name = name;
 	}
 
-
-	
-	public String getProject() {
-		return project;
-	}
-
-	public void setProject(String project) {
-		this.project = project;
-	}
-
-	public void personsChangeListener(AjaxBehaviorEvent e){
-		loginController.setSelectedPersonfromList(name);
-		Tutperson p = loginController.getSelectedPersonList();
-		try{
-		List<Tutactivity> list =activityBean.getAllActivitiesOfPerson(p.getPno());
-		this.setListingActivities(ListActivityFromEntities(list));		
-		}catch(ActivityException ae){
-			actionController.sendAMessage(ae.getMessage(), FacesMessage.SEVERITY_ERROR);
-		}
-	}
-	
-	public void projectsChangeListener(AjaxBehaviorEvent e){
-		String pid = "";
-		project =(String) e.getComponent().getAttributes().get("value");
-		for(Tutproject p : actionController.getListofProjects()){
-			String qName = p.getProtitle();
-			if(project.equals(qName)){
-				pid = p.getPid();
-				break;
-			}
-		}
-		try{
-			List<Tutactivity> list = activityBean.getAllActivitiesOfProject(pid);
-			this.setListingActivities(ListActivityFromEntities(list));
-		}catch(ActivityException ae){
-				actionController.sendAMessage(ae.getMessage(), FacesMessage.SEVERITY_ERROR);
-			}
-		
-	}
-
-	public List<Activity> ListActivityFromEntities(List<Tutactivity> activities){
-		List<Activity> list = new ArrayList<>();
-		for(Tutactivity a : activities){
-			Activity act = new Activity();
-			act.setAid(a.getAid());
-			act.setPerson(a.getPerson().getPno());
-			act.setProject(a.getProject().getPid());
-			act.setActDescription(a.getActDescription());
-			act.setActDate(a.getActDate().toLocalDate().format(DateFormat.dtfDays));
-			act.setActStartTime(a.getActStartTime().toLocalDateTime().toLocalTime().format(DateFormat.dtfHours));
-			act.setActEndTime(a.getActEndTime().toLocalDateTime().toLocalTime().format(DateFormat.dtfHours));
-			list.add(act);
-		}
-		return list;
-	}
 	public LoginController getLoginController() {
 		return loginController;
 	}
@@ -129,13 +117,43 @@ public class CalculationSalaryController {
 		this.actionController = actionController;
 	}
 
-	public List<String> getDescList() {
-		return descList;
+	public CalendarView getCalendar() {
+		return calendar;
 	}
 
-	public void setDescList(List<String> descList) {
-		this.descList = descList;
+	public void setCalendar(CalendarView calendar) {
+		this.calendar = calendar;
 	}
-	
-	
+
+	public LocalDate getStartOfMonth() {
+		return startOfMonth;
+	}
+
+	public void setStartOfMonth(LocalDate startOfMonth) {
+		this.startOfMonth = startOfMonth;
+	}
+
+	public LocalDate getEndOfMonth() {
+		return endOfMonth;
+	}
+
+	public void setEndOfMonth(LocalDate endOfMonth) {
+		this.endOfMonth = endOfMonth;
+	}
+
+	public float getPricePerHour() {
+		return pricePerHour;
+	}
+
+	public void setPricePerHour(float pricePerHour) {
+		this.pricePerHour = pricePerHour;
+	}
+
+	public float getSalary() {
+		return salary;
+	}
+
+	public void setSalary(float salary) {
+		this.salary = salary;
+	}
 }
