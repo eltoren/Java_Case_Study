@@ -5,18 +5,20 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.RollbackException;
 import javax.persistence.TypedQuery;
 
 import be.iris.dao.ActivityDao;
+import be.iris.dao.WorkingDayDao;
 import be.iris.entities.Tutactivity;
 import be.iris.entities.Tutperson;
 import be.iris.entities.Tutproject;
+import be.iris.entities.TutworkingDay;
+import be.iris.exceptions.ActivityException;
 
 @Stateless(mappedName = "activityImpl")
 public class ActivityImpl implements ActivityDao {
@@ -24,31 +26,35 @@ public class ActivityImpl implements ActivityDao {
 	@PersistenceContext(unitName = "TRSAppJpa")
 	private EntityManager em;
 
+	@EJB
+	private WorkingDayDao workingDay;
 	@Override
-	public void insertActivity(Tutactivity activity, String pid, long pno) {
+	public void insertActivity(Tutactivity activity, String pid, long pno)
+			throws ActivityException {
 		try {
-			System.out.println(pid +" " + pno);
 			Tutproject p = em.find(Tutproject.class, pid);
-			em.persist(activity);
 			Tutperson person = em.find(Tutperson.class, pno);
-			System.out.println(person.getPlname());
-			/*Query q  = em.createNativeQuery("Tutperson.findPersonConnected", Tutperson.class);
-			q.setParameter("pno", pno);
-			Tutperson person = (Tutperson) q.getSingleResult();*/
+			if(person.getPtype().equalsIgnoreCase("coworker")){
+				TutworkingDay wd = workingDay.getWorkingDay(activity.getActDate(), pno);
+				if(wd == null){
+					throw new ActivityException("You cannot add an activity for that date, you didn't worked !");
+				}
+			}
+			em.persist(activity);			
 			p.addActivity(activity);
 			person.addActivity(activity);
-		//	person.addActivity(activity);
 			em.merge(p);
 			em.merge(person);
 		
 
 		} catch (RuntimeException re) {
-				re.printStackTrace();
+				throw new ActivityException("Oups: problem while registrating the activity");
 			}
 	}
 
 	@Override
-	public void updateActivity(Tutactivity oldActivity, Tutactivity newActivity) {
+	public void updateActivity(Tutactivity oldActivity, Tutactivity newActivity)
+	{
 		try {
 
 			Tutactivity act = em.find(Tutactivity.class, oldActivity.getAid());
@@ -115,7 +121,8 @@ public class ActivityImpl implements ActivityDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Tutactivity> getAllActivitiesOfPerson(long person) {
+	public List<Tutactivity> getAllActivitiesOfPerson(long person)
+			throws ActivityException {
 		List<Tutactivity> listActivities = new ArrayList<>();
 		try {
 			Tutperson p = em.find(Tutperson.class, person);
@@ -123,17 +130,20 @@ public class ActivityImpl implements ActivityDao {
 			for(; i <p.getActivities().size();i++){
 				listActivities.add(p.getActivities().get(i));
 			}
-
+			if(listActivities.isEmpty()){
+				throw new ActivityException("There is no activity for this person");
+			}
 
 		} catch (RuntimeException re) {
-				System.err.println(re.getMessage());
+			throw new ActivityException("Oups: problem while getting the activity");
 			}
 		return listActivities;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Tutactivity> getAllActivitiesOfProject(String project) {
+	public List<Tutactivity> getAllActivitiesOfProject(String project)
+			throws ActivityException {
 		List<Tutactivity> listActivities = new ArrayList<>();
 		try {
 
@@ -142,9 +152,11 @@ public class ActivityImpl implements ActivityDao {
 			for(; i <p.getActivities().size();i++){
 				listActivities.add(p.getActivities().get(i));
 			}
-
+			if(listActivities.isEmpty()){
+				throw new ActivityException("There is no activity for this project");
+			}
 		} catch (RuntimeException re) {
-			System.err.println(re.getMessage());
+			throw new ActivityException("Oups: problem while getting the activity");
 		}
 		return listActivities;
 	}

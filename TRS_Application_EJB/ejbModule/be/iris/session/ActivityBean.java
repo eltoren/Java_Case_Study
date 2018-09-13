@@ -10,6 +10,7 @@ import be.iris.dao.ActivityDao;
 import be.iris.entities.Tutactivity;
 import be.iris.entities.Tutperson;
 import be.iris.entities.Tutproject;
+import be.iris.exceptions.ActivityException;
 import be.iris.session.view.ActivityBeanRemote;
 
 @Stateless(mappedName = "activityBean")
@@ -22,7 +23,8 @@ public class ActivityBean implements ActivityBeanRemote {
 	}
 
 	@Override
-	public void saveNewActivitie(Tutactivity activity, String pid, long pno) {
+	public void saveNewActivitie(Tutactivity activity, String pid, long pno)
+			throws ActivityException{
 		activityDao.insertActivity(activity, pid, pno);
 
 	}
@@ -57,7 +59,8 @@ public class ActivityBean implements ActivityBeanRemote {
 	}
 
 	@Override
-	public List<Tutactivity> getAllActivitiesOfPerson(long person) {
+	public List<Tutactivity> getAllActivitiesOfPerson(long person)
+			throws ActivityException {
 		return activityDao.getAllActivitiesOfPerson(person);
 	}
 
@@ -67,7 +70,8 @@ public class ActivityBean implements ActivityBeanRemote {
 	}
 
 	@Override
-	public List<Tutactivity> getAllActivitiesOfProject(String project) {
+	public List<Tutactivity> getAllActivitiesOfProject(String project)
+			throws ActivityException {
 		return activityDao.getAllActivitiesOfProject(project);
 	}
 

@@ -3,18 +3,25 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
 xmlns:p="http://primefaces.org/ui"
-xmlns:f="http://xmlns.jcp.org/jsf/core">
+xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-
  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" /> 
 <title>Login</title>
 <h:outputStylesheet name="css/mystyle.css"/>
 </h:head>
 <h:body>
 
+
 <p:growl />
 	<p:panel id="login" header="#{msgs.panel_header}">
 	       
+
+<!-- <f:view locale="#{languageController.language}"> -->
+  
+<p:growl showDetail="false"/>
+	<p:panel id="login" header="login">
+	       <ui:include src="templates/language.xhtml" />
+
   <h:form> 
    <h:panelGrid columns="2" cellpadding="10">
      <p:outputLabel value="#{msgs.indexUserId}"/>
@@ -29,6 +36,6 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 	</h:panelGrid>
 	</h:form>
 	</p:panel>
-
+<!-- </f:view> -->
 </h:body>
 </html>

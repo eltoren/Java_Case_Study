@@ -7,7 +7,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
-import be.iris.exceptions.NoWorkingDayInProgressException;
+import be.iris.exceptions.WorkingDayException;
 import be.iris.session.view.WorkingDayBeanRemote;
 
 @Named
@@ -35,8 +35,13 @@ public class WorkingDayController {
 	public void checkIn(ActionEvent e){
 		
 		pno = loginController.getPersonSelected().getPno();
+		try{
 		workingDayBean.StartNewWorkingDay(pno);
 		actionController.sendAMessage("Check-in done", FacesMessage.SEVERITY_INFO);
+		}catch(WorkingDayException wde){
+			actionController.sendAMessage(wde.getMessage(), FacesMessage.SEVERITY_ERROR);
+		}
+		
 	}
 	
 	public void checkOut(ActionEvent e){
@@ -44,7 +49,7 @@ public class WorkingDayController {
 		try{
 			workingDayBean.endWorkingDay(pno);
 			actionController.sendAMessage("Check-out done", FacesMessage.SEVERITY_INFO);
-		}catch(NoWorkingDayInProgressException nwde){
+		}catch(WorkingDayException nwde){
 			actionController.sendAMessage(nwde.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
 	}

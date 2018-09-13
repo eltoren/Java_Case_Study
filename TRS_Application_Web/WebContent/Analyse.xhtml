@@ -4,17 +4,25 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui" >
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Analyse page for manager</title>
 </h:head>
 
 <h:body style="background-color:#698dc6;">
+<!-- <f:view locale="#{languageController.language}"> -->
+ 
+<p:growl showDetail="false"/>
 	<h1>Analyse</h1>
 
+<<<<<<< HEAD
 	<p:panel header="#{msgs.analysePanel}" footer="#{msgs.analysePanel}"
 		style="margin-bottom:20px">
+=======
+	<p:panel header="Analyse" footer="Analyse" style="margin-bottom:20px">
+	 <ui:include src="templates/language.xhtml" />
+>>>>>>> 45f4f4f3c7088db1e228ba10a4ceca6dea47b63b
 		<h:form id="formId">
 
 			<p:panel id="panelProjects" header="#{msgs.analysePanelProject}"
@@ -68,5 +76,6 @@
 				style="float: right;" />
 		</h:form>
 	</p:panel>
+<!-- </f:view> -->	
 </h:body>
 </html>

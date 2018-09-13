@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import be.iris.entities.Tutactivity;
 import be.iris.entities.Tutperson;
 import be.iris.entities.Tutproject;
+import be.iris.exceptions.ActivityException;
 import be.iris.model.Activity;
 import be.iris.session.view.ActivityBeanRemote;
 import be.iris.utilities.DateFormat;
@@ -66,16 +68,14 @@ public class AnalyseController {
 	}
 
 	public void personsChangeListener(AjaxBehaviorEvent e){
-		long pno = 0;
-		for(Tutperson p : loginController.getPersons()){
-			String qName = p.getPfname() + " " + p.getPlname();
-			if(name.equalsIgnoreCase(qName)){
-				pno = p.getPno();
-				break;
-			}
+		loginController.setSelectedPersonfromList(name);
+		Tutperson p = loginController.getSelectedPersonList();
+		try{
+		List<Tutactivity> list =activityBean.getAllActivitiesOfPerson(p.getPno());
+		this.setListingActivities(ListActivityFromEntities(list));		
+		}catch(ActivityException ae){
+			actionController.sendAMessage(ae.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
-		List<Tutactivity> list =activityBean.getAllActivitiesOfPerson(pno);
-		this.setListingActivities(ListActivityFromEntities(list));
 	}
 	
 	public void projectsChangeListener(AjaxBehaviorEvent e){
@@ -88,8 +88,12 @@ public class AnalyseController {
 				break;
 			}
 		}
-		List<Tutactivity> list = activityBean.getAllActivitiesOfProject(pid);
-		this.setListingActivities(ListActivityFromEntities(list));
+		try{
+			List<Tutactivity> list = activityBean.getAllActivitiesOfProject(pid);
+			this.setListingActivities(ListActivityFromEntities(list));
+		}catch(ActivityException ae){
+				actionController.sendAMessage(ae.getMessage(), FacesMessage.SEVERITY_ERROR);
+			}
 		
 	}
 

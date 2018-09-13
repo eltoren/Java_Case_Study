@@ -3,8 +3,6 @@ package be.iris.entities;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,12 +16,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 
-/**
- * The persistent class for the TUTCOMPANIES database table.
- * 
- */
-@Named
-@RequestScoped
+
 @Entity
 @Table(name="TUTCOMPANIES")
 @NamedQuery(name="Tutcompany.findAll", query="SELECT t FROM Tutcompany t")
