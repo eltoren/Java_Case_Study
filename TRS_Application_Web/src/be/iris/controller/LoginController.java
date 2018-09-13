@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import be.iris.Backing.FrontBean;
 import be.iris.entities.Tutperson;
 import be.iris.session.view.PersonBeanRemote;

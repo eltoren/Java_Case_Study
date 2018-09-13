@@ -1,7 +1,6 @@
 package be.iris.dao.impl;
 
 import java.sql.Date;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -61,6 +60,7 @@ public class WorkigDayImpl implements WorkingDayDao {
 		}
 
 	}
+	@SuppressWarnings("unchecked")
 	public TutworkingDay getWorkingDay(Date date, long pno){
 		String queryString = "Select w.* from TUTWORKING_DAYS w  where w.WORKING_DATE = ? and w.PNO = ?";
 		Query  query= em.createNativeQuery(queryString, TutworkingDay.class);

@@ -62,7 +62,9 @@
 					<p:outputLabel for="restricted" value="#{msgs.activityDate}" />
 			
 					<p:calendar id="restricted" value="#{calendarView.date}"
+
 						mindate="1/09/18" maxdate="01/1/2100" required="true" requiredMessage="#{msgs.calendarRF}" />
+
 					<p:dialog modal="true" resizable="false" header="Values"
 						widgetVar="dlg" showEffect="fold">
 						<p:outputLabel value="Restricted:" />
