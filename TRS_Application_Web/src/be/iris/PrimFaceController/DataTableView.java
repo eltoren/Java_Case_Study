@@ -6,7 +6,10 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
+
+import be.iris.controller.LoginController;
 import be.iris.entities.Tutperson;
 import be.iris.session.view.PersonBeanRemote;
 
@@ -19,21 +22,23 @@ public class DataTableView implements Serializable {
 	private List<Tutperson> persons = new ArrayList<>();
 	private List<Tutperson> coWorker = new ArrayList<>();
 	
-	@EJB(name = "personBean")
-	private PersonBeanRemote personBean;
+	
+	
+	@Inject
+	private LoginController  lg;
 	
 	@PostConstruct
    	public void ConstructionList()
 	{
-	persons = personBean.getAllPersons();
+	persons = lg.getPersons();
 	
 		for (Tutperson temp : persons) {
 			if(temp.getPtype().equals("Coworker"))
 			coWorker.add(temp);
+			
 		
 		}
 	}
-
 
 	public List<Tutperson> getPersons() {
 		return persons;
@@ -44,18 +49,10 @@ public class DataTableView implements Serializable {
 	}
 
 
-	public PersonBeanRemote getPersonBean() {
-		return personBean;
-	}
 
 
-	public void setPersonBean(PersonBeanRemote personBean) {
-		this.personBean = personBean;
-	}
-
-
-	public List<Tutperson> getCoWorker() {
-		return coWorker;
+	public List<Tutperson> getCoWorker() {	
+			return coWorker;
 	}
 
 

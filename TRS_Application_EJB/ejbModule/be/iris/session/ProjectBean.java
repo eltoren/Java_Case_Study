@@ -48,10 +48,22 @@ public class ProjectBean implements ProjectBeanRemote {
 	public List<Tutcours> getListInvoicedProject() {
 		return projectDao.listInvoicedProjects();
 	}
+	
+	@Override
+	public Tutcours getInvoicedProject(String projectName) {
+		List<Tutcours> list = this.getListInvoicedProject();
+		for (Tutcours tutcours : list) {
+			if (projectName.equalsIgnoreCase(tutcours.getCstitle())) {
+				return tutcours;
+			}
+		}
+		return null;
+	}
 
 	@Override
 	public List<Tutproject> getListNonInvoicesProjects() {
 		return projectDao.listAllNonInvoicedProjects();
 	}
+
 
 }
