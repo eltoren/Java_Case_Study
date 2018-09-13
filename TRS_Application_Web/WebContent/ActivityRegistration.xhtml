@@ -10,7 +10,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<h:outputStylesheet name="css/mystyle.css"/>
 	<title>Activity registration</title>
-	
 </h:head>
 
 <h:body id="basicActivity">
@@ -18,11 +17,12 @@
 	<h1>#{msgs.registrationPanel}</h1>
 
 <f:view locale="#{languageController.language}"> 
-  <ui:include src="templates/language.xhtml" />
+  
 <p:growl showDetail="false" life="2000"/>
 	
 	<p:panel  header="#{msgs.registrationPanel}"
 		footer="#{msgs.registrationPanel}" style="margin-bottom:20px">
+		<ui:include src="templates/language.xhtml" />
 
 		<h:panelGrid columns="2" cellpadding="5">
 
@@ -61,9 +61,10 @@
 					
 					<p:outputLabel for="restricted" value="#{msgs.activityDate}" />
 			
-
 					<p:calendar id="restricted" value="#{calendarView.date}"
-						mindate="1/09/2018" maxdate="01/1/2100" />
+
+						mindate="1/09/18" maxdate="01/1/2100" required="true" requiredMessage="#{msgs.calendarRF}" />
+
 					<p:dialog modal="true" resizable="false" header="Values"
 						widgetVar="dlg" showEffect="fold">
 						<p:outputLabel value="Restricted:" />
@@ -81,7 +82,7 @@
 					<p:outputLabel for="Project" value="#{msgs.projectName}" />
 
 					<p:selectOneMenu id="Project" value="#{actionController.project}"
-						style="width:125px">
+						style="width:200px">
 						<f:selectItems value="#{actionController.listProjectsNames}" />
 					</p:selectOneMenu>
 
@@ -105,25 +106,22 @@
 
 
 					<!--  2 buttons Start : register and go back -->
-
-
-					<br />
+					<h:panelGroup layout="block" id ="ButtonDIV" style ="display:flex; flex-direction:row;">
+			 
 					<p:commandButton value="#{msgs.activitySubmit}" id="registerButton"
-						actionListener="#{actionController.registerActivity}" ajax="false" />
-					<br />
+						actionListener="#{actionController.registerActivity}" ajax="false" style="width:120px;height:40px"/>
 					<p:commandButton value="#{msgs.goBackButton}" id="BackButton"
-						action="#{frontBean.goBack}" ajax="false" immediate="true" />
-
+						action="#{frontBean.goBack}" ajax="false" immediate="true" style="width:120px;height:40px"/>
+					</h:panelGroup>
+				
 					<!-- End Button -->
-
 				</h:panelGrid>
-
-
-		
 		
 
 			</h:form>
 		</h:panelGrid>
+		
+			
 	</p:panel>
  </f:view> 
 </h:body>

@@ -12,6 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessOrder;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorOrder;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 
 /**
@@ -21,13 +28,17 @@ import javax.persistence.Table;
 
 @Entity(name="Tutactivity")
 @Table(name="TUTACTIVITIES")
+@XmlRootElement(name="activity")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Tutactivity implements Serializable {
 	
 	/**
 	 * 
 	 */
+	@XmlTransient
 	private static final long serialVersionUID = 7720086255696017210L;
 
+	
 	@Id
 	@GeneratedValue
 	private long aid;
@@ -44,11 +55,12 @@ public class Tutactivity implements Serializable {
 	@Column(name="ACT_START_TIME")
 	private Timestamp actStartTime;
 	
+	@XmlElement(name="person")
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="PNO")
 	private Tutperson person;
 	
-
+	@XmlElement(name="project")
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="PID")
 	private Tutproject project;

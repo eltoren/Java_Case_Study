@@ -207,6 +207,17 @@ INSERT INTO TUTPROJECTS VALUES ('8054', 'DbaseIII systems');
 INSERT INTO TUTPROJECTS VALUES ('8055', 'LOTUS 123 : programming');
 INSERT INTO TUTPROJECTS VALUES ('8056', 'Autocad', 'Training Autocad');
 
+INSERT INTO TUTPROJECTS VALUES ('0001', 'Administrations Work');
+INSERT INTO TUTPROJECTS VALUES ('0002', 'collegues meetings');
+INSERT INTO TUTPROJECTS VALUES ('0010', 'webSite adjustments');
+INSERT INTO TUTPROJECTS VALUES ('0020', 'creation of a course');
+INSERT INTO TUTPROJECTS VALUES ('0003', 'partners contacts');
+INSERT INTO TUTPROJECTS VALUES ('0040', 'business meetings');
+INSERT INTO TUTPROJECTS VALUES ('1010', 'Update hardware');
+INSERT INTO TUTPROJECTS VALUES ('1020', 'cleaning computers');
+INSERT INTO TUTPROJECTS VALUES ('1030', 'arrangments locals');
+
+
 /* Junior update here*/
 
 /*ALTER TABLE Tutpersons drop column PTYPE;*/

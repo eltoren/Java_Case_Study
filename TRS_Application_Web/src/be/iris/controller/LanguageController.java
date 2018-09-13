@@ -1,3 +1,4 @@
+
 package be.iris.controller;
 
 import java.io.Serializable;
@@ -14,15 +15,14 @@ import javax.inject.Named;
 
 @Named
 @SessionScoped
-public class LanguageController implements Serializable {
-
+public class LanguageController implements Serializable{
 
 	private String language="en";
 	
 	public void changeCurrentLanguage(ActionEvent ae) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		UIViewRoot viewRoot = context.getViewRoot();
-		String language = (String) ae.getComponent().getAttributes().get("value");
+		String language = (String)ae.getComponent().getAttributes().get("value");
 		this.setLanguage(language);
 		viewRoot.setLocale(new Locale(language));
 	}
@@ -54,3 +54,5 @@ public class LanguageController implements Serializable {
 
 
 }
+
+
