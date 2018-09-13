@@ -14,20 +14,15 @@
 </h:head>
 
 <h:body id="basicActivity">
-<<<<<<< HEAD
-	<h1>#{msgs.registrationPanel}</h1>
 
-	
-	<p:growl id="growl" life="2000" showDetail="false" />
-	<p:panel  header="#{msgs.registrationPanel}"
-		footer="#{msgs.registrationPanel}" style="margin-bottom:20px">
+	<h1>#{msgs.registrationPanel}</h1>
 
 <!-- <f:view locale="#{languageController.language}"> -->
   <ui:include src="templates/language.xhtml" />
 <p:growl showDetail="false" life="2000"/>
 	<h1>Activity registration</h1>
-	<p:panel  header="Registration activity"
-		footer="Registration activity" style="margin-bottom:20px">
+	<p:panel  header="#{msgs.registrationPanel}"
+		footer="#{msgs.registrationPanel}" style="margin-bottom:20px">
 
 		<h:panelGrid columns="2" cellpadding="5">
 
