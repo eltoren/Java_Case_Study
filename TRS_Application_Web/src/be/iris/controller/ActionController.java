@@ -19,6 +19,7 @@ import javax.inject.Named;
 import be.iris.PrimFaceController.CalendarView;
 import be.iris.entities.Tutactivity;
 import be.iris.entities.Tutproject;
+import be.iris.exceptions.ActivityException;
 import be.iris.session.view.ActivityBeanRemote;
 import be.iris.session.view.ProjectBeanRemote;
 import be.iris.utilities.DateFormat;
@@ -110,7 +111,7 @@ public class ActionController implements Serializable {
 
 	public void registerActivity(ActionEvent e) {
 		activity = new Tutactivity();
-		dateConversionsSetter();
+		if(dateConversionsSetter()){
 		activity.setActDescription(activityName);
 		for (Tutproject p : listofProjects) {
 			if (project.equals(p.getProtitle())) {
@@ -120,15 +121,17 @@ public class ActionController implements Serializable {
 		}
 		try {
 			activityBean.saveNewActivitie(activity, project, loginController.getPersonSelected().getPno());
-		} catch (Exception ex) {
+			this.sendAMessage("Acitivity registered", FacesMessage.SEVERITY_INFO);
+		} catch (ActivityException ex) {
 			this.sendAMessage(ex.getMessage(), FacesMessage.SEVERITY_ERROR);
+		}
 		}
 	}
 
 	@Deprecated
-	private void dateConversionsSetter() {
+	private boolean dateConversionsSetter() {
 		System.out.println(startTime.format(DateFormat.dtfHours));
-
+		boolean returnedValue = true;
 		int day = calendar.getDate().getDate();
 		int month = calendar.getDate().getMonth() +1;
 		int year = calendar.getDate().getYear() + 1900;
@@ -137,27 +140,28 @@ public class ActionController implements Serializable {
 		LocalDateTime endDateTime = LocalDateTime.of(date, endTime);
 		if (date.isAfter(LocalDate.now())) {
 			this.sendAMessage("ENTER A VALID DATE, MAXIMUM IS TODAY", FacesMessage.SEVERITY_ERROR);
-			return;
+			returnedValue = false;
 		}
 		if (date.getDayOfWeek().getValue() == 6 || date.getDayOfWeek().getValue() == 7) {
 			this.sendAMessage("ENTER A VALID DATE, NOT A DAY OF THE WEEKEND", FacesMessage.SEVERITY_ERROR);
-			return;
+			returnedValue = false;
 		}
 		if (startTime.isAfter(LocalTime.of(20, 0)) || startTime.isBefore(LocalTime.of(5, 0))) {
 			this.sendAMessage("ENTER A VALID STAR TIME, CANNOT WORK ON THE WRONGS HOURS", FacesMessage.SEVERITY_ERROR);
-			return;
+			returnedValue = false;
 		}
 		if (endTime.isAfter(LocalTime.of(20, 0)) || endTime.isBefore(LocalTime.of(5, 0))) {
 			this.sendAMessage("ENTER A VALID END TIME, CANNOT WORK ON THE WRONGS HOURS", FacesMessage.SEVERITY_ERROR);
-			return;
+			returnedValue = false;
 		}
 		if(endTime.isBefore(startTime)){
 			this.sendAMessage("ENTER VALID HOURS, CANNOT END BEFORE BEGINNING RIGHT ?", FacesMessage.SEVERITY_ERROR);
-			return;
+			returnedValue = false;
 		}
 		activity.setActDate(Date.valueOf(date));
 		activity.setActStartTime(Timestamp.valueOf(startDateTime));
 		activity.setActEndTime(Timestamp.valueOf(endDateTime));
+		return returnedValue;
 	}
 
 	public LocalTime getStartTime() {

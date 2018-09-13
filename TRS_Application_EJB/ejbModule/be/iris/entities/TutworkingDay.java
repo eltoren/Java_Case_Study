@@ -4,8 +4,6 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,10 +14,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import com.sun.istack.internal.Nullable;
-
-@Named
-@RequestScoped
 @Entity
 @IdClass(WorkingDayPK.class)
 @Table(name="TUTWORKING_DAYS")
@@ -43,7 +37,6 @@ public class TutworkingDay {
 	private Timestamp startTime;
 	
 	@Column(name="END_TIME")
-	@Nullable
 	private Timestamp endTime;
 	
 

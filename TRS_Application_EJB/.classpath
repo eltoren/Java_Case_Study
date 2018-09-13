@@ -9,9 +9,9 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/com.ibm.ws.st.core.runtimeClasspathProvider/Liberty Runtime"/>
-	<classpathentry kind="lib" path="D:/DevEnviJava/JavaLibrairies/javax.persistence_2.1.1.v201509150925.jar"/>
-	<classpathentry kind="lib" path="D:/Workspace_JAVA/eclipse-workspace-PROJECT/Java_Case_Study/TRS_Application_EJB/Lib/openjpa-all-2.4.3.jar"/>
-	<classpathentry kind="lib" path="D:/Workspace_JAVA/eclipse-workspace-PROJECT/Java_Case_Study/TRS_Application_EJB/Lib/slf4j-simple-1.7.25.jar"/>
+	<classpathentry kind="lib" path="C:/Workspaces/TRS_Application/Java_Case_Study/TRS_Application_EJB/Lib/openjpa-all-2.4.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Duser/Desktop/javax.persistence_2.1.1.v201509150925.jar"/>
+	<classpathentry kind="lib" path="Lib/slf4j-simple-1.7.25.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/libraryJPA">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>

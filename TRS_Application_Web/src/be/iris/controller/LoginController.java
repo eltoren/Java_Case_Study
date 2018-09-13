@@ -24,6 +24,7 @@ public class LoginController implements Serializable {
 	@Inject
 	private FrontBean fb;
 
+	private Tutperson selectedPersonList;
 	
 	private Tutperson personSelected;
 	private List<Tutperson> persons = new ArrayList<>();
@@ -31,13 +32,14 @@ public class LoginController implements Serializable {
 
 	public LoginController() {
 		personSelected = new Tutperson();
+		selectedPersonList = new Tutperson();
 	}
 
 	public List<String> getListOfFirstNames() {
 		if (persons.isEmpty()) {
 			persons = personBean.getAllPersons();
 			for (Tutperson p : persons) {
-				listOfFirstNames.add(p.getPfname() + " " + p.getPlname());
+				listOfFirstNames.add(p.getPno() + " . " + p.getPlname());
 				
 			}
 		}
@@ -74,13 +76,14 @@ public class LoginController implements Serializable {
 	}
 
 	public String login() {
-		String firstName = name.split(" ")[0]; /* Here change this !! Junior */
-		String lastName = name.split(" ")[1];
+		long pno = Long.parseLong(name.split(" . ")[0]); 
+		String lastName = name.split(" . ")[1];
 		
 				
 		for (Tutperson p : persons) {
-			if (p.getPfname().equals(firstName) && p.getPlname().equals(lastName)) {
+			if (pno == p.getPno() && p.getPlname().equals(lastName)) {
 				personSelected = p;
+				System.out.println(pno + " " + p.getPfname() + " " + p.getPlname());
 				break;
 			}
 		}
@@ -124,4 +127,23 @@ public class LoginController implements Serializable {
 
 	}
 
+	public Tutperson getSelectedPersonList() {
+		return selectedPersonList;
+	}
+
+	public void setSelectedPersonList(Tutperson selectedPersonList) {
+		this.selectedPersonList = selectedPersonList;
+	}
+
+	public void setSelectedPersonfromList(String name){
+
+		long pno = Long.parseLong(name.split(" . ")[0]); 
+		String lastName = name.split(" . ")[1];
+		
+		for(Tutperson p: persons){
+			if (pno == p.getPno() && p.getPlname().equals(lastName)) {
+				selectedPersonList = p;
+			}
+		}
+	}
 }

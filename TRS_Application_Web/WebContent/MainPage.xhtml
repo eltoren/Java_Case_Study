@@ -11,14 +11,14 @@
 	<title>Menu main page</title>
 </h:head>
 <h:body id="basicMain">
-<f:view locale="#{languageController.language}">
-  <ui:include src="templates/language.xhtml" />
+<!-- <f:view locale="#{languageController.language}"> -->
+  
 <p:growl showDetail="false" life="2000"/>
 	<h1>Menu</h1>
 
 	<p:panel id="Menu" header="Menu" footer="Menu"
 		style="margin-bottom:20px">
-
+	<ui:include src="templates/language.xhtml" />
 		<h:form>
 			<p:growl />
 			<h:panelGrid id="panelButton" columns="2" border="0" cellpadding="2"
@@ -56,7 +56,7 @@
 	<p:commandButton value="Logout" id="logout"
 		action="#{frontBean.logout}" styleClass="ui-priority-primary"
 		style="float: right;" />
-</f:view>
+<!-- </f:view> -->
 </h:body>
 
 </html>

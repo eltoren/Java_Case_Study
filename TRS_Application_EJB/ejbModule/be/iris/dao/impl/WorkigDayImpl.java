@@ -1,6 +1,7 @@
 package be.iris.dao.impl;
 
 import java.sql.Date;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,8 +19,7 @@ import javax.persistence.TypedQuery;
 import be.iris.dao.WorkingDayDao;
 import be.iris.entities.Tutperson;
 import be.iris.entities.TutworkingDay;
-import be.iris.entities.WorkingDayPK;
-import be.iris.exceptions.NoWorkingDayInProgressException;
+import be.iris.exceptions.WorkingDayException;
 
 @Stateless(mappedName = "workingDayDaoImpl")
 public class WorkigDayImpl implements WorkingDayDao {
@@ -28,46 +28,51 @@ public class WorkigDayImpl implements WorkingDayDao {
 	EntityManager em;
 
 	@Override
-	public void insertWorkingDay(TutworkingDay workingDay, long pno) {
+	public void insertWorkingDay(TutworkingDay workingDay, long pno) 
+	throws WorkingDayException{
 		try {
+			if(this.getWorkingDay(workingDay.getDate(), pno) != null)
+				throw new WorkingDayException("You have already checked in !");
 			Tutperson p = em.find(Tutperson.class, pno);
 			workingDay.setCoworker(p);
 			
 			em.persist(workingDay);
 
-		} catch (RuntimeException re) {
-			System.err.println(re.getMessage());
+		} catch (Exception re ) {
+			throw new WorkingDayException("You have already checked in !");
 		}
 
 	}
 
 	@Override
-	public void updateWorkingDay(long pno) throws NoWorkingDayInProgressException{
+	public void updateWorkingDay(long pno) throws WorkingDayException{
 		try {
-			Tutperson person = em.find(Tutperson.class, pno);
+			
 			Date date = Date.valueOf(LocalDate.now());
-			String queryString = "Select w.* from TUTWORKING_DAYS w  where w.WORKING_DATE = ? and w.PNO = ?";
-			Query  query= em.createNativeQuery(queryString, TutworkingDay.class);
-			System.out.println(date.toString() + " " + pno);
-			query.setParameter(1, date);
-			query.setParameter(2, pno);
-			TutworkingDay wd = (TutworkingDay)query.getSingleResult();
-			if(wd.getEndTime() != null){
-				throw new NoWorkingDayInProgressException("You Have already check out !");
+			TutworkingDay wd = getWorkingDay(date, pno);
+			if(wd == null){
+				throw new WorkingDayException("You Have to check in befor checking out !");
 			}
-			System.out.println("there");
 			wd.setEndTime(Timestamp.valueOf(LocalDateTime.now()));
-			System.out.println("time out setted");
 			em.merge(wd);
-			System.out.println("merged");
 
 		} catch (RuntimeException re) {
-			System.out.println("erroooor");
-			System.err.println(re.getMessage());
+			throw new WorkingDayException("A problem occured while trying to check out : " + re.getMessage());
 		}
 
 	}
-
+	public TutworkingDay getWorkingDay(Date date, long pno){
+		String queryString = "Select w.* from TUTWORKING_DAYS w  where w.WORKING_DATE = ? and w.PNO = ?";
+		Query  query= em.createNativeQuery(queryString, TutworkingDay.class);
+		query.setParameter(1, date);
+		query.setParameter(2, pno);
+		List<TutworkingDay> wd = (List<TutworkingDay>)query.getResultList();
+		if(!wd.isEmpty()){
+			return wd.get(0);
+		}else{
+			return null;
+		}
+	}
 	@Override
 	public void deleteWorkingDay(TutworkingDay workingDay) {
 		EntityTransaction tx = em.getTransaction();
