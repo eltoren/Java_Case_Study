@@ -16,6 +16,7 @@ import javax.inject.Named;
 @SessionScoped
 public class LanguageController implements Serializable {
 
+
 	private String language="en";
 	
 	public void changeCurrentLanguage(ActionEvent ae) {

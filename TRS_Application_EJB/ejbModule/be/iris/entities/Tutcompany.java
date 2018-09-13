@@ -16,10 +16,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 
-/**
- * The persistent class for the TUTCOMPANIES database table.
- * 
- */
+
 @Entity
 @Table(name="TUTCOMPANIES")
 @NamedQuery(name="Tutcompany.findAll", query="SELECT t FROM Tutcompany t")

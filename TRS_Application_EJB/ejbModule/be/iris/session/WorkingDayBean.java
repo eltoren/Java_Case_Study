@@ -11,7 +11,7 @@ import javax.ejb.Stateless;
 import be.iris.dao.WorkingDayDao;
 import be.iris.entities.Tutperson;
 import be.iris.entities.TutworkingDay;
-import be.iris.exceptions.NoWorkingDayInProgressException;
+import be.iris.exceptions.WorkingDayException;
 import be.iris.session.view.WorkingDayBeanRemote;
 
 @Stateless(mappedName = "workingDayBean")
@@ -24,7 +24,7 @@ public class WorkingDayBean implements WorkingDayBeanRemote {
 	}
 
 	@Override
-	public void StartNewWorkingDay(long person) {
+	public void StartNewWorkingDay(long person) throws WorkingDayException {
 		TutworkingDay workingDay = new TutworkingDay();
 		workingDay.setDate(LocalDate.now());
 		workingDay.setStartTime(Timestamp.valueOf(LocalDateTime.now()));
@@ -37,7 +37,7 @@ public class WorkingDayBean implements WorkingDayBeanRemote {
 	}
 */
 	@Override
-	public void endWorkingDay(long person) throws NoWorkingDayInProgressException {
+	public void endWorkingDay(long person) throws WorkingDayException {
 //		TutworkingDay oldWorkingDay = workingDayDao.getWorkigDaysOfPersonAtDate(person, LocalDate.now());
 //		TutworkingDay newWorkingDay = oldWorkingDay;
 //		newWorkingDay.setEndTime(Timestamp.valueOf(LocalDateTime.now()));

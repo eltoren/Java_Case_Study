@@ -8,11 +8,13 @@ import javax.ejb.Local;
 import be.iris.entities.Tutactivity;
 import be.iris.entities.Tutperson;
 import be.iris.entities.Tutproject;
+import be.iris.exceptions.ActivityException;
 
 @Local
 public interface ActivityDao {
 
-	public void insertActivity(Tutactivity activity, String pid, long pno);
+	public void insertActivity(Tutactivity activity, String pid, long pno)
+			throws ActivityException ;
 
 	public void updateActivity(Tutactivity oldActivity, Tutactivity newActivity);
 
@@ -24,11 +26,13 @@ public interface ActivityDao {
 
 	public List<Tutactivity> getAllActivitiesAtDate(LocalDate date);
 
-	public List<Tutactivity> getAllActivitiesOfPerson(long person);
+	public List<Tutactivity> getAllActivitiesOfPerson(long person)
+			throws ActivityException ;
 
 	public List<Tutactivity> getAllActivitiesOfPersonAtDate(Tutperson person, LocalDate date);
 
-	public List<Tutactivity> getAllActivitiesOfProject(String project);
+	public List<Tutactivity> getAllActivitiesOfProject(String project)
+			throws ActivityException ;
 
 	public List<Tutactivity> getAllActivitiesOfProjectAtDate(Tutproject project, LocalDate date);
 

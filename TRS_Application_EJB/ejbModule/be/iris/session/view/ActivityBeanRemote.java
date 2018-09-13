@@ -8,11 +8,13 @@ import javax.ejb.Remote;
 import be.iris.entities.Tutactivity;
 import be.iris.entities.Tutperson;
 import be.iris.entities.Tutproject;
+import be.iris.exceptions.ActivityException;
 
 @Remote
 public interface ActivityBeanRemote {
 
-	public void saveNewActivitie(Tutactivity activity, String pid, long pno);
+	public void saveNewActivitie(Tutactivity activity, String pid, long pno)
+			throws ActivityException;
 
 	public void updateActivity(Tutactivity oldActivity, Tutactivity newActivity);
 
@@ -22,11 +24,13 @@ public interface ActivityBeanRemote {
 
 	public List<Tutactivity> getAllActivitiesAtDate(LocalDate date);
 
-	public List<Tutactivity> getAllActivitiesOfPerson(long person);
+	public List<Tutactivity> getAllActivitiesOfPerson(long person)
+			throws ActivityException ;
 
 	public List<Tutactivity> getAllActivitiesOfPersonAtDate(Tutperson person, LocalDate date);
 
-	public List<Tutactivity> getAllActivitiesOfProject(String Project);
+	public List<Tutactivity> getAllActivitiesOfProject(String Project)
+			throws ActivityException ;
 
 	public List<Tutactivity> getAllActivitiesOfProjectAtDate(Tutproject project, LocalDate date);
 

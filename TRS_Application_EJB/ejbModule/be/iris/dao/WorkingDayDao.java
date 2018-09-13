@@ -1,5 +1,6 @@
 package be.iris.dao;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -7,14 +8,15 @@ import javax.ejb.Local;
 
 import be.iris.entities.Tutperson;
 import be.iris.entities.TutworkingDay;
-import be.iris.exceptions.NoWorkingDayInProgressException;
+import be.iris.exceptions.WorkingDayException;
 
 @Local
 public interface WorkingDayDao {
 
-	public void insertWorkingDay(TutworkingDay workingDay, long person);
+	public void insertWorkingDay(TutworkingDay workingDay, long person)
+			throws WorkingDayException;
 
-	public void updateWorkingDay(long person) throws NoWorkingDayInProgressException;
+	public void updateWorkingDay(long person) throws WorkingDayException;
 
 	public void deleteWorkingDay(TutworkingDay workingDay);
 
@@ -35,4 +37,5 @@ public interface WorkingDayDao {
 	public List<TutworkingDay> getListWorkigDaysOfPersonBetweenStartDateANdEndDate(long person,
 			LocalDate startDate, LocalDate endDate);
 
+	public TutworkingDay getWorkingDay(Date date, long pno);
 }
