@@ -60,7 +60,7 @@
 
 					
 					<p:outputLabel for="restricted" value="#{msgs.activityDate}" />
-			<p:outputLabel for="restricted" value="The date of activity :" />
+			
 
 					<p:calendar id="restricted" value="#{calendarView.date}"
 						mindate="1/09/18" maxdate="01/1/2100" />
@@ -79,8 +79,6 @@
 					
 
 					<p:outputLabel for="Project" value="#{msgs.projectName}" />
-
-					<p:outputLabel for="Project" value="Project:" />
 
 					<p:selectOneMenu id="Project" value="#{actionController.project}"
 						style="width:125px">
