@@ -13,14 +13,10 @@
 <h:body style="background-color:#698dc6;">
 
 	<h1>#{msgs.panelCalculSalary}</h1>
-
-	<p:panel id="CalculationSalary" header="#{msgs.panelCalculSalary}"
-
-	<h1>Calculation salary</h1>
-<f:view locale="#{languageController.language}">
+	<f:view locale="#{languageController.language}">
   
 <p:growl showDetail="false" life="2000"/>
-	<p:panel id="CalculationSalary" header="Calculation salary"
+	<p:panel id="CalculationSalary" header="#{msgs.panelCalculSalary}"
 		footer="Calculation salary" style="margin-bottom:20px">
 		<ui:include src="templates/language.xhtml" />
 
