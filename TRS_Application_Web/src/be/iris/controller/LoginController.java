@@ -2,6 +2,8 @@ package be.iris.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -12,6 +14,7 @@ import javax.inject.Named;
 import be.iris.Backing.FrontBean;
 import be.iris.entities.Tutperson;
 import be.iris.session.view.PersonBeanRemote;
+import be.iris.utilities.PrenomComparator;
 
 @Named
 @SessionScoped
@@ -128,6 +131,21 @@ public class LoginController implements Serializable {
 		}
 
 	}
+	
+	/*SI time*/
+	
+	@SuppressWarnings("unchecked") //Supprime un avertissement
+	public void trierContacts() {  
+		Comparator Jcomparator = new PrenomComparator();
+	
+		Collections.sort(persons,Jcomparator); 
+		
+		//Collections.sort(persons);
+		
+				
+	}
+	
+	
 
 	public Tutperson getSelectedPersonList() {
 		return selectedPersonList;

@@ -10,22 +10,29 @@ xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://java.sun.com/jsf/facele
 <h:outputStylesheet name="css/mystyle.css"/>
 </h:head>
 <h:body>
+
+
+<p:growl />
+	<p:panel id="login" header="#{msgs.panel_header}">
+	       
+
 <!-- <f:view locale="#{languageController.language}"> -->
   
 <p:growl showDetail="false"/>
 	<p:panel id="login" header="login">
 	       <ui:include src="templates/language.xhtml" />
+
   <h:form> 
    <h:panelGrid columns="2" cellpadding="10">
-     <p:outputLabel value="Login ID:" />
+     <p:outputLabel value="#{msgs.indexUserId}"/>
 
      <p:selectOneMenu value="#{loginController.name}" required="true">
     	<f:selectItems value="#{loginController.listOfFirstNames}" />
     </p:selectOneMenu> 
-    <p:outputLabel value="Password : " />
-    <p:password value="#{loginController.password}" required="true"/>
+    <p:outputLabel value="#{msgs.indexPwd}" />
+    <p:password value="#{loginController.password}" required="true" requiredMessage="#{msgs.passwordNeed}"/>
  
-	<p:commandButton value="LOGIN" ajax="false" action="#{loginController.login}"/>
+	<p:commandButton value="#{msgs.loginButton}" ajax="false" action="#{loginController.login}" style="width:150px;height:70px"/>
 	</h:panelGrid>
 	</h:form>
 	</p:panel>

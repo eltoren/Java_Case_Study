@@ -14,32 +14,59 @@
 </h:head>
 
 <h:body id="basicActivity">
+<<<<<<< HEAD
+	<h1>#{msgs.registrationPanel}</h1>
+
+	
+	<p:growl id="growl" life="2000" showDetail="false" />
+	<p:panel  header="#{msgs.registrationPanel}"
+		footer="#{msgs.registrationPanel}" style="margin-bottom:20px">
+
 <!-- <f:view locale="#{languageController.language}"> -->
   <ui:include src="templates/language.xhtml" />
 <p:growl showDetail="false" life="2000"/>
 	<h1>Activity registration</h1>
 	<p:panel  header="Registration activity"
 		footer="Registration activity" style="margin-bottom:20px">
+
 		<h:panelGrid columns="2" cellpadding="5">
 
 
+					<!--  <p:dialog header="Values" modal="true" showEffect="bounce"
+						widgetVar="dlg" resizable="false">
+						<h:outputText value="Basic:" />
+						<h:outputText value="#{actionController.project}" />
+					</p:dialog>-->
+					
+					
+	
 			<h:form id="form">
 
 				<h:panelGrid id="panel" columns="1" border="0" cellpadding="1"
 					cellspacing="1">
+					
+					<p:messages>
+						<p:autoUpdate />
+					</p:messages>
+			
+					
 
 					<!--  Start Activity Name (change the value) -->
 					<br />
-					<p:outputLabel value="Name of the activity :" />
+					<p:outputLabel value="#{msgs.activityName}" />
 					<p:inputText id="ln" value="#{actionController.activityName}"
-						required="true" requiredMessage="required field" />
+						required="true" requiredMessage="#{msgs.NameRF}" />   <!-- RF MEAN REQUIRED FIELD -->
 					<br />
 					<!--  End Activity Name -->
 
 
 
 					<!--  Calendar part (restricted)-->
-					<p:outputLabel for="restricted" value="The date of activity :" />
+
+					
+					<p:outputLabel for="restricted" value="#{msgs.activityDate}" />
+			<p:outputLabel for="restricted" value="The date of activity :" />
+
 					<p:calendar id="restricted" value="#{calendarView.date}"
 						mindate="1/09/18" maxdate="01/1/2100" />
 					<p:dialog modal="true" resizable="false" header="Values"
@@ -51,17 +78,21 @@
 					</p:dialog>
 					<!-- End Calendar -->
 
+
+
+					<!--  Start Menu select Project -->
+					
+
+					<p:outputLabel for="Project" value="#{msgs.projectName}" />
+
 					<p:outputLabel for="Project" value="Project:" />
+
 					<p:selectOneMenu id="Project" value="#{actionController.project}"
 						style="width:125px">
 						<f:selectItems value="#{actionController.listProjectsNames}" />
 					</p:selectOneMenu>
 
-					<p:dialog header="Values" modal="true" showEffect="bounce"
-						widgetVar="dlg" resizable="false">
-						<h:outputText value="Basic:" />
-						<h:outputText value="#{actionController.project}" />
-					</p:dialog>
+					
 					<!--  End Menu select Project -->
 
 
@@ -69,28 +100,35 @@
 					<!-- Start Button Time registry , end button time registry -->
 					<br />
 
-					<p:outputLabel for="timeStart" value="Start Time : " />
+					<p:outputLabel for="timeStart" value="#{msgs.startTime}" />
 					<p:calendar id="timeStart" value="#{actionController.startTime}"
-						pattern="HH:mm" timeOnly="true" required="true" />
+						pattern="HH:mm" timeOnly="true" required="true" requiredMessage="#{msgs.TIMEStartRF}" />
 					<br />
-					<p:outputLabel for="timeEnd" value="End Time : " />
+					<p:outputLabel for="timeEnd" value="#{msgs.endTime}" />
 					<p:calendar id="timeEnd" value="#{actionController.endTime}"
-						pattern="HH:mm" timeOnly="true" required="true" />
+						pattern="HH:mm" timeOnly="true" required="true" requiredMessage="#{msgs.TIMEEndRF}" />
 					<br />
 					<!-- End Start Button time registry , end button time registry -->
 
 
 					<!--  2 buttons Start : register and go back -->
+
+
 					<br />
-					<p:commandButton value="Register" id="registerButton"
+					<p:commandButton value="#{msgs.activitySubmit}" id="registerButton"
 						actionListener="#{actionController.registerActivity}" ajax="false" />
 					<br />
-					<p:commandButton value="Go Back" id="BackButton"
+					<p:commandButton value="#{msgs.goBackButton}" id="BackButton"
 						action="#{frontBean.goBack}" ajax="false" immediate="true" />
 
 					<!-- End Button -->
 
 				</h:panelGrid>
+
+
+		
+		
+
 			</h:form>
 		</h:panelGrid>
 	</p:panel>

@@ -1,0 +1,21 @@
+IF time  
+
+
+
+finish calcul salary
+internationalisation : french, english, dutch
+validation
+fix "problem" with the first element in one select menu ( for analyse worker and analyse activities
+Order the datatable per one field ( exemple Date)
+Order de users in connection field 
+webservice?
+Clear the session ( real clear) when logout
+fix the problem if we have the same ln and fn
+
+
+
+find comparator  to sort !!
+
+
+powerpoint
+reunion who say what

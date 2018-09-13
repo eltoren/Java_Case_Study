@@ -11,6 +11,11 @@
 </h:head>
 
 <h:body style="background-color:#698dc6;">
+
+	<h1>#{msgs.panelCalculSalary}</h1>
+
+	<p:panel id="CalculationSalary" header="#{msgs.panelCalculSalary}"
+
 	<h1>Calculation salary</h1>
 <f:view locale="#{languageController.language}">
   
@@ -19,31 +24,29 @@
 		footer="Calculation salary" style="margin-bottom:20px">
 		<ui:include src="templates/language.xhtml" />
 
+
 		<h:form>
 
-
-			<p>Here the calculation of salary</p>
-
 			<p:dataTable var="coWorker" value="#{dtSalaryView.coWorker}">
-				<p:column headerText="Last Name">
+				<p:column headerText="#{msgs.dtSalaryPLName}">
 					<h:outputText value="#{coWorker.plname}" />
 				</p:column>
 
-				<p:column headerText="First Name">
+				<p:column headerText="#{msgs.dtSalaryPFName}">
 					<h:outputText value="#{coWorker.pfname}" />
 				</p:column>
 			
-				<p:column headerText="Statut">
+				<p:column headerText="#{msgs.dtSalaryStatut}">
 					<h:outputText value="#{coWorker.ptype}" />
 				</p:column>
 
-				<p:column headerText="Total">
+				<p:column headerText="#{msgs.dtSalaryTotal}">
 					<h:outputText value="#{actionController.calculationSalary(100,50)}" />
 				</p:column>
 
 			</p:dataTable>
 
-			<p:commandButton value="Go Back" id="BackButton"
+			<p:commandButton value="#{msgs.goBackButton}" id="BackButton"
 				action="#{frontBean.goBack}" ajax="false"
 				styleClass="ui-priority-primary" style="float: right;" />
 
@@ -53,7 +56,7 @@
 
 	</p:panel>
 
-	<p:commandButton value="Logout" id="logout"
+	<p:commandButton value="#{msgs.logoutButton}" id="logout"
 		action="#{frontBean.logout}" styleClass="ui-priority-primary"
 		style="float: right;" />
 
