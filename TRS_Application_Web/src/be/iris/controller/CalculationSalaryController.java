@@ -26,6 +26,9 @@ public class CalculationSalaryController {
 	private LocalDate endOfMonth;
 	private float pricePerHour;
 	private float salary;
+	private Boolean dataTableSalary = false;
+	
+	
 
 	@Inject
 	private LoginController loginController;
@@ -48,13 +51,15 @@ public class CalculationSalaryController {
 	}
 
 	public void calculateSalarie() {
+		/*dataTableSalary =true;
 		this.dateConversionsSetter();
 		loginController.setSelectedPersonfromList(personName);
 		Tutperson p = loginController.getSelectedPersonList();
 		workingDays = workingDayBean.getListWorkigDaysOfPersonBetweenStartDateANdEndDate(p.getPno(), startOfMonth,
 				endOfMonth);
 		float timeWorked = getHoursWorkedInMonth();
-		salary = pricePerHour * timeWorked;
+		salary = pricePerHour * timeWorked;*/
+		dataTableSalary = true;
 	}
 	
 	private float getHoursWorkedInMonth() {
@@ -132,4 +137,13 @@ public class CalculationSalaryController {
 	public void setSalary(float salary) {
 		this.salary = salary;
 	}
+
+	public Boolean getDataTableSalary() {
+		return dataTableSalary;
+	}
+
+	public void setDataTableSalary(Boolean dataTableSalary) {
+		this.dataTableSalary = dataTableSalary;
+	}
+	
 }

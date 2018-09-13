@@ -8,85 +8,101 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Calculation salary</title>
-	<h:outputStylesheet name="css/mystyle.css"/>
+	<h:outputStylesheet name="css/mystyle.css" />
 </h:head>
 
 <h:body style="background-color:#698dc6;">
 
 	<h1>#{msgs.panelCalculSalary}</h1>
 	<f:view locale="#{languageController.language}">
-  
-<p:growl showDetail="false" life="2000"/>
-	<p:panel id="CalculationSalary" header="#{msgs.panelCalculSalary}"
-		footer="Calculation salary" style="margin-bottom:20px">
-		<ui:include src="templates/language.xhtml" />
+
+		<p:growl showDetail="false" life="2000" />
+		<p:panel id="CalculationSalary" header="#{msgs.panelCalculSalary}"
+			footer="Calculation salary" style="margin-bottom:20px">
+			<ui:include src="templates/language.xhtml" />
 
 
-		<h:form>
-
-			<p:dataTable var="coWorker" value="#{dtSalaryView.coWorker}">
-				<p:column headerText="#{msgs.dtSalaryPLName}">
-					<h:outputText value="#{coWorker.plname}" />
-				</p:column>
-
-				<p:column headerText="#{msgs.dtSalaryPFName}">
-					<h:outputText value="#{coWorker.pfname}" />
-				</p:column>
-			
-				<p:column headerText="#{msgs.dtSalaryStatut}">
-					<h:outputText value="#{coWorker.ptype}" />
-				</p:column>
-
-				<p:column headerText="#{msgs.dtSalaryTotal}">
-					<h:outputText value="#{actionController.calculationSalary(100,50)}" />
-				</p:column>
-
-			</p:dataTable>
-
-			<p:commandButton value="#{msgs.goBackButton}" id="BackButton"
-				action="#{frontBean.goBack}" ajax="false"
-				styleClass="ui-priority-primary" style="float: right;" />
-
-		</h:form>
-
-		<br />
-		
-			     
-        <p:row>  
-            <p:column>  
-                <p:inputNumber id="pricePerHour" value="25" symbol="EUR" symbolPosition="s" 
-                               decimalSeparator="," thousandSeparator=".">  
-                </p:inputNumber>  
-            </p:column>  
-            
-            <p:column>  
-            <p:commandButton value="#{}" ajax="false"
-					actionListener="#{}"
-					style="width:150px;height:80px"/>  
-            </p:column> 
-                
-                
-                
-              
-                
-        </p:row>
-        
-        
-         
-     
-		
-		
-		
-
-	</p:panel>
-
-	<p:commandButton value="#{msgs.logoutButton}" id="logout"
-		action="#{frontBean.logout}" styleClass="ui-priority-primary"
-		style="float: right;" />
+			<h:form>
 
 
+				<h:panelGrid columns="2" cellpadding="10">
 
-</f:view>
+					<p:outputLabel value="#{msgs.indexUserId}" />
+
+					<p:selectOneMenu value="#{loginController.name}" required="true">
+						<f:selectItems value="#{dtSalaryView.coWorker}" />
+					</p:selectOneMenu>
+
+
+					<h:outputText value="#{msgs.priceHour}" />
+					<p:inputNumber id="pricePerHour"
+						value="#{calculationsalarycontroller.pricePerHour}" symbol="EUR"
+						symbolPosition="s" decimalSeparator="," thousandSeparator=".">
+					</p:inputNumber>
+
+					<p:outputLabel for="restricted" value="#{msgs.month}" />
+
+					<p:calendar id="restricted" value="#{calendarView.date}"
+						mindate="1/09/18" maxdate="01/1/2100" required="true"
+						requiredMessage="#{msgs.calendarRF}" />
+
+					<p:dialog modal="true" resizable="false" header="Values"
+						widgetVar="dlg" showEffect="fold">
+						<p:outputLabel value="Restricted:" />
+						<p:outputLabel value="#{calendarView.date}">
+							<f:convertDateTime pattern="MM/dd/yyyy" />
+						</p:outputLabel>
+					</p:dialog>
+
+					<p:commandButton value="#{msgs.calculSalaryPrice}" ajax="true"
+						actionListener="#{calculationSalaryController.calculateSalarie}"
+						style="width:120px;height:40px" />
+				</h:panelGrid>
+
+				<p:dataTable var="coWorker" value="#{dtSalaryView.coWorker}"
+					rendered="#{calculationSalaryController.dataTableSalary}">
+					<p:column headerText="#{msgs.dtSalaryPLName}">
+						<h:outputText value="#{coWorker.plname}" />
+					</p:column>
+
+					<p:column headerText="#{msgs.dtSalaryPFName}">
+						<h:outputText value="#{coWorker.pfname}" />
+					</p:column>
+
+					<p:column headerText="#{msgs.dtSalaryStatut}">
+						<h:outputText value="#{coWorker.ptype}" />
+					</p:column>
+
+					<p:column headerText="#{msgs.dtSalaryTotal}">
+						<h:outputText value="#{calculationSalaryController.salary}"/>
+					</p:column>
+
+				</p:dataTable>
+
+
+				<br />
+
+								
+				<p:commandButton value="#{msgs.goBackButton}" id="BackButton"
+					action="#{frontBean.goBack}" ajax="false" immediate="true" style="width:120px;height:40px"/>
+
+				<p:commandButton value="#{msgs.logoutButton}" id="logout"
+					action="#{frontBean.logout}" styleClass="ui-priority-primary"
+					style="float: right;width:120px;height:40px" />
+
+			</h:form>
+
+			<br />
+
+
+
+		</p:panel>
+
+
+
+
+
+	</f:view>
 
 </h:body>
 </html>
