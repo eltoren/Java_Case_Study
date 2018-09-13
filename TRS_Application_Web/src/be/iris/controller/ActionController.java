@@ -96,6 +96,7 @@ public class ActionController implements Serializable {
 		this.listProjectsNames = listProjectsNames;
 	}
 
+	
 	public void sendAMessage(String msg, Severity error) {
 		FacesMessage message = new FacesMessage(msg);
 		message.setSeverity(error);
