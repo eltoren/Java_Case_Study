@@ -11,7 +11,7 @@
 	<title>Menu main page</title>
 </h:head>
 <h:body id="basicMain">
-<!-- <f:view locale="#{languageController.language}"> -->
+<f:view locale="#{languageController.language}"> 
   
 <p:growl showDetail="false" life="2000"/>
 	<h1>Menu</h1>
@@ -56,7 +56,7 @@
 	<p:commandButton value="#{msgs.logoutButton}" id="logout"
 		action="#{frontBean.logout}" styleClass="ui-priority-primary"
 		style="float: right;" />
-<!-- </f:view> -->
+</f:view> 
 </h:body>
 
 </html>

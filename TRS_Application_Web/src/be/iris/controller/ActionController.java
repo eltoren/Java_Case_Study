@@ -131,11 +131,21 @@ public class ActionController implements Serializable {
 
 	@Deprecated
 	private boolean dateConversionsSetter() {
+	
 		System.out.println(startTime.format(DateFormat.dtfHours));
 		boolean returnedValue = true;
+		
+		
+		if(calendar.getDate() == null)
+		{
+		this.sendAMessage("ENTER A DATE PLEASE!", FacesMessage.SEVERITY_ERROR);
+		return false;
+		}
+		
 		int day = calendar.getDate().getDate();
 		int month = calendar.getDate().getMonth() +1;
 		int year = calendar.getDate().getYear() + 1900;
+				
 		LocalDate date = LocalDate.of(year, month, day);
 		LocalDateTime startDateTime = LocalDateTime.of(date, startTime);
 		LocalDateTime endDateTime = LocalDateTime.of(date, endTime);
@@ -213,15 +223,6 @@ public class ActionController implements Serializable {
 	public String checkOut() {
 
 		return "MainPage";
-	}
-
-	public float calculationSalary(float pricePerHour, float totalHour) {
-		float salaryTotal;
-
-		salaryTotal = pricePerHour * totalHour;
-
-		return salaryTotal;
-
 	}
 
 }

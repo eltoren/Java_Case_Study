@@ -8,6 +8,7 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Calculation salary</title>
+	<h:outputStylesheet name="css/mystyle.css"/>
 </h:head>
 
 <h:body style="background-color:#698dc6;">
@@ -49,6 +50,33 @@
 		</h:form>
 
 		<br />
+		
+			     
+        <p:row>  
+            <p:column>  
+                <p:inputNumber id="pricePerHour" value="25" symbol="EUR" symbolPosition="s" 
+                               decimalSeparator="," thousandSeparator=".">  
+                </p:inputNumber>  
+            </p:column>  
+            
+            <p:column>  
+            <p:commandButton value="#{}" ajax="false"
+					actionListener="#{}"
+					style="width:150px;height:80px"/>  
+            </p:column> 
+                
+                
+                
+              
+                
+        </p:row>
+        
+        
+         
+     
+		
+		
+		
 
 	</p:panel>
 
