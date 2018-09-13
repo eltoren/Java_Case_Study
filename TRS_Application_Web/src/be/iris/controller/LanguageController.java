@@ -1,5 +1,6 @@
 package be.iris.controller;
 
+import java.io.Serializable;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -13,7 +14,7 @@ import javax.inject.Named;
 
 @Named
 @SessionScoped
-public class LanguageController {
+public class LanguageController implements Serializable {
 
 	private String language="en";
 	
