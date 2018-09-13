@@ -11,32 +11,29 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import be.iris.PrimFaceController.CalendarView;
-import be.iris.entities.Tutperson;
-import be.iris.entities.TutworkingDay;
-import be.iris.session.view.WorkingDayBeanRemote;
+import be.iris.entities.Tutactivity;
+import be.iris.entities.Tutcours;
+import be.iris.session.view.ProjectBeanRemote;
 
 @Named
 @RequestScoped
-public class CalculationSalaryController {
+public class CalculationInvoiceController {
 
-	private List<TutworkingDay> workingDays = new ArrayList<>();
+	private List<Tutactivity> activities = new ArrayList<>();
 
-	private String personName;
+	private String projectName;
 	private LocalDate startOfMonth;
 	private LocalDate endOfMonth;
 	private float pricePerHour;
-	private float salary;
-
-	@Inject
-	private LoginController loginController;
+	private float price;
 
 	@Inject
 	private CalendarView calendar;
 
 	@EJB
-	private WorkingDayBeanRemote workingDayBean;
+	private ProjectBeanRemote projectBean;
 
-	public CalculationSalaryController() {
+	public CalculationInvoiceController() {
 	}
 
 	@Deprecated
@@ -47,50 +44,40 @@ public class CalculationSalaryController {
 		endOfMonth = startOfMonth.plusMonths(1).minusDays(1);
 	}
 
-	public void calculateSalarie() {
+	public void calculateInvoice() {
 		this.dateConversionsSetter();
-		loginController.setSelectedPersonfromList(personName);
-		Tutperson p = loginController.getSelectedPersonList();
-		workingDays = workingDayBean.getListWorkigDaysOfPersonBetweenStartDateANdEndDate(p.getPno(), startOfMonth,
-				endOfMonth);
-		float timeWorked = getHoursWorkedInMonth();
-		salary = pricePerHour * timeWorked;
+		Tutcours c = projectBean.getInvoicedProject(projectName);
+		
+		activities =  c.getProject().getActivities();
+		this.filterActivitiesInMonth();
+		
+			
+		
+		float timeWorked = getHoursWorkedOnProject();
+		price = pricePerHour * timeWorked;
+	}	
+	
+	private void filterActivitiesInMonth() {
+		List<Tutactivity> list = new ArrayList<>();
+		for (Tutactivity tutactivity : activities) {
+			LocalDate actDate = tutactivity.getActDate().toLocalDate();
+			if (actDate.isAfter(startOfMonth.minusDays(1)) && actDate.isBefore(endOfMonth.plusDays(1))) {
+				list.add(tutactivity);
+			}
+		}
+		this.setActivities(list);
 	}
 	
-	private float getHoursWorkedInMonth() {
+	private float getHoursWorkedOnProject() {
 		float timeWorked = 0;
-		for (TutworkingDay workingDay : workingDays) {
-			LocalDateTime startTime = workingDay.getStartTime().toLocalDateTime();
-			LocalDateTime endTime = workingDay.getEndTime().toLocalDateTime();
+		for (Tutactivity activity : activities) {
+			LocalDateTime startTime = activity.getActStartTime().toLocalDateTime();
+			LocalDateTime endTime = activity.getActEndTime().toLocalDateTime();
 			int hours = (endTime.getHour() - startTime.getHour());
 			int minuts = (endTime.getMinute() - startTime.getMinute());
 			timeWorked += hours + ((minuts/60)*100);
 		}
 		return timeWorked;
-	}
-
-	public List<TutworkingDay> getWorkingDays() {
-		return workingDays;
-	}
-
-	public void setWorkingDays(List<TutworkingDay> workingDays) {
-		this.workingDays = workingDays;
-	}
-
-	public String getName() {
-		return personName;
-	}
-
-	public void setName(String personName) {
-		this.personName = personName;
-	}
-
-	public LoginController getLoginController() {
-		return loginController;
-	}
-
-	public void setLoginController(LoginController loginController) {
-		this.loginController = loginController;
 	}
 	
 	public CalendarView getCalendar() {
@@ -126,10 +113,34 @@ public class CalculationSalaryController {
 	}
 
 	public float getSalary() {
-		return salary;
+		return price;
 	}
 
 	public void setSalary(float salary) {
-		this.salary = salary;
+		this.price = salary;
+	}
+
+	public List<Tutactivity> getActivities() {
+		return activities;
+	}
+
+	public void setActivities(List<Tutactivity> list) {
+		this.activities = list;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
 	}
 }

@@ -21,6 +21,8 @@ public interface ProjectBeanRemote {
 	public List<Tutproject> getAllProjects();
 
 	public List<Tutcours> getListInvoicedProject();
+	
+	public Tutcours getInvoicedProject(String projectName);
 
 	public List<Tutproject> getListNonInvoicesProjects();
 
