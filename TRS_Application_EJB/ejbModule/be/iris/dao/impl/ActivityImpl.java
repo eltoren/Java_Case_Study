@@ -102,13 +102,12 @@ public class ActivityImpl implements ActivityDao {
 		return listActivities;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Tutactivity> getAllActivitiesAtDate(LocalDate date) {
 		List<Tutactivity> listActivities = new ArrayList<>();
 		try {
 
-			Query query = em.createQuery("SELECT a from Tutactivity a WHERE a.date = :date", Tutactivity.class);
+			TypedQuery<Tutactivity> query = em.createQuery("SELECT a from Tutactivity a WHERE a.date = :date", Tutactivity.class);
 			query.setParameter("date", Date.valueOf(date));
 			listActivities = query.getResultList();
 
@@ -119,7 +118,6 @@ public class ActivityImpl implements ActivityDao {
 		return listActivities;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Tutactivity> getAllActivitiesOfPerson(long person)
 			throws ActivityException {
@@ -128,6 +126,7 @@ public class ActivityImpl implements ActivityDao {
 			Tutperson p = em.find(Tutperson.class, person);
 			int i = 0;
 			for(; i <p.getActivities().size();i++){
+				em.detach(p.getActivities().get(i));
 				listActivities.add(p.getActivities().get(i));
 			}
 			if(listActivities.isEmpty()){
@@ -140,7 +139,6 @@ public class ActivityImpl implements ActivityDao {
 		return listActivities;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Tutactivity> getAllActivitiesOfProject(String project)
 			throws ActivityException {
@@ -150,6 +148,7 @@ public class ActivityImpl implements ActivityDao {
 			Tutproject p = em.find(Tutproject.class, project);
 			int i = 0;
 			for(; i <p.getActivities().size();i++){
+				em.detach(p.getActivities().get(i));
 				listActivities.add(p.getActivities().get(i));
 			}
 			if(listActivities.isEmpty()){
@@ -162,13 +161,12 @@ public class ActivityImpl implements ActivityDao {
 	}
 
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Tutactivity> getAllActivitiesOfPersonAtDate(Tutperson person, LocalDate date) {
 		List<Tutactivity> listActivities = new ArrayList<>();
 		try {
 
-			Query query = em.createQuery("SELECT a from Tutactivity a WHERE a.person = person AND a.date = :date",
+			TypedQuery<Tutactivity> query = em.createQuery("SELECT a from Tutactivity a WHERE a.person = person AND a.date = :date",
 					Tutactivity.class);
 			query.setParameter("person", person);
 			query.setParameter("date", Date.valueOf(date));
@@ -182,13 +180,12 @@ public class ActivityImpl implements ActivityDao {
 	}
 
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Tutactivity> getAllActivitiesOfProjectAtDate(Tutproject project, LocalDate date) {
 		List<Tutactivity> listActivities = new ArrayList<>();
 		try {
 
-			Query query = em.createQuery("SELECT a from Tutactivity a WHERE a.project = project AND a.date = :date",
+			TypedQuery<Tutactivity> query = em.createQuery("SELECT a from Tutactivity a WHERE a.project = project AND a.date = :date",
 					Tutactivity.class);
 			query.setParameter("project", project);
 			query.setParameter("date", Date.valueOf(date));
@@ -200,13 +197,12 @@ public class ActivityImpl implements ActivityDao {
 		return listActivities;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Tutactivity> getAllActivitiesOfPersonWorkingAtProject(Tutperson person, Tutproject project) {
 		List<Tutactivity> listActivities = new ArrayList<>();
 		try {
 
-			Query query = em.createQuery("SELECT a from Tutactivity a WHERE a.person = person AND a.project = project",
+			TypedQuery<Tutactivity> query = em.createQuery("SELECT a from Tutactivity a WHERE a.person = person AND a.project = project",
 					Tutactivity.class);
 			query.setParameter("person", person);
 			query.setParameter("project", project);
@@ -219,14 +215,13 @@ public class ActivityImpl implements ActivityDao {
 		return listActivities;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Tutactivity> getAllActivitiesOfPersonWorkigAtProjectOnDate(Tutperson person, Tutproject project,
 			LocalDate date) {
 		List<Tutactivity> listActivities = new ArrayList<>();
 		try {
 
-			Query query = em.createQuery(
+			TypedQuery<Tutactivity> query = em.createQuery(
 					"SELECT a from Tutactivity a WHERE a.person = person AND a.project = :project AND a.date = :date",
 					Tutactivity.class);
 			query.setParameter("person", person);

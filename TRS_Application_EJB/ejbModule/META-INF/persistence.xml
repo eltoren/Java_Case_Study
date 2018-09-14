@@ -17,8 +17,6 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org
 			<property name="openjpa.jdbc.Schema" value="tu00010" />
 			<property name="openjpa.Log"
 				value="defaultLevel=WARN, Runtime=INFO, Tool=INFO,SQL=TRACE" />
-
-	
 		 <!--  Generation table
             <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
@@ -30,9 +28,6 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org
         
             <property name="eclipselink.ddl-generation.output-mode" value="both"/> 
         -->
-
-
-
 		</properties>
 		
 	</persistence-unit>	

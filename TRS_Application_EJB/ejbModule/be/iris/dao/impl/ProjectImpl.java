@@ -6,7 +6,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import be.iris.dao.ProjectDao;
@@ -78,9 +77,8 @@ public class ProjectImpl implements ProjectDao {
 	public List<Tutproject> listAllprojects() {
 		List<Tutproject> listProjects = new ArrayList<>();
 		try {
-				Query q =  em.createNamedQuery("Tutproject.findAll");
+				TypedQuery<Tutproject> q =  em.createNamedQuery("Tutproject.findAll", Tutproject.class);
 				for(Tutproject p : (List<Tutproject>) q.getResultList()){
-					//em.detach(p);
 				listProjects.add(p);
 				}
 		} catch (RuntimeException re) {

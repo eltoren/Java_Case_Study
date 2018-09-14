@@ -25,27 +25,27 @@ public class SelectOneMenuView {
 		this.analyse = analyse;
 	}
  
-	public void onSelectShowDataTable(String choice){
-		choice = this.analyse;
-		switch(choice)
-		{
-		case "Activitylist" :
-			
-			System.out.println("Changer datatable");
-			
-			break;
-		case "Projectlist" :
-			System.out.println("Changer datatable");
-			
-			break;
-		case "Employeelist" :
-			
-			System.out.println("Changer datatable");
-			break;
-				
-		}
-		
-	}
-  
+//	public void onSelectShowDataTable(String choice){
+//		choice = this.analyse;
+//		switch(choice)
+//		{
+//		case "Activitylist" :
+//			
+//			System.out.println("Changer datatable");
+//			
+//			break;
+//		case "Projectlist" :
+//			System.out.println("Changer datatable");
+//			
+//			break;
+//		case "Employeelist" :
+//			
+//			System.out.println("Changer datatable");
+//			break;
+//				
+//		}
+//		
+//	}
+//  
        
 }

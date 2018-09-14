@@ -1,22 +1,17 @@
-package be.iris.exceptions;
+package be.iris.session;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
 import be.iris.dao.ActivityDao;
 import be.iris.entities.Tutactivity;
 import be.iris.entities.Tutperson;
 import be.iris.entities.Tutproject;
+import be.iris.exceptions.ActivityException;
 import be.iris.session.view.ActivityBeanRemote;
 
 @Stateless(mappedName = "activityBean")
@@ -52,7 +47,6 @@ public class ActivityBean implements ActivityBeanRemote {
 			}
 		} else {
 			System.out.println("size not equal");
-			// error
 		}
 
 	}

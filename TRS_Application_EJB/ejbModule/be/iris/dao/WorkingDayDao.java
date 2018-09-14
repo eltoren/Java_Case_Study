@@ -23,8 +23,6 @@ public interface WorkingDayDao {
 
 	public List<TutworkingDay> listAllWorkigDays();
 
-	// extra methods
-
 	public List<TutworkingDay> getListWorkingDaysAtDate(LocalDate date);
 
 	public List<TutworkingDay> getListWorkigDaysOfPerson(long person);

@@ -1,23 +1,33 @@
 package be.iris.controller;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import be.iris.PrimFaceController.CalendarView;
 import be.iris.entities.Tutperson;
 import be.iris.entities.TutworkingDay;
+import be.iris.model.SalaryInput;
+import be.iris.model.SalaryResult;
 import be.iris.session.view.WorkingDayBeanRemote;
 
-@Named
-@RequestScoped
-public class CalculationSalaryController {
+@SuppressWarnings("serial")
+@Named("calculationSalaryController")
+@SessionScoped
+public class CalculationSalaryController implements Serializable {
 
 	private List<TutworkingDay> workingDays = new ArrayList<>();
 
@@ -27,8 +37,6 @@ public class CalculationSalaryController {
 	private float pricePerHour;
 	private float salary;
 	private Boolean dataTableSalary = false;
-	
-	
 
 	@Inject
 	private LoginController loginController;
@@ -50,29 +58,27 @@ public class CalculationSalaryController {
 		endOfMonth = startOfMonth.plusMonths(1).minusDays(1);
 	}
 
-	public void calculateSalarie() {
-		/*dataTableSalary =true;
-		this.dateConversionsSetter();
-		loginController.setSelectedPersonfromList(personName);
-		Tutperson p = loginController.getSelectedPersonList();
-		workingDays = workingDayBean.getListWorkigDaysOfPersonBetweenStartDateANdEndDate(p.getPno(), startOfMonth,
-				endOfMonth);
-		float timeWorked = getHoursWorkedInMonth();
-		salary = pricePerHour * timeWorked;*/
+	public String calculateSalary() {
 		dataTableSalary = true;
+		this.dateConversionsSetter();
+		Tutperson p = this.rightPerson();
+		float timeWorked = workingDayBean.getHoursWorkedInMonth(p.getPno(), startOfMonth, endOfMonth);
+		Client client = ClientBuilder.newClient();
+		
+		String baseUri = "http://localhost:9080/salaryapi/salaryservice/salaries";
+		WebTarget target = client.target(baseUri);
+		
+		SalaryInput input = new SalaryInput(timeWorked,pricePerHour);
+		
+		Invocation.Builder builder = target.request(MediaType.APPLICATION_JSON);	
+		Response response = builder.post(Entity.entity(input,MediaType.APPLICATION_JSON));
+		SalaryResult result = response.readEntity(SalaryResult.class);
+		salary = (float) result.getSalary();
+		return "CalculationSalary";
+		
 	}
 	
-	private float getHoursWorkedInMonth() {
-		float timeWorked = 0;
-		for (TutworkingDay workingDay : workingDays) {
-			LocalDateTime startTime = workingDay.getStartTime().toLocalDateTime();
-			LocalDateTime endTime = workingDay.getEndTime().toLocalDateTime();
-			int hours = (endTime.getHour() - startTime.getHour());
-			int minuts = (endTime.getMinute() - startTime.getMinute());
-			timeWorked += hours + ((minuts/60)*100);
-		}
-		return timeWorked;
-	}
+
 
 	public List<TutworkingDay> getWorkingDays() {
 		return workingDays;
@@ -82,11 +88,11 @@ public class CalculationSalaryController {
 		this.workingDays = workingDays;
 	}
 
-	public String getName() {
+	public String getPersonName() {
 		return personName;
 	}
 
-	public void setName(String personName) {
+	public void setPersonName(String personName) {
 		this.personName = personName;
 	}
 
@@ -145,5 +151,27 @@ public class CalculationSalaryController {
 	public void setDataTableSalary(Boolean dataTableSalary) {
 		this.dataTableSalary = dataTableSalary;
 	}
-	
+
+	public Tutperson rightPerson(){
+		Tutperson person = null;
+		String[] names = personName.split(" ");
+		String firstName = names[0];
+		String lastName ="";
+		for(int i =1; i < names.length; i++){
+			lastName += names[i];
+		}
+			
+		for(Tutperson p : loginController.getPersons()){
+			if(firstName.trim().equalsIgnoreCase(p.getPfname().trim()) && 
+					lastName.trim().equalsIgnoreCase(p.getPlname().trim())){
+						person = p;
+						break;
+					}
+		}
+		if(person == null){
+			return null;
+		}else{
+			return person;
+		}
+	}
 }

@@ -51,8 +51,6 @@ public class CalculationInvoiceController {
 		activities =  c.getProject().getActivities();
 		this.filterActivitiesInMonth();
 		
-			
-		
 		float timeWorked = getHoursWorkedOnProject();
 		price = pricePerHour * timeWorked;
 	}	

@@ -1,17 +1,18 @@
 package be.iris.PrimFaceController;
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
 
 @Named
 @RequestScoped
-public class CalendarView implements Serializable {
+public class CalendarView {
          
 	private Date date;
 

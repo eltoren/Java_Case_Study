@@ -7,9 +7,7 @@ import java.sql.Date;
 public class WorkingDayPK implements Serializable{
 
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 23934585316885000L;
 
 	private long coworker;

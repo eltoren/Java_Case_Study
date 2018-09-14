@@ -5,10 +5,8 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.RollbackException;
 import javax.persistence.TypedQuery;
 
 import be.iris.dao.PersonDao;
@@ -22,28 +20,18 @@ public class PersonImpl implements PersonDao {
 
 	@Override
 	public void insertPerson(Tutperson person) {
-		EntityTransaction tx = em.getTransaction();
 		try {
-			tx.begin();
 
 			em.persist(person);
 
-			tx.commit();
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 	}
 
 	@Override
 	public void updatePerson(Tutperson oldPerson, Tutperson newPerson) {
-		EntityTransaction tx = em.getTransaction();
 		try {
-			tx.begin();
 
 			Tutperson prsn = em.find(Tutperson.class, oldPerson);
 			prsn.setPadept(newPerson.getPadept());
@@ -57,13 +45,7 @@ public class PersonImpl implements PersonDao {
 
 			em.merge(prsn);
 
-			tx.commit();
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 
@@ -71,20 +53,10 @@ public class PersonImpl implements PersonDao {
 
 	@Override
 	public void deletePerson(Tutperson person) {
-		EntityTransaction tx = em.getTransaction();
 		try {
-			tx.begin();
-
 			em.merge(person);
 			em.remove(person);
-
-			tx.commit();
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 
@@ -92,18 +64,9 @@ public class PersonImpl implements PersonDao {
 
 	@Override
 	public Tutperson getPerson(Tutperson person) {
-		EntityTransaction tx = em.getTransaction();
 		Tutperson returnPerson = new Tutperson();
 		try {
-			tx.begin();
-			returnPerson = em.find(Tutperson.class, person);
-			tx.commit();
 		} catch (RuntimeException re) {
-			try {
-
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 		return returnPerson;
@@ -127,7 +90,6 @@ public class PersonImpl implements PersonDao {
 
 	@Override
 	public String getPasswordOfPerson(Tutperson person) {
-		System.out.println("pno = " + person.getPno());
 		try {
 			String sql = "select password from tutpasswords where pass_pno = ?";
 			Query query = em.createNativeQuery(sql);

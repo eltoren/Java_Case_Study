@@ -9,7 +9,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import be.iris.dao.WorkingDayDao;
-import be.iris.entities.Tutperson;
 import be.iris.entities.TutworkingDay;
 import be.iris.exceptions.WorkingDayException;
 import be.iris.session.view.WorkingDayBeanRemote;
@@ -31,31 +30,11 @@ public class WorkingDayBean implements WorkingDayBeanRemote {
 		workingDayDao.insertWorkingDay(workingDay, person);
 	}
 
-	/*@Override
-	public void StartNewWorkingDay(TutworkingDay workingDay) {
-		workingDayDao.insertWorkingDay(workingDay);
-	}
-*/
 	@Override
 	public void endWorkingDay(long person) throws WorkingDayException {
-//		TutworkingDay oldWorkingDay = workingDayDao.getWorkigDaysOfPersonAtDate(person, LocalDate.now());
-//		TutworkingDay newWorkingDay = oldWorkingDay;
-//		newWorkingDay.setEndTime(Timestamp.valueOf(LocalDateTime.now()));
 		workingDayDao.updateWorkingDay(person);
 	}
 
-	/*@Override
-	public void endWorkingDay(TutworkingDay workingDay, long pno) {
-		TutworkingDay oldWorkingDay = workingDay;
-		TutworkingDay newWorkingDay = workingDay;
-		newWorkingDay.setEndTime(Timestamp.valueOf(LocalDateTime.now()));
-		workingDayDao.updateWorkingDay(newWorkingDay, pno);
-	}*/
-/*
-	@Override
-	public void changeWorkingDay(TutworkingDay oldWorkingDay, TutworkingDay newWorkingDay) {
-		workingDayDao.updateWorkingDay(oldWorkingDay, newWorkingDay);
-	}*/
 
 	@Override
 	public void removeWorkingDay(long person, LocalDate date) {
@@ -102,6 +81,19 @@ public class WorkingDayBean implements WorkingDayBeanRemote {
 	public List<TutworkingDay> getListWorkigDaysOfPersonBetweenStartDateANdEndDate(long person,
 			LocalDate startDate, LocalDate endDate) {
 		return workingDayDao.getListWorkigDaysOfPersonBetweenStartDateANdEndDate(person, startDate, endDate);
+	}
+
+	
+	public float getHoursWorkedInMonth(long person, LocalDate startDate, LocalDate endDate) {
+		float timeWorked = 0;
+		for (TutworkingDay workingDay : this.getListWorkigDaysOfPersonBetweenStartDateANdEndDate(person, startDate, endDate)) {
+			LocalDateTime startTime = workingDay.getStartTime().toLocalDateTime();
+			LocalDateTime endTime = workingDay.getEndTime().toLocalDateTime();
+			int hours = (endTime.getHour() - startTime.getHour());
+			int minuts = (endTime.getMinute() - startTime.getMinute());
+			timeWorked += hours + ((minuts/60)*100);
+		}
+		return timeWorked;
 	}
 
 }

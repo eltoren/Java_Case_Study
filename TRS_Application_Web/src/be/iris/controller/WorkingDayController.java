@@ -36,8 +36,8 @@ public class WorkingDayController {
 		
 		pno = loginController.getPersonSelected().getPno();
 		try{
-		workingDayBean.StartNewWorkingDay(pno);
-		actionController.sendAMessage("Check-in done", FacesMessage.SEVERITY_INFO);
+			workingDayBean.StartNewWorkingDay(pno);
+			actionController.sendAMessage("Check-in done", FacesMessage.SEVERITY_INFO);
 		}catch(WorkingDayException wde){
 			actionController.sendAMessage(wde.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}

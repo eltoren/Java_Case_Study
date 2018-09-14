@@ -20,16 +20,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 
-/**
- * The persistent class for the TUTPERSONS database table.
- * 
- */
 @Entity(name="Tutperson")
 @Table(name="TUTPERSONS")
 @NamedQuery(name="Tutperson.findAll", query="SELECT t FROM Tutperson t ")
@@ -73,7 +66,7 @@ public class Tutperson implements Serializable {
 	private Tutcompany tutcompany;
 	
 //	@XmlTransient
-	@OneToMany(targetEntity=Tutactivity.class, mappedBy="person",fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
+	@OneToMany(targetEntity=Tutactivity.class, mappedBy="person",fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
 	private List<Tutactivity> activities = new ArrayList<>();
 	
 	@Column(name="ptype")

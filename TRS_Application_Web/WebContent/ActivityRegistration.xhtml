@@ -5,7 +5,6 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<h:outputStylesheet name="css/mystyle.css"/>
@@ -20,32 +19,21 @@
   
 <p:growl showDetail="false" life="2000"/>
 	
-	<p:panel  header="#{msgs.registrationPanel}"
-		footer="#{msgs.registrationPanel}" style="margin-bottom:20px">
+	<p:panel  header="#{msgs.registrationPanel}" style="margin-bottom:20px">
 		<ui:include src="templates/language.xhtml" />
-
 		<h:panelGrid columns="2" cellpadding="5">
-
-
 					<!--  <p:dialog header="Values" modal="true" showEffect="bounce"
 						widgetVar="dlg" resizable="false">
 						<h:outputText value="Basic:" />
 						<h:outputText value="#{actionController.project}" />
 					</p:dialog>-->
-					
-					
-	
 			<h:form id="form">
-
 				<h:panelGrid id="panel" columns="1" border="0" cellpadding="1"
 					cellspacing="1">
-					
 					<p:messages>
 						<p:autoUpdate />
 					</p:messages>
 			
-					
-
 					<!--  Start Activity Name (change the value) -->
 					<br />
 					<p:outputLabel value="#{msgs.activityName}" />
@@ -53,18 +41,11 @@
 						required="true" requiredMessage="#{msgs.NameRF}" />   <!-- RF MEAN REQUIRED FIELD -->
 					<br />
 					<!--  End Activity Name -->
-
-
-
-					<!--  Calendar part (restricted)-->
-
 					
+					<!--  Calendar part (restricted)-->
 					<p:outputLabel for="restricted" value="#{msgs.activityDate}" />
-			
 					<p:calendar id="restricted" value="#{calendarView.date}"
-
 						mindate="1/09/18" maxdate="01/1/2100" required="true" requiredMessage="#{msgs.calendarRF}" />
-
 					<p:dialog modal="true" resizable="false" header="Values"
 						widgetVar="dlg" showEffect="fold">
 						<p:outputLabel value="Restricted:" />
@@ -73,27 +54,17 @@
 						</p:outputLabel>
 					</p:dialog>
 					<!-- End Calendar -->
-
-
-
-					<!--  Start Menu select Project -->
 					
-
+					<!--  Start Menu select Project -->
 					<p:outputLabel for="Project" value="#{msgs.projectName}" />
-
 					<p:selectOneMenu id="Project" value="#{actionController.project}"
 						style="width:200px">
 						<f:selectItems value="#{actionController.listProjectsNames}" />
 					</p:selectOneMenu>
-
-					
 					<!--  End Menu select Project -->
-
-
 
 					<!-- Start Button Time registry , end button time registry -->
 					<br />
-
 					<p:outputLabel for="timeStart" value="#{msgs.startTime}" />
 					<p:calendar id="timeStart" value="#{actionController.startTime}"
 						pattern="HH:mm" timeOnly="true" required="true" requiredMessage="#{msgs.TIMEStartRF}" />
@@ -104,10 +75,8 @@
 					<br />
 					<!-- End Start Button time registry , end button time registry -->
 
-
 					<!--  2 buttons Start : register and go back -->
 					<h:panelGroup layout="block" id ="ButtonDIV" style ="display:flex; flex-direction:row;">
-			 
 					<p:commandButton value="#{msgs.activitySubmit}" id="registerButton"
 						actionListener="#{actionController.registerActivity}" ajax="false" style="width:120px;height:40px"/>
 					<p:commandButton value="#{msgs.goBackButton}" id="BackButton"
@@ -116,15 +85,10 @@
 				action="#{loginController.logOut}" styleClass="ui-priority-primary"
 				style="float: right;" immediate="true"/>
 					</h:panelGroup>
-				
 					<!-- End Button -->
 				</h:panelGrid>
-		
-
 			</h:form>
 		</h:panelGrid>
-		
-			
 	</p:panel>
  </f:view> 
 </h:body>

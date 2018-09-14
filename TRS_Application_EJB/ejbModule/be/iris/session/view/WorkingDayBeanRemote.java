@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
-import be.iris.entities.Tutperson;
 import be.iris.entities.TutworkingDay;
 import be.iris.exceptions.WorkingDayException;
 
@@ -14,14 +13,8 @@ public interface WorkingDayBeanRemote {
 	
 	public void StartNewWorkingDay(long pno) throws WorkingDayException;
 	
-//	public void StartNewWorkingDay(TutworkingDay workingDay);
-	
 	public void endWorkingDay(long pno) throws WorkingDayException;
 	
-/*	public void endWorkingDay(TutworkingDay workingDay);
-	
-	public void changeWorkingDay(TutworkingDay oldWorkingDay, TutworkingDay newWorkingDay);
-	*/
 	public void removeWorkingDay(long person, LocalDate date);
 	
 	public void removeWorkingDay(TutworkingDay workingDay);
@@ -41,6 +34,6 @@ public interface WorkingDayBeanRemote {
 	public List<TutworkingDay> getListWorkigDaysOfPersonBetweenStartDateANdEndDate(long person,
 			LocalDate startDate, LocalDate endDate);
 	
-	
+	public float getHoursWorkedInMonth(long person, LocalDate startDate, LocalDate endDate);
 
 }

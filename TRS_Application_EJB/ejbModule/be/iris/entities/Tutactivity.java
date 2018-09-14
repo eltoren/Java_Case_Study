@@ -12,21 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import be.iris.services.DateAdapter;
-import be.iris.services.TimestampAdapter;
-
-
-/**
- * The persistent class for the TUTACTIVITIES database table.
- * 
- */
 
 @Entity(name="Tutactivity")
 @Table(name="TUTACTIVITIES")
@@ -34,9 +20,7 @@ import be.iris.services.TimestampAdapter;
 //@XmlAccessorType(XmlAccessType.FIELD)
 public class Tutactivity implements Serializable {
 	
-	/**
-	 * 
-	 */
+
 	//@XmlTransient
 	private static final long serialVersionUID = 7720086255696017210L;
 

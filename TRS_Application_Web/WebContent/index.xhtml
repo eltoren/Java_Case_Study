@@ -1,38 +1,34 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-xmlns:p="http://primefaces.org/ui"
-xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
- <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" /> 
-<title>Login</title>
-<h:outputStylesheet name="css/mystyle.css"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Login</title>
+	<h:outputStylesheet name="css/mystyle.css" />
 </h:head>
 <h:body>
-
-<f:view locale="#{languageController.language}"> 
-  
-<p:growl showDetail="false"/>
-	
-	<p:panel id="login" header="#{msgs.panelheader}">
-	<ui:include src="templates/language.xhtml" />
-  <h:form> 
-   
-   <h:panelGrid columns="2" cellpadding="10">
-     <p:outputLabel value="#{msgs.indexUserId}"/>
-
-     <p:selectOneMenu value="#{loginController.name}" required="true">
-    	<f:selectItems value="#{loginController.listOfFirstNames}" />
-    </p:selectOneMenu> 
-    <p:outputLabel value="#{msgs.indexPwd}" />
-    <p:password value="#{loginController.password}" required="true" requiredMessage="#{msgs.passwordNeed}"/>
- 
-	<p:commandButton value="#{msgs.loginButton}" ajax="false" action="#{loginController.login}" style="width:150px;height:45px"/>
-	</h:panelGrid>
-	</h:form>
-	</p:panel>
-	
- </f:view> 
+	<f:view locale="#{languageController.language}">
+		<p:growl showDetail="false" />
+		<p:panel id="login" header="#{msgs.panelheader}">
+			<ui:include src="templates/language.xhtml" />
+			<h:form>
+				<h:panelGrid columns="2" cellpadding="10">
+					<p:outputLabel value="#{msgs.indexUserId}" />
+					<p:selectOneMenu value="#{loginController.name}" required="true">
+						<f:selectItems value="#{loginController.listOfFirstNames}" />
+					</p:selectOneMenu>
+					<p:outputLabel value="#{msgs.indexPwd}" />
+					<p:password value="#{loginController.password}" required="true"
+						requiredMessage="#{msgs.passwordNeed}" />
+					<p:commandButton value="#{msgs.loginButton}" ajax="false"
+						action="#{loginController.login}" style="width:150px;height:45px" />
+				</h:panelGrid>
+			</h:form>
+		</p:panel>
+	</f:view>
 </h:body>
 </html>

@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -16,13 +17,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import be.iris.PrimFaceController.CalendarView;
 import be.iris.entities.Tutactivity;
 import be.iris.entities.Tutproject;
 import be.iris.exceptions.ActivityException;
 import be.iris.session.view.ActivityBeanRemote;
 import be.iris.session.view.ProjectBeanRemote;
-import be.iris.utilities.DateFormat;
 
 @Named
 @SessionScoped
@@ -132,14 +133,11 @@ public class ActionController implements Serializable {
 	@Deprecated
 	private boolean dateConversionsSetter() {
 	
-		System.out.println(startTime.format(DateFormat.dtfHours));
 		boolean returnedValue = true;
 		
-		
-		if(calendar.getDate() == null)
-		{
-		this.sendAMessage("ENTER A DATE PLEASE!", FacesMessage.SEVERITY_ERROR);
-		return false;
+		if(calendar.getDate() == null){
+			this.sendAMessage("ENTER A DATE PLEASE!", FacesMessage.SEVERITY_ERROR);
+			return false;
 		}
 		
 		int day = calendar.getDate().getDate();
@@ -149,6 +147,7 @@ public class ActionController implements Serializable {
 		LocalDate date = LocalDate.of(year, month, day);
 		LocalDateTime startDateTime = LocalDateTime.of(date, startTime);
 		LocalDateTime endDateTime = LocalDateTime.of(date, endTime);
+		
 		if (date.isAfter(LocalDate.now())) {
 			this.sendAMessage("ENTER A VALID DATE, MAXIMUM IS TODAY", FacesMessage.SEVERITY_ERROR);
 			returnedValue = false;
@@ -215,14 +214,5 @@ public class ActionController implements Serializable {
 		return project;
 	}
 
-	public String checkIn() {
-
-		return "MainPage";
-	}
-
-	public String checkOut() {
-
-		return "MainPage";
-	}
 
 }

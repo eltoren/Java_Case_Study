@@ -21,6 +21,7 @@ import javax.validation.constraints.NotNull;
 @Table(name="TUTCOMPANIES")
 @NamedQuery(name="Tutcompany.findAll", query="SELECT t FROM Tutcompany t")
 public class Tutcompany implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id

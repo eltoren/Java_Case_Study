@@ -11,10 +11,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
-/**
- * The persistent class for the TUTCOURSES database table.
- * 
- */
 @Entity
 @Table(name="TUTCOURSES")
 @NamedNativeQuery(name="Tutcours.findAll", query="SELECT * FROM TUTCOURSES", resultClass=Tutcours.class)

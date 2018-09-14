@@ -16,8 +16,7 @@
 <p:growl showDetail="false" life="2000"/>
 	<h1>Menu</h1>
 
-	<p:panel id="Menu" header="Menu" footer="Menu"
-		style="margin-bottom:20px">
+	<p:panel id="Menu" header="Menu" style="margin-bottom:20px">
 	<ui:include src="templates/language.xhtml" />
 		<h:form>
 			<p:growl />
@@ -27,22 +26,27 @@
 					action="#{frontBean.registryActivity}"
 					style="width:150px;height:80px"
 					rendered="#{frontBean.bool_CW == true or frontBean.bool_ACC == true or frontBean.bool_MAN == true or frontBean.bool_EMP == true}" />
+				
 				<p:commandButton value="#{msgs.calculSalaryButton}" ajax="false"
 					action="#{frontBean.calculation}" disabled="false"
 					style="width:150px;height:80px"
 					rendered="#{frontBean.bool_ACC == true}" />
+				
 				<p:commandButton value="#{msgs.analyseWorkerButton}" ajax="false"
 					action="#{frontBean.analysePersons}"
 					style="width:150px;height:80px"
 					rendered="#{frontBean.bool_MAN == true}" />
+				
 				<p:commandButton value="#{msgs.analyseProjectButton}" ajax="false"
 					action="#{frontBean.analyseProjects}"
 					style="width:150px;height:80px"
 					rendered="#{frontBean.bool_MAN == true}" />
+				
 				<p:commandButton value="#{msgs.checkin}" ajax="false"
 					actionListener="#{workingDayController.checkIn}"
 					style="width:150px;height:80px"
 					rendered="#{frontBean.bool_CW == true}" />
+				
 				<p:commandButton value="#{msgs.checkout}" ajax="false"
 					actionListener="#{workingDayController.checkOut}"
 					style="width:150px;height:80px"

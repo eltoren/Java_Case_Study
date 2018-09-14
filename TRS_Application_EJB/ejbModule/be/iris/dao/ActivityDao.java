@@ -22,8 +22,6 @@ public interface ActivityDao {
 
 	public List<Tutactivity> listAllActivity();
 	
-	//extra methods
-
 	public List<Tutactivity> getAllActivitiesAtDate(LocalDate date);
 
 	public List<Tutactivity> getAllActivitiesOfPerson(long person)

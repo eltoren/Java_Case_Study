@@ -9,10 +9,8 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.RollbackException;
 import javax.persistence.TypedQuery;
 
 import be.iris.dao.WorkingDayDao;
@@ -75,20 +73,12 @@ public class WorkigDayImpl implements WorkingDayDao {
 	}
 	@Override
 	public void deleteWorkingDay(TutworkingDay workingDay) {
-		EntityTransaction tx = em.getTransaction();
 		try {
-			tx.begin();
 
 			em.merge(workingDay);
 			em.remove(workingDay);
 
-			tx.commit();
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 
@@ -96,20 +86,12 @@ public class WorkigDayImpl implements WorkingDayDao {
 
 	@Override
 	public TutworkingDay getWorkigDay(TutworkingDay workingDay) {
-		EntityTransaction tx = em.getTransaction();
 		TutworkingDay returnWorkingDay = new TutworkingDay();
 		try {
-			tx.begin();
 
 			returnWorkingDay = em.find(TutworkingDay.class, workingDay);
 
-			tx.commit();
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 		return returnWorkingDay;
@@ -117,21 +99,13 @@ public class WorkigDayImpl implements WorkingDayDao {
 
 	@Override
 	public List<TutworkingDay> listAllWorkigDays() {
-		EntityTransaction tx = em.getTransaction();
 		List<TutworkingDay> listWorkingDays = new ArrayList<>();
 		try {
-			tx.begin();
 
 			TypedQuery<TutworkingDay> query = em.createNamedQuery("TutworkingDay.listWorkingDays", TutworkingDay.class);
 			listWorkingDays = query.getResultList();
 
-			tx.commit();
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 		return listWorkingDays;
@@ -140,23 +114,15 @@ public class WorkigDayImpl implements WorkingDayDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<TutworkingDay> getListWorkingDaysAtDate(LocalDate date) {
-		EntityTransaction tx = em.getTransaction();
 		List<TutworkingDay> listWorkingDays = new ArrayList<>();
 		try {
-			tx.begin();
 
 			String sql = "select w from tutworkingDay w where w.date = ?";
 			Query query = em.createNativeQuery(sql, TutworkingDay.class);
 			query.setParameter(1, Date.valueOf(date));
 			listWorkingDays = query.getResultList();
 
-			tx.commit();
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 		return listWorkingDays;
@@ -165,23 +131,15 @@ public class WorkigDayImpl implements WorkingDayDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<TutworkingDay> getListWorkigDaysOfPerson(long person) {
-		EntityTransaction tx = em.getTransaction();
 		List<TutworkingDay> listWorkingDays = new ArrayList<>();
 		try {
-			tx.begin();
 
-			String sql = "select w from tutworkingDay w where w.personId = ?";
+			String sql = "select w from tutworkingDay w where w.coworker = ?";
 			Query query = em.createNativeQuery(sql, TutworkingDay.class);
 			query.setParameter(1, person);
 			listWorkingDays = query.getResultList();
 
-			tx.commit();
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 		return listWorkingDays;
@@ -189,24 +147,16 @@ public class WorkigDayImpl implements WorkingDayDao {
 
 	@Override
 	public TutworkingDay getWorkigDaysOfPersonAtDate(long person, LocalDate date) {
-		EntityTransaction tx = em.getTransaction();
 		TutworkingDay returnWorkingDay = new TutworkingDay();
 		try {
-			tx.begin();
 
-			String sql = "select w from tutworkingDay w where w.personId = ? and w.date = ?";
+			String sql = "select w from tutworkingDay w where w.coworker = ? and w.date = ?";
 			Query query = em.createNativeQuery(sql, TutworkingDay.class);
 			query.setParameter(1, person);
 			query.setParameter(2, Date.valueOf(date));
 			returnWorkingDay = (TutworkingDay) query.getSingleResult();
 
-			tx.commit();
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 		return returnWorkingDay;
@@ -215,26 +165,14 @@ public class WorkigDayImpl implements WorkingDayDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<TutworkingDay> getListWorkigDaysBetweenStartDateANdEndDate(LocalDate startDate, LocalDate endDate) {
-		EntityTransaction tx = em.getTransaction();
 		List<TutworkingDay> listWorkingDays = new ArrayList<>();
 		try {
-			tx.begin();
-
-			// needs testing if between works!
-
 			String sql = "select w from tutworkingDay w where w.date between  ? and ?";
 			Query query = em.createNativeQuery(sql, TutworkingDay.class);
 			query.setParameter(1, Date.valueOf(startDate));
 			query.setParameter(2, Date.valueOf(endDate));
 			listWorkingDays = query.getResultList();
-
-			tx.commit();
 		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
-			}
 			System.err.println(re.getMessage());
 		}
 		return listWorkingDays;
@@ -244,29 +182,18 @@ public class WorkigDayImpl implements WorkingDayDao {
 	@Override
 	public List<TutworkingDay> getListWorkigDaysOfPersonBetweenStartDateANdEndDate(long person,
 			LocalDate startDate, LocalDate endDate) {
-		EntityTransaction tx = em.getTransaction();
 		List<TutworkingDay> listWorkingDays = new ArrayList<>();
-		try {
-			tx.begin();
-
-			// needs testing if between works!
-
-			String sql = "select w from tutworkingDay w where w.personId = ? and w.date between  ? and ?";
+			String sql = "select w.* from tutworking_Days w where w.pno = ? and w.working_date > ? and w.working_date < ? ";
 			Query query = em.createNativeQuery(sql, TutworkingDay.class);
 			query.setParameter(1, person);
 			query.setParameter(2, Date.valueOf(startDate));
 			query.setParameter(3, Date.valueOf(endDate));
-			listWorkingDays = query.getResultList();
-
-			tx.commit();
-		} catch (RuntimeException re) {
-			try {
-				tx.rollback();
-			} catch (RollbackException rbe) {
-				System.err.println(rbe.getMessage());
+			for(TutworkingDay wd  : (List<TutworkingDay>) query.getResultList()){
+				em.detach(wd);
+				listWorkingDays.add(wd);
 			}
-			System.err.println(re.getMessage());
-		}
+
+		
 		return listWorkingDays;
 	}
 

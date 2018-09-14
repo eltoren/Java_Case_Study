@@ -24,7 +24,6 @@ public class AnalyseController {
 
 
 	private List<Activity> listingActivities = new ArrayList<>();
-	private List<String> descList = new ArrayList<>();
 	private String name;
 	
 	@Inject
@@ -72,8 +71,8 @@ public class AnalyseController {
 		loginController.setSelectedPersonfromList(name);
 		Tutperson p = loginController.getSelectedPersonList();
 		try{
-		List<Tutactivity> list =activityBean.getAllActivitiesOfPerson(p.getPno());
-		this.setListingActivities(ListActivityFromEntities(list));		
+			List<Tutactivity> list =activityBean.getAllActivitiesOfPerson(p.getPno());
+			this.setListingActivities(ListActivityFromEntities(list));		
 		}catch(ActivityException ae){
 			actionController.sendAMessage(ae.getMessage(), FacesMessage.SEVERITY_ERROR);
 		}
@@ -129,13 +128,6 @@ public class AnalyseController {
 		this.actionController = actionController;
 	}
 
-	public List<String> getDescList() {
-		return descList;
-	}
-
-	public void setDescList(List<String> descList) {
-		this.descList = descList;
-	}
 	
 	
 }

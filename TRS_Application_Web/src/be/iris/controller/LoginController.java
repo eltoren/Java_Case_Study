@@ -2,8 +2,6 @@ package be.iris.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -16,8 +14,8 @@ import javax.inject.Named;
 import be.iris.Backing.FrontBean;
 import be.iris.entities.Tutperson;
 import be.iris.session.view.PersonBeanRemote;
-import be.iris.utilities.PrenomComparator;
 
+@SuppressWarnings("serial")
 @Named
 @SessionScoped
 public class LoginController implements Serializable {
@@ -86,17 +84,15 @@ public class LoginController implements Serializable {
 		long pno = Long.parseLong(name.split(" . ")[0]); 
 		String lastName = name.split(" . ")[1];
 		
-				
 		for (Tutperson p : persons) {
 			if (pno == p.getPno() && p.getPlname().equals(lastName)) {
 				personSelected = p;
-				System.out.println(pno + " " + p.getPfname() + " " + p.getPlname());
 				break;
 			}
 		}
 		if (personBean.iSLoginOk(personSelected, password)) {
 			PersonTypeCheck();
-			return "MainPage";
+			return "MainPage?faces-redirect=true";
 		} else
 			return "index";
 	}
@@ -134,19 +130,6 @@ public class LoginController implements Serializable {
 
 	}
 	
-	/*SI time*/
-	
-	@SuppressWarnings("unchecked") //Supprime un avertissement
-	public void trierContacts() {  
-		Comparator Jcomparator = new PrenomComparator();
-	
-		Collections.sort(persons,Jcomparator); 
-		
-		//Collections.sort(persons);
-		
-				
-	}
-	
 	
 
 	public Tutperson getSelectedPersonList() {
@@ -158,7 +141,6 @@ public class LoginController implements Serializable {
 	}
 
 	public void setSelectedPersonfromList(String name){
-
 		long pno = Long.parseLong(name.split(" . ")[0]); 
 		String lastName = name.split(" . ")[1];
 		

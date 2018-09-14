@@ -7,6 +7,7 @@ import javax.inject.Named;
 
 import be.iris.PrimFaceController.CalendarView;
 
+@SuppressWarnings("serial")
 @Named
 @SessionScoped
 public class FrontBean implements Serializable {
@@ -32,7 +33,7 @@ public class FrontBean implements Serializable {
 
 	public String registryActivity() {
 	
-		return "ActivityRegistration";
+		return "ActivityRegistration?faces-redirect=true";
 	}
 
 	public String analysePersons() {
@@ -50,11 +51,11 @@ public class FrontBean implements Serializable {
 	
 
 	public String calculation() {
-		return "CalculationSalary";
+		return "CalculationSalary?faces-redirect=true";
 	}
 
 	public String goBack() {
-		return "MainPage";
+		return "MainPage?faces-redirect=true";
 
 	}
 

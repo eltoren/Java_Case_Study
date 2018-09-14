@@ -18,9 +18,7 @@ public interface CompanyDao {
 	public Tutcompany geCompany(Tutcompany company);
 	
 	public List<Tutcompany> listAllCompanies();
-	
-	// extra methods
-	
+		
 	public List<Tutcompany> listComapniesInCountry(String country);
 	
 	public List<Tutcompany> listCompaniesInTownByName(String town);
